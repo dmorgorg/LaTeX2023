@@ -1,0 +1,37 @@
+% !TEX root = ../statikz/statikz.tex
+
+%\Member{startpt}{endpt}{outer}{inner}{stroke}{height}{radius}{line width}
+\providecommand{\Member}[8]{
+	% name the points
+	\coordinate(start) at (#1);
+	\coordinate(end) at (#2);
+	\def\outer{#3}
+	\def\inner{#4}
+	\def\stroke{#5}
+	\def\hi{#6} % cm
+	\def\rad{#7} % cm
+	\def\line{#8} % mm
+	
+	\def\tocm{0.035146}
+	
+	\coordinate(delta) at ($ (end)-(start) $);
+	\gettikzxy{(delta)}{\dx}{\dy}
+	\gettikzxy{(start)}{\sx}{\sy}
+	\pgfmathparse{veclen(\dx, \dy)}% \pgfmathresult
+	\let\length\pgfmathresult
+	
+	\pgfmathparse{\dx==0}%
+	% \ifnum low-level TeX for integers
+	\ifnum\pgfmathresult=1 % \dx == 0
+		\pgfmathsetmacro{\rot}{\dy > 0 ? 90 : -90}
+	\else
+		\pgfmathsetmacro{\rot}{\dx > 0 ? atan(\dy / \dx) : 180 + atan(\dy / \dx)}
+	\fi
+	
+	\node at (end) {.}; % adds coordinate for boundary calculations since (end) is not in the drawing
+	\begin{scope}	[rounded corners = \rad cm, transform canvas = { rotate around = {\rot:(\sx,\sy)}}]
+		\shadedraw[top color = \outer, bottom color = \outer, middle color = \inner, draw = \stroke, line width = \line mm] ($ (start)+(-0.5*\hi, 0.5*\hi) $) -- ++(\hi cm +\length pt, 0 ) -- ++(0, -\hi) -- ++ (-\hi cm -\length pt, 0) -- cycle;
+	\end{scope}
+	\node at (end) {.}; % adds coordinate for boundary calculations since (end) is not in the drawing
+}
+

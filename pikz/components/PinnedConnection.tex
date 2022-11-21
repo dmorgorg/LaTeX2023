@@ -1,0 +1,14 @@
+\newcommand{\PinnedConnection}[6][0]{
+	\def\lrotate{#1}
+	\def\lpin{#2}
+	\def\lfill{#3}
+	\def\ldraw{#4}
+	\def\lscale{#5}
+	\def\lwidth{#6}
+	\def\h{1}
+	\def\r{0.3}
+	\begin{scope}[scale=\lscale, rotate=\lrotate]
+		\filldraw[draw=\ldraw, fill=\lfill, line width=\lwidth mm] ($(\lpin) + (0.201*\h+1.0353*\r ,-0.75*\h)$) -- ++(105: 0.77646*\h+0.26795*\r) arc (15:165:\r) -- ++(-105:0.77646*\h+0.26795*\r) -- cycle;		
+		\filldraw[rounded corners=\lscale pt, draw=\ldraw, fill=\lfill, line width=\lwidth mm] ($ (\lpin) - (1,1) $) rectangle +(2,0.35);
+	\end{scope}
+}

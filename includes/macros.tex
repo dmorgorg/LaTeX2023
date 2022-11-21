@@ -1,0 +1,62 @@
+% counter for resuming enumerated list numbers
+\newcounter{resumeenumi}
+\newcommand{\suspend}{\setcounter{resumeenumi}{\theenumi}}
+\newcommand{\resume}{\setcounter{enumi}{\theresumeenumi}}
+% \newcounter{myexercisecounter}
+% \newcommand{\suspendExerciseCounter}{\setcounter{myexercisecounter}{\theenumi}}
+% \newcommand{\resumeExerciseCounter}{\setcounter{enumi}{\themyexercisecounter}}
+
+\newcommand\lb{\linebreak}
+\newcommand\pars{\par\smallskip}
+\newcommand\parm{\par\medskip}
+\newcommand\parb{\par\bigskip}
+
+%left flushed minipage
+\newcommand{\minit}[2][0.8]{
+	\begin{minipage}[t]{#1\columnwidth}
+		\raggedright
+		#2
+	\end{minipage}
+}
+
+
+
+% centered minipage with text \raggedright
+%\cmini[width]{content}
+\newcommand{\cmini}[2][0.8]{
+	\begin{center}
+		\begin{minipage}{#1\columnwidth}
+			\raggedright
+			#2
+		\end{minipage}
+	\end{center}
+}
+
+\newcommand{\cfig}[2][1]{% centred, scaled graphic
+	\begin{center}
+		\includegraphics[scale=#1]{#2}
+	\end{center}
+}
+% figure with tight border for photos
+% \cfigb[saitMaroon]{borderwidth with unit}{scale}{image}
+\newcommand{\cfigb}[4][structure]{
+	% \usepackage{adjustbox}
+	\setlength{\fboxrule}{1pt}
+	\begin{center}
+		\includegraphics[scale=#3, cframe= #1 #2]{#4}
+	\end{center}
+}
+\newcommand{\imgbox}[3]{
+	% \setlength{\fboxsep}{12pt}
+	\includegraphics[scale=#1, cframe= structure #3]{#2}
+}
+
+% get x and y coordinates from a tikz coordinate
+%\gettikzxy{A}{\ax}{\ay}
+\makeatletter
+\providecommand{\gettikzxy}[3]{%
+	\tikz@scan@one@point\pgfutil@firstofone#1\relax
+	\edef#2{\the\pgf@x}%
+	\edef#3{\the\pgf@y}%
+}
+\makeatother

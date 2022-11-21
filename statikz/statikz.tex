@@ -1,0 +1,173 @@
+%!TEX option = -enable-write18
+
+\documentclass[9pt,xcolor={svgnames, x11names}]{beamer}
+
+\usefonttheme{professionalfonts}
+\everymath{\displaystyle}
+
+\usepackage[absolute,overlay]{textpos}
+	\setlength{\TPHorizModule}{1.0cm}
+	\setlength{\TPVertModule}{\TPHorizModule}
+	\textblockorigin{0.0cm}{0.0cm}  %start all at upper left corner
+\usepackage{bm}
+\usepackage{verbatim} % for latex code in latex doc
+\usepackage{tikz}
+	\tikzset{every picture/.append style={line cap=round}}
+	\usetikzlibrary{calc} % only works within a path. required for member component. and others?
+	% \usetikzlibrary{fpu}
+	% \usetikzlibrary{math} % if then else etc.
+	\usetikzlibrary{arrows.meta}
+	% \usetikzlibrary{shadings}
+	% \usetikzlibrary{intersections}
+	\usetikzlibrary{backgrounds}
+\usepackage{pgfmath}
+
+\input{../includes/macros}
+\input{../includes/definedColors}
+\input{../pikz/components/Member}
+\input{../pikz/components/PinnedConnection.tex}
+
+\hypersetup{
+	colorlinks,
+	linkcolor=staticsRed, % table of contents
+	urlcolor=staticsRed
+}
+
+\usetheme{Antibes}
+\usecolortheme[named=staticsRed]{structure}
+\setbeamertemplate{blocks}[rounded][shadow=false]
+\setbeamertemplate{headline}{\vspace{.1cm}}
+\setbeamertemplate{navigation symbols}{} % empty braces suppresses all navigation symbols
+\setbeamertemplate{footline}{
+  \hfill
+  \insertshorttitle
+  \quad
+  \insertsection
+  \quad
+  \insertsubsection
+  \quad
+  \insertframenumber/\inserttotalframenumber
+  \quad{ }
+  \vspace{0.125cm}
+}
+\addtobeamertemplate{footline}{\hypersetup{linkcolor=black}}{}
+\setbeamertemplate{navigation symbols}{} % empty braces suppresses all navigation symbols
+% \setbeamercolor{frametitle}{fg=white}
+\setbeamertemplate{section in toc shaded}[default][50]
+% \setbeamertemplate{subsection in toc}[subsections numbered]
+\setcounter{tocdepth}{5}
+
+% various hacks to get around (apparent?) Beamer titlepage constraints
+\title[\color{black} Statikz \textcolor{Maroon}{ (2020-\the\year)}]{\Huge Statikeetz}
+\subtitle{} % i.e., a blank line
+\institute{\small Source code at: \lb{\footnotesize\url{https://github.com/dmorgorg/LaTeX2022}}}
+\author{} % another blanky
+\date{\small Last updated on \today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\titlepage
+\end{frame}
+
+\begin{frame}{Table of Contents}
+	\begin{minipage}{0.9\textwidth}
+		\tableofcontents
+	\end{minipage}
+	\vfill
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Tikz Drawing Components}
+\centering  % centres all components, pikz on the frame
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Tikz Components :: Member}
+
+	\small
+	\begin{verbatim}
+		\Member{startpt}{endpt}{outer}{inner}{stroke}{height}{radius}{line width}
+		 \end{verbatim}
+	\parb
+	% \vspace{2cm}
+		%  \centering
+	\resizebox{0.75\textwidth}{!}{%
+		\begin{tikzpicture}
+			\coordinate (A) at (0,0);
+			\coordinate (B) at (3,3);
+			\coordinate (C) at (8,0);
+			\coordinate (D) at (6,-0.5);
+			\coordinate (E) at (2,0.5);
+			\Member{A}{B}{SlateGray}{SlateGray!25!white}{black}{0.35}{0.175}{.25}
+			\fill[white] (A) circle (1mm);
+			\fill[red] (B) circle (1mm);
+		\end{tikzpicture}
+
+	}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Tikz Components :: Member}
+
+	\small\centering
+	\begin{verbatim}
+		\Member{startpt}{endpt}{outer}{inner}{stroke}{height}{radius}{line width}
+		 \end{verbatim}
+	\parb
+	% \vspace{2cm}
+
+	\resizebox{0.75\textwidth}{!}{%
+		\begin{tikzpicture}
+			\coordinate (A) at (0,0);
+			\coordinate (B) at (3,3);
+			\coordinate (C) at (8,0);
+			\coordinate (D) at (6,-0.5);
+			\coordinate (E) at (2,0.5);
+			\Member{A}{B}{SlateGray}{SlateGray!25!white}{black}{0.35}{0.175}{.25}
+			\Member{A}{E}{DarkMagenta}{DarkMagenta!25!white}{black}{0.35}{0.175}{.25}
+			\Member{E}{B}{DarkRed}{DarkRed!25!white}{black}{0.35}{0.175}{.25}
+			\Member{E}{D}{DarkOliveGreen}{DarkOliveGreen!25!white}{black}{0.35}{0.175}{.25}
+			\Member{D}{B}{SteelBlue}{SteelBlue!25!white}{black}{0.35}{0.175}{.25}
+			\Member{C}{B}{DarkKhaki}{DarkKhaki!25!white}{black}{0.35}{0.175}{.25}
+			\Member{D}{C}{Goldenrod}{Goldenrod!25!white}{black}{0.35}{0.175}{.25}
+			\fill[white] (-1,0) circle (0.1mm);
+			\fill[white] (9,0) circle (0.1mm);
+		\end{tikzpicture}
+
+	}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}[fragile]{Tikz Components :: PinnedConnection}
+
+	\small
+	\begin{verbatim}
+	  \PinnedConnection[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
+  	\end{verbatim}
+	\vspace{1cm}
+	\tikz{
+		\coordinate (A) at (0,0);
+		% \PinnedConnection[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
+		\PinnedConnection{A}{Honeydew1}{Black}{2}{0.5}
+	}
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{06 Equilibrium of Rigid Bodies}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	\def\scale{0.7}
+	\input{../pikz/06ERB/06erb01}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{09 Frames}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{frame}
+	hello
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

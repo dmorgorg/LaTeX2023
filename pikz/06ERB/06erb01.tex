@@ -1,0 +1,54 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+\tikz[scale=\scale]{
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (8,0);
+	\coordinate (C) at (2,2.5);
+	\coordinate (BCmid) at ($(B)!0.5!(C)$);	
+	
+	\gettikzxy{(A)}{\ax}{\ay}
+	\gettikzxy{(B)}{\bx}{\by}
+	\gettikzxy{(C)}{\cx}{\cy}
+	\gettikzxy{(BCmid)}{\bcmidx}{\bcmidy}
+	
+	\filldraw[fill=white, opacity=0.75] ($(A)+(-2.75,-2.75)$) rectangle (\bx+1.75cm, \cy+1.75cm);
+	
+	\PinnedConnection{A}{DarkOliveGreen4}{black}{0.5}{0.125}
+	\PinnedConnection{B}{DarkOliveGreen4}{black}{0.5}{0.125}
+	
+	\shade[top color=Ivory4, bottom color= white] ($(A)+(-2,-0.5)$) rectangle ($(B)+(1,-1.5)$);
+	\draw[Ivory4!50!black] ($(A)+(-2,-0.5)$) -- ($(B)+(1,-0.5)$);	
+	
+	\def\delta{0.175}
+	\def\left{-1.75}
+	\def\bot{-1.75}
+	\def\bottom{-2}
+	\filldraw[fill=Ivory3, draw=black] ($(A)+(-\delta,0)$)--(\ax-\delta cm, \cy-\delta cm)arc(180:90:2*\delta cm)--(\cx,\cy+\delta cm)arc(90:-90:\delta)--(\ax+2*\delta cm, \cy-\delta cm)arc(90:180:\delta)--(\ax+\delta cm, \ay)arc(360:180:\delta);
+	\Member{B}{C}{Ivory3}{Ivory4}{black}{0.35}{0.1}{0.125};
+	
+	\filldraw[ball color=Ivory4, draw=Ivory4!50!black, thin] (A) circle (1mm);
+	\filldraw[ball color=Ivory4, draw=Ivory4!50!black, thin] (B) circle (1mm);
+	\filldraw[ball color=Ivory4, draw=Ivory4!50!black, thin] (C) circle (1mm);
+	
+	\draw (A)  node[black, left, inner sep=5pt] {$A$};
+	\draw (B)  node[black, above right, inner sep=3pt] {$B$};
+	\draw (C)  node[black, above right, inner sep=3pt] {$C$};
+	
+	\draw[very thick, Latex-, saitDeepBlue] ($(B)!0.5!(C)$)--+(0,2)node[above, black]{$10.0\,\text{kN}$ };
+	\draw[very thin] ($(A)+(0.5,0)$)--($(B)+(-0.875,0)$);
+	\draw[very thin] ($(A)+(-0.75,0)$)--(\left,\ay);
+	\draw[very thin] ($(C)+(-0.5,0)$)--(\left,\cy);
+	\draw[very thin] (\ax+0.5cm,\cy)--($(C)+(-0.5,0)$);
+	\draw[very thin] (\ax,\ay-0.25cm)--(\ax, \bottom);
+	\draw[very thin] (\bx,\by-0.25cm)--(\bx, \bottom);
+	\draw[very thin] (\cx,\cy-0.375cm)--(\cx, \bottom);
+	\draw[very thin] (\bcmidx, \bcmidy-0.375cm)--(\bcmidx, \bottom);
+	
+	\small
+	\draw[latex-latex] (\ax,\bot)--node[fill=white, inner sep=0.5mm]{$1.00\,\text{m}$}(\cx,\bot);
+	\draw[latex-latex] (\cx,\bot)--node[fill=white, inner sep=0.5mm]{$1.50\,\text{m}$}(\bcmidx,\bot);
+	\draw[latex-latex] (\bcmidx,\bot)--node[fill=white, inner sep=0.5mm]{$1.50\,\text{m}$}(\bx,\bot);
+	\draw[latex-latex] (\ax-1.5cm,\cy)--node[fill=white, inner sep=0.5mm]{$1.25\,\text{m}$}(\ax-1.5cm,\ay);
+	
+}
