@@ -1,0 +1,58 @@
+% !TEX root = ../../statikz2020/statikz2020.tex
+
+\begin{tikzpicture}
+
+	\coordinate (C) at (0,0);
+	\coordinate (B) at (0,3);
+	\coordinate (A) at (0,5);
+	\coordinate (D) at (3.5,0);
+	\coordinate (E) at (3.5,-1.75);
+    \coordinate (F) at (-3,3);
+
+    \gettikzxy{(A)}{\ax}{\ay}
+    \gettikzxy{(B)}{\bx}{\by}
+    \gettikzxy{(C)}{\cx}{\cy}
+    \gettikzxy{(D)}{\dx}{\dy}
+    \gettikzxy{(E)}{\ex}{\ey}
+    \gettikzxy{(F)}{\fx}{\fy}
+    
+    \PinnedConnection{C}{DarkSeaGreen4}{Black}{0.5}{0.125};
+    \filldraw[fill=DarkSeaGreen!75, draw=black] ($ (A)+(0,0.25)$) arc(90:180:0.25) --($ (C)+(-0.25,0) $)arc(180:270:0.25) -- ($ (D)+(0.25,-0.25)$)arc(270:360:0.25)arc[start angle=0, end angle=90, x radius=4cm, y radius=5.25cm];
+
+    \PinnedConnection[-90]{F}{DarkSeaGreen4}{Black}{0.5}{0.125};
+    
+    \PinnedConnection{E}{DarkSeaGreen4}{Black}{0.5}{0.125};
+    \Member{F}{B}{Cornsilk4}{Cornsilk1}{black}{0.3}{0.14}{0.125};
+    \Member{D}{E}{Cornsilk4}{Cornsilk1}{black}{0.45}{0.14}{0.125};
+    
+    \filldraw[fill=white, draw=black] (A) circle (3pt) node[xshift=1.75mm, yshift=-2mm]{\Large $A$};
+    \shadedraw[ball color=Cornsilk4] (B) circle (3pt) node[right, xshift=0.5mm]{\Large $B$};
+    \shadedraw[ball color=Cornsilk4] (C) circle (4.5pt) node[above right]{\Large $C$};
+    \shadedraw[ball color=Cornsilk4] (D) circle (3pt) node[above left, xshift=-1mm]{\Large $D$};
+    \shadedraw[ball color=Cornsilk4] (E) circle (3pt) node[right, xshift=1.5mm]{\Large $E$};
+    \shadedraw[ball color=Cornsilk4] (F) circle (3pt) node[above, xshift=0.75mm, yshift=1.5mm]{\Large $F$};
+
+    \fill[right color=Ivory4, left color=Ivory1] (\fx-0.5cm,\fy+1cm) rectangle ++(-0.5,-2);
+    \fill[top color=Ivory4, bottom color=Ivory1] (\cx-1cm,\cy-0.5cm) rectangle ++(2,-0.5);
+    \fill[top color=Ivory4, bottom color=Ivory1] (\ex-1cm,\ey-0.5cm) rectangle ++(2,-0.5);
+    \draw (\fx-0.5cm,\fy+1cm) -- ++(0,-2);
+    \draw (\cx-1cm,\cy-0.5cm) -- ++(2,0);
+    \draw (\ex-1cm,\ey-0.5cm) -- ++(2,0);
+
+    \draw ($ (F) + (0,-0.5) $) -- ($ (\fx, \ey+0.25cm)$);
+    \draw ($ (D)+(0,-0.25)$) -- ($ (E)+(0,0.25) $);
+    \draw ($ (C)+(0,-0.3)$) -- ($ (\cx, \ey+0.25cm) $);
+    \draw ($ (A)+(0,-0.2)$) -- ($ (B)+(0,0.25) $);
+    \draw ($ (B)+(0,-0.25)$) -- ($ (C)+(0,0.25) $);
+    \draw ($ (A)+(-0.5,0)$) -- +(-1.5,0);
+    \draw ($ (B)+(-0.5,0)$) -- +(-1.5,0);
+    \draw ($ (C)+(-0.5,0)$) -- +(-1.5,0);
+    \draw ($ (C)+(0.25,0)$) -- ($(D)+(-0.375,0)$);
+    \draw [Stealth-stealth] ($ (A)+(-1.25,0)$) -- node[fill=white]{$250$ mm}($ (B)+(-1.25,0)$);
+    \draw [stealth-Stealth] ($ (B)+(-1.25,0)$) -- node[fill=white]{$375$ mm}($ (C)+(-1.25,0)$);
+    \draw [Stealth-Stealth] ($ (\fx, \ey+0.5cm)$) -- node[fill=white]{$350$ mm}($ (\cx, \ey+0.5cm)$);
+    \draw [Stealth-Stealth] ($ (\cx, \ey+0.5cm)$) -- node[fill=white]{$450$ mm}($ (\ex, \ey+0.5cm)$);
+
+    \draw [-Stealth, ultra thick, Maroon] (A)--+(3,0)node[black, xshift=2mm]{\Large $P$};
+
+\end{tikzpicture}

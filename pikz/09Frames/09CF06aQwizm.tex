@@ -1,0 +1,78 @@
+% !TEX root = ../../statikz2020/statikz2020.tex
+
+\resizebox{0.5\textwidth}{!}{%
+	\begin{tikzpicture}
+
+		\coordinate (A) at (0,0.5);
+		\coordinate (AA) at (0,0);
+		\coordinate (C) at (0,5.5);
+		\coordinate (B) at (0,3);
+		\coordinate (D) at (-2,1.5);
+		\coordinate (E) at (2,4.5);
+		% \coordinate (P) at (5,-2.25);
+
+		\gettikzxy{(E)}{\ex}{\ey}
+		\gettikzxy{(D)}{\ddx}{\ddy}
+		\gettikzxy{(B)}{\bx}{\by}
+		\gettikzxy{(C)}{\cx}{\cy}
+		\gettikzxy{(A)}{\ax}{\ay}
+		
+		\def\right{4.5}
+		\def\rightdim{3.75}
+		\def\btm{-1.75}
+		\def\btmdim{-1.4}
+		\def\pulleyrad{0.365}
+
+		\Member{AA}{C}{Azure4}{Azure3}{black}{0.4}{0.2}{0.15}
+
+		\begin{scope}[even odd rule, transform canvas={rotate around={36.87:(B)}}]
+			\filldraw[top color=Azure4,bottom color=Azure4,middle color=Azure3, rounded corners=0.2cm]($(B)+(-2.7,0.2)$)rectangle($(B)+(2.7,-.2)$)
+			[rounded corners=0.0625cm]($(B)+(-1,0.1)$) rectangle ($(B)+(1,-0.1)$);
+		\end{scope}
+
+		% \PinnedConnection{A}{DarkSeaGreen4}{black}{0.5}{0.15}
+        \PinnedConnection[-90]{D}{DarkSeaGreen4}{black}{0.5}{0.15}
+        
+        \draw[-latex, line width = 0.75mm, staticsRed] (C)--(\ex+0.075cm, \ey+0.075cm)arc(40:0:0.1)-- +(0,-2.125cm);
+
+        \shade[top color=DarkSeaGreen4, bottom color=DarkSeaGreen3] (\right,\ay)--(\ddx-0.5cm, \ay)-- ++(-1,-1)--(\right, \ay-1cm);
+
+        
+        
+		\begin{scope}[xshift=0.1mm]
+			\shade[right color=DarkSeaGreen4, left color=DarkSeaGreen3] (\ddx-0.5cm,\cy+1cm)--(\ddx-0.5cm, \ay)-- ++(-1,-1)--(\ddx-1.5cm, \cy+1cm);
+		\end{scope}
+        \draw (\ddx-0.5cm, \cy+1cm)--(\ddx-0.5cm,\ay)--(\right, \ay);
+        
+        %horizontal
+		\draw[thin] (\ddx+0.5cm, \ddy)--(\right, \ddy);		
+		\draw[thin] (\bx+0.5cm, \by)--(\ex-0.125cm, \by);
+		\draw[thin] (\ex+0.325cm, \by)--(\right, \by);
+        \draw[thin] (\ex+0.375cm, \ey)--(\right, \ey);
+        \draw[thin] (\cx+0.375cm, \cy)--(\right, \cy);
+        %vertical
+		\draw[thin] (\ddx, \ddy-0.35cm)--(\ddx, \btm);
+		\draw[thin] (\ax, \ay-0.25cm)--(\ax, \btm);
+		\draw[thin] (\ex+0.1cm, \ey-2.75cm)--(\ex+0.1cm, \btm);
+
+		\draw[latex-latex] (\ddx,\btmdim) -- (\ax,\btmdim);
+		\draw[latex-latex] (\ax,\btmdim) -- (\ex+0.1cm,\btmdim);
+		\draw[latex-latex] (\rightdim,\cy) -- (\rightdim,\ey);
+		\draw[latex-latex] (\rightdim,\ey) -- (\rightdim,\by);
+		\draw[latex-latex] (\rightdim,\by) -- (\rightdim,\ddy);
+		\draw[latex-latex] (\rightdim,\ddy) -- (\rightdim,\ay);
+
+		\draw[ball color=black] (B) circle (0.075cm)node[above, xshift=-0.375cm]{$B$};
+		\draw[ball color=Azure4] (D) circle (0.0875cm)node[xshift=-0.125cm, yshift=0.375cm]{$D$};
+		\filldraw[fill=white] (E) circle (0.1cm)node[yshift=0.4cm]{$E$};
+		\fill[black] (A) circle (0.05cm)node[xshift=-0.375cm, yshift=0.15cm]{$A$};
+        \draw[ball color=Azure4] (C) circle (0.0875cm)node[above, xshift=-0.375cm]{$C$};
+
+		
+
+
+		
+
+		
+	\end{tikzpicture}
+}

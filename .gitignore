@@ -1,1 +1,14 @@
+*.fls
+*.aux
+*.fdb_latexmk
+*.log
+*.nav
+*.out
+*.snm
 *.synctex.gz
+*.synctex.gz(busy)
+*.toc
+*.md
+*.vrb
+docs/
+harvardProposal/tufte-latex

@@ -1,0 +1,73 @@
+% !TEX root = ../../statikz2020/statikz2020.tex
+
+\resizebox{0.75\textwidth}{!}{%
+
+
+\begin{tikzpicture}[scale=\scale]
+
+	\small
+
+	\coordinate (A) at (0,0);
+	\coordinate (AA) at (-0.5,0);
+	\coordinate (B) at (4,0);
+	\coordinate (C) at (6,-1);
+	\coordinate (D) at (10,-1);
+	\coordinate (E) at (2,0);
+	\coordinate (F) at (8.5,-1);
+	\coordinate (P) at (-2.75,-3.5);
+
+	\gettikzxy{(E)}{\Ex}{\Ey}
+	\gettikzxy{(D)}{\Dx}{\Dy}
+	\gettikzxy{(B)}{\Bx}{\By}
+	\gettikzxy{(C)}{\Cx}{\Cy}
+	\gettikzxy{(A)}{\Ax}{\Ay}
+	\gettikzxy{(F)}{\Fx}{\Fy}
+	\gettikzxy{(E)}{\Ex}{\Ey}
+	\gettikzxy{(P)}{\Px}{\Py}
+
+	% \Member{startpt}{endpt}{outer}{inner}{stroke}{height}{radius}{line width}
+	\Member{AA}{B}{Salmon4}{Salmon3}{black}{0.25}{0.125}{.125};	
+	\Member{C}{D}{Salmon4}{Salmon3}{black}{0.25}{0.125}{.125};
+	\Member{B}{C}{LightYellow4}{LightYellow2}{black}{0.0625}{0}{.125};
+
+
+	\shade[right color=LightYellow4, left color=LightYellow2] ($(A)+(0,1.5)$)rectangle($(A)+(-1.5,-4)$);
+	\shade[left color=LightYellow4, right color=LightYellow2] ($(D)+(0.5,2.5)$)rectangle($(D)+(1.5,-3)$);
+	\draw[thin] ($(D)+(0.5,2.5)$) -- +(0,-5.5);
+	\draw[thin] ($(A)+(0,1.5)$) -- +(0,-5.5);
+	\draw (\Bx+0.5cm, \By) -- (\Cx+1.5cm, \By);
+	\draw (\Cx+0.5cm, \Cy) -- (\Cx+1.5cm, \Cy);
+	
+	
+
+
+
+	\PinnedConnection[90]{D}{LightYellow3}{black}{0.5}{0.1}
+
+	\draw[ultra thick, SteelBlue4, -latex] (E)--+(0,-1.5)node[below]{$2.07\,$kN};
+
+	\draw [very thick, SteelBlue4, latex-] ($(F)+(325:0.575)$)arc(325:35:0.575);
+
+	\filldraw[ball color = black] (A) circle (0.05cm)node[xshift=0.125cm, yshift=0.3cm]{$A$};
+	\filldraw[ball color = black] (B) circle (0.05cm)node[yshift=0.3cm]{$B$};
+	\filldraw[ball color = black] (C) circle (0.05cm)node[yshift=0.3cm]{$C$};
+	\filldraw[ball color=LightYellow3,draw=LightYellow4!50!black] (D) circle (0.075cm)node[yshift=0.375cm]{$D$};
+	\filldraw[ball color = black] (E) circle (0.05cm);
+	\filldraw[ball color = black] (F) circle (0.05cm)node[SteelBlue4, yshift=-0.875cm]{$2.76\,\mathrm{kN\!\cdot\!m}$};
+
+	\draw (\Fx,\Fy-1.25cm)--(\Fx,\Py-0.5cm);
+	\draw (\Cx,\Cy-0.5cm)--(\Cx,\Py-0.5cm);
+	\draw (\Bx,\By-0.5cm)--(\Bx,\Py-0.5cm);
+	\draw (\Ex,\By-2.25cm)--(\Ex,\Py-0.5cm);
+	\draw (\Dx,\Dy-0.5cm)--(\Dx,\Py-0.5cm);
+
+	\footnotesize
+	\draw[latex-latex] (\Cx+1cm,\Cy)--node[fill=white]{$1.000\text{ m}$}(\Cx+1cm,\By);
+	\draw[latex-latex] (\Ax,\Py)--node[fill=white,inner sep=0.5mm]{$2.00\,$m}(\Ex,\Py);
+	\draw[latex-latex] (\Ex,\Py)--node[fill=white,inner sep=0.5mm]{$2.00\,$m}(\Bx,\Py);
+	\draw[latex-latex] (\Bx,\Py)--node[fill=white,inner sep=0.5mm]{$2.00\,$m}(\Cx,\Py);
+	\draw[latex-latex] (\Cx,\Py)--node[fill=white,inner sep=0.5mm]{$2.50\,$m}(\Fx,\Py);
+	\draw[latex-latex] (\Fx,\Py)--node[fill=white,inner sep=0.125mm]{$1.500\,$m}(\Dx,\Py);
+
+\end{tikzpicture}
+}

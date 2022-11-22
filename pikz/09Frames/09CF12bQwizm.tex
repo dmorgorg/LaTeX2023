@@ -1,0 +1,75 @@
+% !TEX root = ../../statikz2020/statikz2020.tex
+
+\resizebox{0.5\textwidth}{!}{%
+	\tikz[scale=\scale, line cap=round]{        
+
+        \coordinate (A) at (0,0);
+        \coordinate (P) at (0,2);
+        \coordinate (B) at (0,3);
+        \coordinate (C) at (0,7.5);
+        \coordinate (D) at (4,7.5);
+        \coordinate (E) at (4,3);
+        \coordinate (F) at (4,0);
+
+        \def\rght{6.5}
+        \def\rghtdim{5.75}
+        \def\btm{-2.5}
+        \def\btmdim{-1.75}              
+
+        \PinnedConnection{A}{Azure4!50!Azure3}{black}{0.5}{0.15}
+        \PinnedConnection{F}{Azure4!50!Azure3}{black}{0.5}{0.15}
+        
+        \Member{C}{E}{Azure4}{Azure3}{black}{0.275}{0.15}{0.15}
+        \Member{B}{D}{Azure4}{Azure3}{black}{0.15}{0.15}{0.15}
+        \Member{A}{C}{SkyBlue4}{SkyBlue3}{black}{0.3}{0.0875}{0.15}
+        \Member{F}{D}{SkyBlue4}{SkyBlue3}{black}{0.3}{0.0875}{0.15}
+
+        \shade[top color=Azure4, bottom color=Azure2] ($(A)+(-2.15,-0.5)$) rectangle (\rght,-1.5);
+        \draw ($(A)+(-2.15,-0.5)$) -- (\rght,-0.5);
+
+        \Large
+        
+        \shadedraw[ball color=Azure4] (A) circle (2pt)node[xshift=1mm, above right]{$A$};
+        \shadedraw[ball color=Azure4] (B) circle (1.5pt)node[below right, xshift=1mm]{$B$};
+        \shadedraw[ball color=Azure4] (C) circle (1.5pt)node[yshift=0.05cm, above right]{$C$};
+        \shadedraw[ball color=Azure4] (D) circle (1.5pt)node[above left, xshift=-0.5mm]{$D$};
+        \shadedraw[ball color=Azure4] (E) circle (1.5pt)node[below left, xshift=-1mm]{$E$};
+        \shadedraw[ball color=Azure4] (F) circle (2pt)node[above left, xshift=-1mm]{$F$};
+
+		\gettikzxy{(A)}{\Ax}{\Ay}
+		\gettikzxy{(B)}{\Bx}{\By}
+		\gettikzxy{(C)}{\Cx}{\Cy}
+		\gettikzxy{(D)}{\Dx}{\Dy}
+        \gettikzxy{(E)}{\Ex}{\Ey}
+        \gettikzxy{(F)}{\Fx}{\Fy}
+        \gettikzxy{(P)}{\Px}{\Py}
+
+        \begin{scope}[xshift=-2.155cm, yshift=2cm, rotate=90 ]            
+            \coordinate (TL) at (0,0);
+            \coordinate (TR) at (5.5,0);
+            \coordinate (BT) at (2.5,-2);
+            \DLDown{TL}{TR}{BT}{DarkSeaGreen3}{black!80}{8}{1}{0.375}
+        \end{scope}
+
+		\draw (\Ax+0.35cm,\Ay)--(\Fx-0.35cm,\Fy);
+		\draw (\Fx+0.35cm,\Fy)--(\rght,\Fy);
+		\draw (\Cx+0.35cm,\Cy)--(\Dx-0.35cm,\Dy);
+		\draw (\Dx+0.35cm,\Cy)--(\rght,\Dy);
+		\draw (\Bx+0.35cm,\By)--(\Ex-0.35cm,\Ey);
+		\draw (\Ex+0.35cm,\By)--(\rght,\Ey);
+		\draw (\Px+0.35cm,\Py)--(\Ex-0.35cm,\Py);
+		\draw (\Ex+0.35cm,\Py)--(\rght,\Py);
+		\draw (\Ax,\Ay-0.25cm)-- +(0, -2);
+        \draw (\Fx,\Ay-0.25cm)-- +(0, -2);
+        	
+        % \footnotesize
+        \small
+
+        % \node[xshift=-1.375cm,yshift=0.2cm] at (C) {$2.75$ kN/m};
+
+		\draw[latex-latex] (\rghtdim, \Dy)--(\rghtdim,\Ey);
+		\draw[latex-latex] (\rghtdim, \Ey)--(\rghtdim,\Py);
+		\draw[latex-latex] (\rghtdim, \Py)--(\rghtdim,\Fy);
+		\draw[latex-latex] (\Ax, \Ay-1.875cm)--(\Fx,\Fy-1.875cm);		
+	}
+}

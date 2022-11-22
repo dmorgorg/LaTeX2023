@@ -1,0 +1,51 @@
+% !TEX root = ../../statikz2020/statikz2020.tex
+
+\begin{tikzpicture}   
+
+	\coordinate (O) at (0,0);
+	\coordinate (A) at (0,-2);
+	\coordinate (B) at (4,0);
+    \coordinate (C) at (2,-3);    	
+	\coordinate (W) at (2,-4);	
+
+    \gettikzxy{(A)}{\ax}{\ay}
+    \gettikzxy{(B)}{\bx}{\by}
+    \gettikzxy{(C)}{\cx}{\cy}
+    \gettikzxy{(O)}{\ox}{\oy}
+
+    \footnotesize
+    \draw[thin] ($(C)+(-1,0)$)--($(C)+(0.65,0)$);
+    \draw[thin, Green] (A)--node[above, sloped, black]{$1.350$ m}(C);
+    \draw[thin, Green] (B)--node[above, sloped, black]{$2.90$ m}(C);
+    \draw[thin, Green] (C)-- +(0,-1);
+    \Member{A}{C}{DarkGreen}{DarkGreen!20}{black}{0.0625}{0.014}{0.0625};
+    \Member{B}{C}{DarkGreen}{DarkGreen!20}{black}{0.0625}{0.014}{0.0625};
+    \Member{C}{W}{DarkGreen}{DarkGreen!20}{black}{0.0625}{0.014}{0.0625};
+
+    \small
+    \fill[ball color=DarkGreen]  (A)circle(2pt)node[above right]{$A$};
+    \fill[ball color=DarkGreen]  (B)circle(2pt)node[below right]{$B$};
+    \fill[ball color=DarkGreen]  (C)circle(2pt)node[below right]{$C$};
+
+    \fill[fill=Cornsilk3] ($(A)+(0,-3.5)$)--(O)--($(B)+(1,0)$)-- ++(0,1)--(\ox-1cm,\oy+1cm)--(\ox-1cm,\ay-3.5cm)--cycle;
+    \draw ($(A)+(0,-3.5)$)--(O)--($(B)+(1,0)$);
+
+    \node[above left] at (O) {$O$};
+
+    \node[xshift=-0.7cm,yshift=1.5mm] at (C) {$\theta$};
+    \node[xshift=0.35cm,yshift=1.75mm] at (C) {$\phi$};
+
+    \shade[left color = Cornsilk4, right color = Cornsilk4, middle color = Cornsilk1](\cx+0.35cm,\cy-1cm)-- ++(0.35,-1)-- ++(-1.4,0)-- ++(0.35,1)--cycle;
+    \draw (\cx+0.35cm,\cy-1cm)-- ++(0.35,-1)-- ++(-1.4,0)-- ++(0.35,1)--cycle;
+
+    \draw (\ax-2.5mm,\ay)--(\ax-7.5mm,\ay);
+    \draw (\ox-2.5mm,\oy)--(\ox-7.5mm,\oy);
+    \draw[Stealth-Stealth] (\ax-5mm,\ay)--node[fill=Cornsilk3, sloped]{$1.500$ m}(\ox-5mm,\oy);
+
+    \draw (\ox,\oy+2.5mm)--(\ox,\oy+7.5mm);
+    \draw (\bx,\by+2.5mm)--(\bx,\by+7.5mm);
+    \draw[Stealth-Stealth] (\ox,\oy+5mm)--node[fill=Cornsilk3, sloped]{$3.00$ m}(\bx,\by+5mm);
+    
+    \node at ($(C)+(0,-1.5)$){\large $W$};
+
+\end{tikzpicture}

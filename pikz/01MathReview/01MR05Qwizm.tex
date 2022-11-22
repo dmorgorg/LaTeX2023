@@ -1,0 +1,28 @@
+% !TEX root = ../../statikz2020/statikz2020.tex
+
+\begin{tikzpicture}
+
+    \Large
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (0,3);
+	\coordinate (C) at (4,0);
+	\coordinate (D) at ($(B)!0.36!(C)$);	
+
+    \gettikzxy{(A)}{\ax}{\ay}
+    \gettikzxy{(B)}{\bx}{\by}
+    \gettikzxy{(C)}{\cx}{\cy}
+    \gettikzxy{(D)}{\dx}{\dy}
+    
+    \filldraw[fill=Linen, thick] (A)--(B)--(C)--cycle; 
+    \draw[thick] (A)--(D); 
+    \draw[Maroon, thick] (\ax+2mm,\ay)-- ++(0,0.2)-- ++(-0.2,0);
+    \draw[Maroon, thick] ($(D)+(-36.9:0.2)$)-- ++(-126.9:0.2)-- ++(143.1:0.2);
+    \normalsize
+    \node[below left] at (A){$A$};
+    \node[above left] at (B){$B$};
+    \node[below right] at (C){$C$};
+    \node[above right] at (D){$D$};
+
+\end{tikzpicture}
+

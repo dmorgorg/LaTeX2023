@@ -1,0 +1,74 @@
+% !TEX root = ../../statikz2020/statikz2020.tex
+
+
+\begin{tikzpicture}
+
+    % \def\offset{0.4}  
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (2,0);
+	\coordinate (C) at (4,0);
+    \coordinate (D) at (6,0);
+    \coordinate (F) at (3,2.1);
+	\coordinate (E) at ($ (D)!0.4468!(F) $);	
+    \coordinate (G) at ($ (A)!0.4468!(F) $); 
+    
+    \gettikzxy{(A)}{\ax}{\ay}
+	\gettikzxy{(B)}{\bx}{\by}
+	\gettikzxy{(C)}{\cx}{\cy}
+	\gettikzxy{(D)}{\dx}{\dy}
+	\gettikzxy{(E)}{\ex}{\ey}
+	\gettikzxy{(F)}{\fx}{\fy}
+    \gettikzxy{(G)}{\gx}{\gy}
+
+	\shade[top color = LightSlateGray, bottom color = LightSlateGray!10] ($(A)+(-0.75,-0.4)$) rectangle +(1.5,-0.275);
+    \shade[top color = LightSlateGray, bottom color = LightSlateGray!10] ($(D)+(-0.75,-0.4)$) rectangle +(1.5,-0.275);
+    
+    
+    \Rocker{D}{LightSlateGray}{black}{0.4}{0.125}
+    \PinnedConnection{A}{LightSlateGray}{black}{0.4}{0.125}
+    
+    \draw[thin, black] (\ax, \ay-0.175cm) -- ++(0,-1.125);
+    \draw[thin, black] (\bx, \ay-0.175cm) -- ++(0,-1.125);
+    \draw[thin, black] (\cx, \ay-0.175cm) -- ++(0,-1.125);
+    \draw[thin, black] (\dx, \ay-0.175cm) -- ++(0,-1.125);
+    \draw[thin, black] (\fx-0.35cm, \fy) -- (\ax-1cm,\fy);
+    \draw[thin, black] (\ax-0.25cm, \ay) -- (\ax-1cm,\ay);
+
+    \draw[latex-latex] (\ax, \ay-1cm) -- (\bx, \by-1cm);
+    \draw[latex-latex] (\bx, \ay-1cm) -- (\cx, \by-1cm);
+    \draw[latex-latex] (\cx, \ay-1cm) -- (\dx, \by-1cm);
+    \draw[latex-latex] (\ax-0.625cm, \ay) -- (\ax-0.625cm, \fy);
+    
+    % \draw[thin] ($ (G)+(35:0.25) $) -- ++(-55:0.25)--++(215:0.25);
+    \draw[thin] ($ (G)+(215:0.25) $) -- ++(305:0.25)--++(35:0.25);
+    \draw[thin] ($ (E)+(-35:0.25) $) -- ++(-125:0.25)--++(145:0.25);
+    % \draw[thin] ($ (E)+(145:0.25) $) -- ++(235:0.25)--++(325:0.25);
+
+    \node[xshift=-4.75mm,yshift=2.5mm] at (B) {$\theta$};
+    \node[xshift=3.5mm, yshift=2.5mm] at (B) {$\phi$};
+    	
+    \Member{C}{E}{LightBlue}{LightBlue!25}{black}{0.175}{0.0874}{0.125}
+    \Member{B}{G}{LightBlue}{LightBlue!25}{black}{0.175}{0.0874}{0.125}
+	\Member{A}{B}{LightBlue}{LightBlue!25}{black}{0.175}{0.0874}{0.125}
+	\Member{B}{F}{LightBlue}{LightBlue!25}{black}{0.175}{0.0874}{0.125}
+	\Member{C}{F}{LightBlue}{LightBlue!25}{black}{0.175}{0.0874}{0.125}
+    \Member{C}{D}{LightBlue}{LightBlue!25}{black}{0.175}{0.0874}{0.125}
+    \Member{D}{E}{LightBlue}{LightBlue!25}{black}{0.175}{0.0874}{0.125}
+    \Member{E}{F}{LightBlue}{LightBlue!25}{black}{0.175}{0.0874}{0.125}
+    \Member{A}{G}{LightBlue}{LightBlue!25}{black}{0.175}{0.0874}{0.125}
+	\Member{G}{F}{LightBlue}{LightBlue!25}{black}{0.175}{0.0874}{0.125}
+	\Member{B}{C}{LightBlue}{LightBlue!25}{black}{0.175}{0.0874}{0.125}
+	
+    \footnotesize
+	\shadedraw[ball color=LightBlue] (A) circle (1.25pt) node[xshift=-1.5mm, yshift=2.5mm] {$A$};
+	\shadedraw[ball color=LightBlue] (B) circle (1.25pt) node[xshift=2mm, yshift=-2.5mm] {$B$};
+	\shadedraw[ball color=LightBlue] (C) circle (1.25pt) node[xshift=2mm, yshift=-2.5mm] {$C$};
+	\shadedraw[ball color=LightBlue] (D) circle (1.25pt) node[xshift=1.5mm, yshift=2.5mm] {$D$};
+	\shadedraw[ball color=LightBlue] (E) circle (1.25pt) node[xshift=1.5mm, yshift=2mm] {$E$};
+	\shadedraw[ball color=LightBlue] (F) circle (1.25pt) node[yshift=2.5mm] {$F$};
+    \shadedraw[ball color=LightBlue] (G) circle (1.25pt) node[xshift=-1.5mm, yshift=2mm] {$G$}; 
+    
+    
+
+\end{tikzpicture}

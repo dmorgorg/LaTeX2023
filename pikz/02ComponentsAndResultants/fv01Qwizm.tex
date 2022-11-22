@@ -1,0 +1,38 @@
+% !TEX root = ../../../Beamer/statikz/statikz.tex
+
+
+\begin{tikzpicture}[scale=\scale, line cap=round,decoration={
+		markings,% switch on markings
+		mark=% actually add a mark
+		between positions 0 and 1 step 14pt
+		with
+		{
+			\begin{scope}[scale=0.8]
+				\draw[saitMaroon, very thick] (0pt,-3pt) -- ++(6pt,0) arc(-90:90:3pt) -- ++(-6pt,0pt) arc(90:270:3pt) -- cycle;
+				\draw[saitMaroon,very thick] (-11pt,0) -- (0pt,0);
+			\end{scope}
+		}
+	}]
+
+	\coordinate (D) at (-3,1);
+	\coordinate (E) at (3, 2.5);
+	\coordinate (C) at (0, 0);
+
+	\fill[top color = mucus!25, bottom color = mucus] (D) rectangle (E);
+	\draw[thin, black] (D) -- ($(E)-(0,1.5) $);
+	\EyeConnection[180]{C}{mucus!50}{black}{1}{0.5}
+
+	\draw[latex-latex] ($ (C)+(180:2.125)$) arc (180:225:2.125) node[fill=white, midway, inner sep=0.25mm] {\Huge\textcolor{white}{ hello }};
+	\draw[latex-latex] ($ (C)+(0:2.125)$) arc (0:-30:2.125) node[fill=white, midway, inner sep=0.25mm] {\Huge\textcolor{white}{ hello }};
+
+
+	\path[postaction={decorate}] ($ (C)+(-30:0.45) $) -- +(-30:2);
+	\path[postaction={decorate}] ($ (C)+(225:0.45) $) -- +(225:2);
+	\draw[ultra thick, -latex, saitDeepBlue] ($ (C)+(-30:1.35) $) -- +(-30:2) node[black, below]{$\qquad$};
+	\draw[ultra thick, -latex, saitDeepBlue] ($ (C)+(225:1.35) $) -- +(225:2) node[black, below]{$\qquad$};
+
+	\draw[thin] ($(C)+(-0.5,0) $) -- +(-2,0);
+	\draw[thin] ($(C)+(0.5,0) $) -- +(2,0) node[right] {$x$};
+
+
+\end{tikzpicture}

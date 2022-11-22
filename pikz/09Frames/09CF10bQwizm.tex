@@ -1,0 +1,76 @@
+% !TEX root = ../../statikz2020/statikz2020.tex
+
+\resizebox{0.75\textwidth}{!}{%
+	\tikz[scale=\scale, line cap=round]{
+		\coordinate (P) at (8.75,5);
+		\coordinate (PP) at (-1.75,5.5);
+		\coordinate (Q) at (8.25,9.5);
+		\coordinate (QQ) at (-1.25,7.5);
+		\coordinate (A) at (0,0);
+		\coordinate (F) at (7.5,1);
+		\coordinate (B) at (.875,1);
+		\coordinate (C) at (3.5,4);
+		\coordinate (D) at (5,1);
+		\coordinate (E) at (6,-1);
+		\coordinate (G) at ($(B)!0.5385!(D)$);
+
+		\gettikzxy{(P)}{\Px}{\Py}
+		\gettikzxy{(PP)}{\PPx}{\PPy}
+		\gettikzxy{(Q)}{\Qx}{\Qy}
+		\gettikzxy{(QQ)}{\QQx}{\QQy}
+		\gettikzxy{(A)}{\Ax}{\Ay}
+		\gettikzxy{(B)}{\Bx}{\By}
+		\gettikzxy{(C)}{\Cx}{\Cy}
+		\gettikzxy{(D)}{\Dx}{\Dy}
+		\gettikzxy{(E)}{\Ex}{\Ey}
+		\gettikzxy{(F)}{\Fx}{\Fy}
+
+		\fill[top color=SkyBlue4, bottom color=SkyBlue2] ($(A)+(-1.75,-0.4)$) rectangle +(3,-0.75);
+		\draw ($(A)+(-1.75,-0.4)$) -- +(3, 0);
+		\fill[top color=SkyBlue4, bottom color=SkyBlue2] ($(E)+(-1,-0.4)$) rectangle +(3.75,-0.75);
+		\draw ($(E)+(-1,-0.4)$) -- +(3.75, 0);
+
+		\PinnedConnection{A}{SkyBlue4}{black}{0.4}{0.125}
+		\RollerOne{E}{SkyBlue4}{black}{0.4}{0.125}
+
+		\Member{A}{C}{Honeydew4}{Honeydew3}{black}{0.26}{0.125}{0.15}
+		\Member{C}{E}{Honeydew4}{Honeydew3}{black}{0.26}{0.125}{0.15}
+		\Member{B}{F}{Honeydew4}{Honeydew3}{black}{0.26}{0.125}{0.15}
+
+		\draw (\Ex+0.35cm,\Ey)--(\Px,\Ey);
+		\draw (\Fx+0.35cm,\Dy)--(\Px,\Dy);
+		\draw (\Cx+0.35cm,\Cy)--(\Px,\Cy);
+		\draw (\Cx-0.35cm,\Cy)--(\PPx,\Cy);
+		\draw (\Bx-0.35cm,\By)--(\PPx,\By);
+		\draw (\Ax-0.35cm,\Ay)--(\PPx,\Ay);
+		\draw (\Ax,\Ay+0.375cm)--(\Ax,\PPy);
+		\draw (\Fx,\Fy+0.35cm)--(\Fx,\PPy);
+		\draw (\Cx,\Cy+0.3cm)--(\Cx,\PPy);
+		% \draw (\Ex,\Ey+0.75cm)--(\Ex,\PPy);
+		\draw (\Ex,\Ey+0.675cm)--(\Ex,\Dy-0.35cm);
+		\draw (\Ex,\Dy+0.35cm)--(\Ex,\PPy);
+
+
+		\normalsize
+		\draw[-latex, ultra thick, staticsRed] (F)--+(0,-1);
+		\shadedraw[ball color=SkyBlue4] (A) circle (2pt)node[xshift=-0.25cm,yshift=0.25cm]{$A$};
+		\shadedraw[ball color=SkyBlue4] (B) circle (2pt)node[above left]{$B$};
+		\shadedraw[ball color=SkyBlue4] (C) circle (2pt)node[above right]{$C$};
+		\shadedraw[ball color=SkyBlue4] (D) circle (2pt)node[yshift=0.35cm, xshift=0.25cm]{$D$};
+		\shadedraw[ball color=SkyBlue4] (E) circle (2pt)node[above right]{$E$};
+		\shadedraw[ball color=SkyBlue4] (F) circle (2pt)node[xshift=0.15cm, yshift=0.325cm]{$F$};
+
+		\small
+
+		\draw[latex-latex] (\QQx,\Ay)--(\QQx,\By);
+		\draw[latex-latex] (\QQx,\By)--(\QQx,\Cy);
+		\draw[latex-latex] (\Qx,\Ey)--(\Qx,\Dy);
+		\draw[latex-latex] (\Qx,\Dy)--(\Qx,\Cy);
+		\draw[latex-latex] (\Cx,\Py)--(\Ex,\Py);
+		\draw[latex-latex] (\Ax,\Py)--(\Cx,\Py);
+		\draw[latex-latex] (\Ex,\Py)--(\Fx,\Py);
+
+
+
+	}
+}

@@ -1,0 +1,19 @@
+% !TEX root = ../../statikz2020/statikz2020.tex
+
+\begin{tikzpicture}[scale=\scale]
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (3.35,0);
+	\coordinate (C) at ($ (A) + (3.75,5.25) $);
+
+	\filldraw[fill=Linen, draw=black] (A) -- node[sloped, above] {$6.43$ cm} (C) -- node[sloped, above, rotate=180]{$5.26$ cm}(B) -- node[below, sloped] {$3.35$ cm} cycle;
+	
+	\draw[below right] (B) node {$B$};
+	\draw[below left] (A) node {$A$};
+	\draw[above right] (C) node {$C$};
+
+	\draw (1,0)  arc(0:54.7:1) node[fill=Linen, inner sep=0.4mm] at (24:1.1){$54.7^\circ$};
+
+
+
+\end{tikzpicture}

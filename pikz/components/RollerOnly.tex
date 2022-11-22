@@ -1,0 +1,20 @@
+
+
+
+\providecommand{\RollerOnly}[6][0]{
+	\def\rotate{#1};
+	\def\pin{#2}
+	\def\lfill{#3}
+	\def\ldraw{#4}
+	\def\lScale{#5};
+	\def\lwidth{#6};
+	\def\h{1}
+	\def\r{0.3}
+	\def\rr{0.2}
+	\begin{scope}[scale=\lScale]
+		\begin{scope}[roller/.style={outer color = \lfill, inner color=\lfill!30!black, draw=\ldraw!50!black, line width=\lwidth mm}]
+			\shadedraw[roller] (\pin) circle (\h);
+			\shadedraw[ball color=\lfill, line width=2*\lwidth pt] (\pin) circle (1.5mm);
+		\end{scope}
+	\end{scope}
+}

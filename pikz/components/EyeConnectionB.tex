@@ -1,0 +1,23 @@
+
+\newcommand{\EyeConnectionB}[6][0]{
+	\def\lrotate{#1};
+	\def\lpin{#2}
+	\def\lfill{#3}
+	\def\ldraw{#4}
+	\def\lscale{#5}
+	\def\lwidth{#6}
+	%\def\h{1.5}
+	\def\r{0.3}
+	\begin{scope}[scale=\lscale, rotate=\lrotate]
+		\filldraw[draw=\ldraw, fill=\lfill, line width=\lwidth mm] ($(\lpin) + (-0.7,-1.25)$) arc(180:90:.2) -- ++(0.05,0)arc(-90:0:0.2) -- ++(0.05,0.65)arc(225:-45:0.28284)-- ++(0.05,-.65)arc(180:270:.2)-- ++(0.05,0)arc(90:0:0.2) -- cycle;
+		\fill[outer color=\lfill, inner color=black, line width = 0] (\lpin) circle (2.25mm);
+		\filldraw[fill=white, draw=\ldraw, line width = \lwidth mm] (\lpin) circle (1.25mm);
+
+		\begin{scope}[even odd rule]
+			\fill[\lfill] (\lpin) circle (2.5mm)
+			(\lpin) circle (2.125mm);
+		\end{scope}
+
+		\filldraw[rounded corners=\lscale pt, draw=\ldraw, fill=\lfill, line width=\lwidth mm] ($ (\lpin) - (1,1.5) $) rectangle +(2,0.25);
+	\end{scope}
+}

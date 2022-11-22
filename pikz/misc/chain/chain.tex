@@ -1,0 +1,63 @@
+\documentclass[tikz,border=5]{standalone}
+\usetikzlibrary{calc, decorations.markings}
+\pgfdeclaredecoration{chain links}{prepare}{
+  \state{prepare}[width=0,next state=shift, 
+    persistent precomputation={
+      \def\chainstate{0}
+      \ifpgflinkcentered
+          \def\pgflinkshift{0pt}
+            \pgfmathsetlengthmacro\pgflinklength{\pgfdecoratedpathlength/
+              \pgflinkcount+\pgflinkoverlap}
+        \else
+          \def\pgflinkshift{\pgflinklength/2}
+            \pgfmathsetlengthmacro\pgflinklength{(\pgfdecoratedpathlength
+          -\pgflinkoverlap)/\pgflinkcount+\pgflinkoverlap}
+        \fi
+        \pgfmathsetlengthmacro\pgflinkheight{\pgfdecorationsegmentamplitude}
+    }]{}
+  \state{shift}[width=\pgflinkshift, next state=link]{}
+  \state{link}[width=\pgflinklength-\pgflinkoverlap,
+    persistent precomputation={\pgfmathsetmacro\chainstate{int(1-\chainstate}}]    
+      {\pgfchainlinkdrawlink}
+  \state{final}{
+    \pgfmathsetmacro\chainstate{int(1-\chainstate)}
+    \pgfchainlinkdrawlink
+  }
+}
+\def\pgfchainlinkdrawlink{%
+  \ifcase\chainstate
+    \path [every chain link/.try]
+      (-\pgflinklength/2, 0) -- (\pgflinklength/2, 0);
+  \else
+    \path [every chain link/.try]
+      (0, \pgflinkheight/2) --
+      (\pgflinklength/2-\pgflinkheight/2, \pgflinkheight/2)
+          arc (90:-90:\pgflinkheight/2) --
+          (-\pgflinklength/2+\pgflinkheight/2, -\pgflinkheight/2)
+          arc (270:90:\pgflinkheight/2) -- cycle;
+    \fi
+}
+\newif\ifpgflinkcentered
+\pgfkeys{/pgf/decoration/.cd,
+  link count/.store in=\pgflinkcount,
+  link overlap/.store in=\pgflinkoverlap,
+  center links/.code=\csname pgflinkcentered#1\endcsname,
+  center links/.default=true,
+  link count=20,
+  link overlap=2pt,
+  center links=false,
+}
+\tikzset{%
+  every chain link/.style={
+    line cap=round,
+    very thick,
+    draw=red,
+  }
+}
+
+\begin{document}
+  \begin{tikzpicture}[decoration={chain links, amplitude=4pt}]
+    \path [postaction={decorate}] 
+      (0,0) -- ++(0,2) arc(180:90:1) -- ++(2,0);
+  \end{tikzpicture}
+\end{document}

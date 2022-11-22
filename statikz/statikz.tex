@@ -1,40 +1,66 @@
 %!TEX option = -enable-write18
 
-\documentclass[9pt,xcolor={svgnames, x11names}]{beamer}
-
+\documentclass[9pt,xcolor={svgnames, x11names}]{beamer} 
 \usefonttheme{professionalfonts}
-\everymath{\displaystyle}
-
-\usepackage[absolute,overlay]{textpos}
-	\setlength{\TPHorizModule}{1.0cm}
-	\setlength{\TPVertModule}{\TPHorizModule}
-	\textblockorigin{0.0cm}{0.0cm}  %start all at upper left corner
-\usepackage{bm}
-\usepackage{verbatim} % for latex code in latex doc
-\usepackage{tikz}
-	\tikzset{every picture/.append style={line cap=round}}
-	\usetikzlibrary{calc} % only works within a path. required for member component. and others?
-	% \usetikzlibrary{fpu}
-	% \usetikzlibrary{math} % if then else etc.
-	\usetikzlibrary{arrows.meta}
-	% \usetikzlibrary{shadings}
-	% \usetikzlibrary{intersections}
-	\usetikzlibrary{backgrounds}
-\usepackage{pgfmath}
 
 \input{../includes/macros}
 \input{../includes/definedColors}
 \input{../pikz/components/Member}
-\input{../pikz/components/PinnedConnection.tex}
+\input{../pikz/components/Rocker}
+\input{../pikz/components/RollerOne}
+\input{../pikz/components/RollerThree}
+\input{../pikz/components/RollerOnly}
+\input{../pikz/components/PinnedConnection}
+\input{../pikz/components/EyeConnection}
+\input{../pikz/components/EyeConnectionB}
+\input{../pikz/components/DLDown}
+\input{../pikz/components/DLUp}
 
-\hypersetup{
-	colorlinks,
-	linkcolor=staticsRed, % table of contents
-	urlcolor=staticsRed
+ \hypersetup{
+  colorlinks,
+  % citecolor=red,
+  % filecolor=orange,
+  linkcolor=staticsRed, % table of contents
+  urlcolor=staticsRed
 }
+% \usepackage{enumitem} % incompatible with Beamer?
+\everymath{\displaystyle}
+
+\usepackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1.0cm}
+\setlength{\TPVertModule}{\TPHorizModule}
+\textblockorigin{0.0cm}{0.0cm}  %start all at upper left corner
+
+
+%\usepackage{amssymb}
+\usepackage{bm}
+\usepackage{verbatim} % for latex code in latex doc
+% \usepackage{shellesc}
+
+\usepackage{tikz}
+\usepackage{pgfmath}
+% \usepackage{fp}
+\tikzset{every picture/.append style={line cap=round}}
+\def\scale{1} % initialisation for pikz
+\usetikzlibrary{calc} % only works within a path
+% \usetikzlibrary{fpu}
+\usetikzlibrary{math} % if then else etc.
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{shadings}
+\usetikzlibrary{intersections}
+
 
 \usetheme{Antibes}
 \usecolortheme[named=staticsRed]{structure}
+% \setbeamertemplate{items}[triangle]
+% \setbeamertemplate{subsection in toc}[subsections numbered]
+
+% \setbeamertemplate{section in toc}{%
+    % *  \inserttocsection \par}
+
+% \setbeamertemplate{subsection in toc}{
+%     -- \inserttocsubsection \par}
+
 \setbeamertemplate{blocks}[rounded][shadow=false]
 \setbeamertemplate{headline}{\vspace{.1cm}}
 \setbeamertemplate{navigation symbols}{} % empty braces suppresses all navigation symbols
@@ -55,19 +81,22 @@
 % \setbeamercolor{frametitle}{fg=white}
 \setbeamertemplate{section in toc shaded}[default][50]
 % \setbeamertemplate{subsection in toc}[subsections numbered]
+
+
+
 \setcounter{tocdepth}{5}
 
+
 % various hacks to get around (apparent?) Beamer titlepage constraints
-\title[\color{black} Statikz \textcolor{Maroon}{ (2020-\the\year)}]{\Huge Statikeetz}
+\title[\color{black} Statikz\textcolor{staticsRed}{2018-\the\year}]{\Huge Statikz}
 \subtitle{} % i.e., a blank line
 \institute{\small Source code at: \lb{\footnotesize\url{https://github.com/dmorgorg/LaTeX2022}}}
 \author{} % another blanky
 \date{\small Last updated on \today}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{document}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
+\begin{document} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
 	\titlepage
 \end{frame}
 
@@ -78,43 +107,21 @@
 	\vfill
 \end{frame}
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Tikz Drawing Components}
-\centering  % centres all components, pikz on the frame
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Tikz Components :: Member}
+\section{Tikz Components} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Components %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\centering
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% Note that use of verbatim within Beamer needs fragile setting for frame
+% Also, verbatim environment cannot be inside curly braces, {\begin{verbatim}... blows up?
+\begin{frame}[fragile]{Tikz Components :: Member}
+	
 	\small
 	\begin{verbatim}
-		\Member{startpt}{endpt}{outer}{inner}{stroke}{height}{radius}{line width}
-		 \end{verbatim}
+  \Member{startpt}{endpt}{outer}{inner}{stroke}{height}{radius}{line width}
+   \end{verbatim}
 	\parb
-	% \vspace{2cm}
-		%  \centering
-	\resizebox{0.75\textwidth}{!}{%
-		\begin{tikzpicture}
-			\coordinate (A) at (0,0);
-			\coordinate (B) at (3,3);
-			\coordinate (C) at (8,0);
-			\coordinate (D) at (6,-0.5);
-			\coordinate (E) at (2,0.5);
-			\Member{A}{B}{SlateGray}{SlateGray!25!white}{black}{0.35}{0.175}{.25}
-			\fill[white] (A) circle (1mm);
-			\fill[red] (B) circle (1mm);
-		\end{tikzpicture}
-
-	}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Tikz Components :: Member}
-
-	\small\centering
-	\begin{verbatim}
-		\Member{startpt}{endpt}{outer}{inner}{stroke}{height}{radius}{line width}
-		 \end{verbatim}
-	\parb
-	% \vspace{2cm}
-
+	\vspace{2cm}
+	
 	\resizebox{0.75\textwidth}{!}{%
 		\begin{tikzpicture}
 			\coordinate (A) at (0,0);
@@ -132,42 +139,670 @@
 			\fill[white] (-1,0) circle (0.1mm);
 			\fill[white] (9,0) circle (0.1mm);
 		\end{tikzpicture}
-
 	}
+	
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}[fragile]{Tikz Components :: PinnedConnection}
 
+\begin{frame}[fragile]{Tikz Components :: PinnedConnection}
+	
 	\small
 	\begin{verbatim}
-	  \PinnedConnection[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
-  	\end{verbatim}
+    \PinnedConnection[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
+
+    \tikz{
+      \coordinate (A) at (0,0);
+      \PinnedConnection{A}{DarkKhaki}{Black}{2}{0.5}
+    }
+  \end{verbatim}
+	
 	\vspace{1cm}
+	
 	\tikz{
 		\coordinate (A) at (0,0);
 		% \PinnedConnection[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
-		\PinnedConnection{A}{Honeydew1}{Black}{2}{0.5}
+		\PinnedConnection{A}{DarkKhaki}{Black}{2}{0.5}
 	}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
+\begin{frame}[fragile]{Tikz Components :: RollerOne}
+	
+	\footnotesize
+	\begin{verbatim}
+    \RollerOne[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
+  \end{verbatim}
+	
+	\vspace{1cm}
+	
+	\tikz{
+		\coordinate (A) at (0,0);
+		\RollerOne{A}{DarkKhaki}{Black}{2}{0.5}
+	}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Tikz Components :: RollerThree}
+	
+	\footnotesize
+	\begin{verbatim}
+    \RollerThree[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
+  \end{verbatim}
+	
+	\vspace{1cm}
+	
+	\tikz{
+		\coordinate (A) at (0,0);
+		\RollerThree{A}{DarkKhaki}{Black}{2}{0.5}
+	}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Tikz Components :: RollerOnly}
+	
+	\footnotesize
+	\begin{verbatim}
+    \RollerOnly[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
+  \end{verbatim}
+	
+	\vspace{1cm}
+	
+	\tikz{
+		\coordinate (A) at (0,0);
+		\RollerOnly{A}{DarkKhaki}{Black}{2}{0.5}
+	}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Tikz Components :: Rocker}
+	
+	\footnotesize
+	\begin{verbatim}
+    \Rocker[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
+  \end{verbatim}
+	
+	\vspace{1cm}
+	
+	\tikz{
+		\coordinate (A) at (0,0);
+		% \Rocker[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
+		\Rocker{A}{DarkKhaki}{Black}{2}{0.5}
+	}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Tikz Components :: EyeConnection}
+	
+	\footnotesize
+	\begin{verbatim}
+    \EyeConnection[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
+  \end{verbatim}
+	
+	\vspace{1cm}
+	
+	\tikz{
+		\coordinate (A) at (0,0);
+		\EyeConnection{A}{DarkKhaki}{Black}{2}{0.5}
+	}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Tikz Components :: EyeConnectionB}
+	
+	\small
+	\begin{verbatim}
+    \EyeConnectionB[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
+  \end{verbatim}
+	
+	\vspace{1cm}
+	
+	\tikz{
+		\coordinate (A) at (0,0);
+		\EyeConnectionB{A}{DarkKhaki}{Black}{2}{0.5}
+	}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Tikz Components :: DLDown}
+	
+	\footnotesize
+	\begin{verbatim}
+    \DLDown[rotate]{tl}{tr}{b}{fill}{draw}{spaces}{scale}{lineWidth}
+
+    \DLDown[25]{A}{B}{C}{SlateGray3}{SlateGray4!75!black}{5}{1}{0.375}
+  \end{verbatim}
+	
+	\tikz{
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (4,3);
+		\coordinate (C) at (0,-1);
+		% \DLDown[rotate]{tl}{tr}{b}{fill}{draw}{spaces}{scale}{lineWidth}
+		\DLDown[25]{A}{B}{C}{SlateGray3}{SlateGray4!75!black}{5}{1}{0.375}
+	}
+	
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Tikz Components :: DLUp}
+	
+	\footnotesize
+	\begin{verbatim}
+    \DLUp[rotate]{tl}{tr}{b}{fill}{draw}{spaces}{scale}{lineWidth}
+
+    \DLUp[25]{A}{B}{C}{SlateGray3}{SlateGray4!75!black}{5}{1}{0.375}
+  \end{verbatim}
+	
+	\tikz{
+		\coordinate (A) at (0,0);
+		\coordinate (B) at (4,3);
+		\coordinate (C) at (0,-1);
+		% \DLUp[rotate]{tl}{tr}{b}{fill}{draw}{spaces}{scale}{lineWidth}
+		\DLUp[25]{A}{B}{C}{SlateGray3}{SlateGray4!75!black}{5}{1}{0.375}
+	}
+	
+\end{frame}
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Misc Bits}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/misc/penrose}
+	\input{../pikz/misc/penrose}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \begin{frame}{pikz/misc/penstar}
+%   \input{../pikz/misc/penstar}
+% \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Math Review}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/01MathReview/01MR01}
+	\resizebox{0.75\textwidth}{!}{%
+		\input{../pikz/01MathReview/01MR01}
+	}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{06 Equilibrium of Rigid Bodies}
+
+\begin{frame}{pikz/01MathReview/01MR01Qwizm}
+	\resizebox{0.75\textwidth}{!}{%
+		\input{../pikz/01MathReview/01MR01Qwizm}
+	}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/01MathReview/01MR02}
+	\resizebox{0.75\textwidth}{!}{%
+		\input{../pikz/01MathReview/01MR02}
+	}
+\end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	\def\scale{0.7}
-	\input{../pikz/06ERB/06erb01}
+\begin{frame}{pikz/01MathReview/01MR02Qwizm}
+	\resizebox{0.75\textwidth}{!}{%
+		\input{../pikz/01MathReview/01MR02Qwizm}
+	}
 \end{frame}
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{09 Frames}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}
-	hello
+
+\begin{frame}{pikz/01MathReview/01MR03}
+	\input{../pikz/01MathReview/01MR03}
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/01MathReview/01MR03Qwizm}
+	\input{../pikz/01MathReview/01MR03Qwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/01MathReview/01MR04}
+	\resizebox{0.5\textwidth}{!}{%
+		\input{../pikz/01MathReview/01MR04}
+	}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/01MathReview/01MR04Qwizm}
+	\input{../pikz/01MathReview/01MR04Qwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/01MathReview/01MR05}
+	\input{../pikz/01MathReview/01MR05}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/01MathReview/01MR05Qwizm}
+	\input{../pikz/01MathReview/01MR05Qwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/01MathReview/01MR06}
+	\input{../pikz/01MathReview/01MR06}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/01MathReview/01MR06Qwizm}
+	\input{../pikz/01MathReview/01MR06Qwizm}
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Forces \& Components}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Frames \& Machines}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF01a}
+	\input{../pikz/09Frames/09CF01a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF01aQwizm}
+	\input{../pikz/09Frames/09CF01aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF01b}
+	\input{../pikz/09Frames/09CF01b}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF01bQwizm}
+	\input{../pikz/09Frames/09CF01bQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF01c}
+	\input{../pikz/09Frames/09CF01c}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF01cQwizm}
+	\input{../pikz/09Frames/09CF01cQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF02a}
+	\input{../pikz/09Frames/09CF02a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF02aQwizm}
+	\input{../pikz/09Frames/09CF02aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF02b}
+	\input{../pikz/09Frames/09CF02b}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF02bQwizm}
+	\input{../pikz/09Frames/09CF02bQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF02c}
+	\input{../pikz/09Frames/09CF02c}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF02cQwizm}
+	\input{../pikz/09Frames/09CF02cQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF03a}
+	\input{../pikz/09Frames/09CF03a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF03aQwizm}
+	\input{../pikz/09Frames/09CF03aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF03b}
+	\input{../pikz/09Frames/09CF03b}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF03bQwizm}
+	\input{../pikz/09Frames/09CF03bQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF04a}
+	\input{../pikz/09Frames/09CF04a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF04aQwizm}
+	\input{../pikz/09Frames/09CF04aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF04b}
+	\input{../pikz/09Frames/09CF04b}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF04bQwizm}
+	\input{../pikz/09Frames/09CF04bQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF05a}
+	\input{../pikz/09Frames/09CF05a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF05aQwizm}
+	\input{../pikz/09Frames/09CF05aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF05b}
+	\input{../pikz/09Frames/09CF05b}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF05bQwizm}
+	\input{../pikz/09Frames/09CF05bQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF06a}
+	\input{../pikz/09Frames/09CF06a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF06aQwizm}
+	\input{../pikz/09Frames/09CF06aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF06b}
+	\input{../pikz/09Frames/09CF06b}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF06bQwizm}
+	\input{../pikz/09Frames/09CF06bQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF07a}
+	\input{../pikz/09Frames/09CF07a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF07aQwizm}
+	\input{../pikz/09Frames/09CF07aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF07b}
+	\input{../pikz/09Frames/09CF07b}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF07bQwizm}
+	\input{../pikz/09Frames/09CF07bQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF08a}
+	\input{../pikz/09Frames/09CF08a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF08aQwizm}
+	\input{../pikz/09Frames/09CF08aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF09a}
+	\input{../pikz/09Frames/09CF09a.tex}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF09aQwizm}
+	\input{../pikz/09Frames/09CF09aQwizm}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF09aQwizm}
+	\input{../pikz/09Frames/09CF09aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF10a}
+	\input{../pikz/09Frames/09CF10a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF10aQwizm}
+	\input{../pikz/09Frames/09CF10aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF10b}
+	\input{../pikz/09Frames/09CF10b}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF10bQwizm}
+	\input{../pikz/09Frames/09CF10bQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF11a}
+	\input{../pikz/09Frames/09CF11a}
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF11aQwizm}
+	\input{../pikz/09Frames/09CF11aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF12a}
+	\input{../pikz/09Frames/09CF12a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF12aQwizm}
+	\input{../pikz/09Frames/09CF12aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF12b}
+	\input{../pikz/09Frames/09CF12b}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF12bQwizm}
+	\input{../pikz/09Frames/09CF12bQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF13a}
+	\input{../pikz/09Frames/09CF13a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF13aQwizm}
+	\input{../pikz/09Frames/09CF13aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF14a}
+	\input{../pikz/09Frames/09CF14a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF14aQwizm}
+	\input{../pikz/09Frames/09CF14aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF15a}
+	\input{../pikz/09Frames/09CF15a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF15aQwizm}
+	\input{../pikz/09Frames/09CF15aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF16a}
+	\input{../pikz/09Frames/09CF16a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF16aQwizm}
+	\input{../pikz/09Frames/09CF16aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF17a}
+	\input{../pikz/09Frames/09CF17a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Frames/09CF17aQwizm}
+	\input{../pikz/09Frames/09CF17aQwizm}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\section{Machines}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{pikz/09Machines/09M01a}
+	\input{../pikz/09Machines/09M01a}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
 \end{document}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%

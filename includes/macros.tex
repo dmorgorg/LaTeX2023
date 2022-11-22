@@ -19,7 +19,13 @@
 	\end{minipage}
 }
 
-
+%left flushed minipage
+\newcommand{\mini}[2][0.8]{
+	\begin{minipage}[c]{#1\columnwidth}
+		\raggedright
+		#2
+	\end{minipage}
+}
 
 % centered minipage with text \raggedright
 %\cmini[width]{content}

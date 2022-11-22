@@ -1,0 +1,59 @@
+
+%% !TEX root = ../../Beamer/02ForceVectors/02ForceVectors.tex
+
+\documentclass{standalone}
+\usepackage{tikz}
+\usepackage{pgfmath}
+% \usepackage{fp}
+
+\def\scale{1} % initialisation for pikz
+\usetikzlibrary{calc, decorations.markings}
+% \usetikzlibrary{calc} % only works within a path
+% \usetikzlibrary{fpu}
+\usetikzlibrary{math} % if then else etc.
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{shadings}
+\usetikzlibrary{intersections}
+\usetikzlibrary{shadows,calc,shadings}
+\usetikzlibrary{decorations.shapes, decorations.text, decorations.pathmorphing, decorations.markings}
+\usetikzlibrary{shapes.callouts,shapes.multipart}
+\usetikzlibrary{positioning,arrows.meta}
+\tikzset{every picture/.append style={line cap=round}}
+
+\begin{document}
+\def\scale{1}
+\begin{tikzpicture}[scale=\scale, line cap=round,decoration={
+		markings,% switch on markings
+		mark=% actually add a mark
+		between positions 0 and 1 step 14pt
+		with
+		{
+			\begin{scope}[scale=0.8]
+				\draw[red, very thick] (0pt,-3pt) -- ++(6pt,0) arc(-90:90:3pt) -- ++(-6pt,0pt) arc(90:270:3pt) -- cycle;
+				\draw[red,very thick] (-11pt,0) -- (0pt,0);
+			\end{scope}
+		}
+	}]
+
+	\coordinate (D) at (-3,1);
+	\coordinate (E) at (3, 2);
+	\coordinate (C) at (0, 0);
+
+	% \fill[bottom color=mucus, top color=mucus!50] (D) rectangle (E);
+	\draw[thin, black] (D) -- ($(E)-(0,1) $);
+	% \EyeConnection[180]{C}{mucus!50}{black}{1}{0.5}
+
+	% \draw[latex-latex] ($ (C)+(180:2.12)$) arc (180:225:2.12) node[fill=white, midway, inner sep=0.25mm] {$ 45^\circ $};
+	% \draw[latex-latex] ($ (C)+(0:2.12)$) arc (0:-30:2.12) node[fill=white, midway, inner sep=0.25mm] {$ 30^\circ $};
+
+	% \path[postaction={decorate}] ($ (C)+(-30:0.45) $) -- +(-30:2);
+	% \path[postaction={decorate}] ($ (C)+(225:0.45) $) -- +(225:2);
+	% \draw[line width=2pt, -latex, blue] ($ (C)+(-30:1.25) $) -- +(-30:2) node[black, below]{$2.50 $\text{ kN}};
+	\draw[line width=2pt, -latex, blue] (0,0) -- +(45:2);
+	% \draw[line width=2pt, -latex, blue] ($ (C)+(225:1.25) $) -- +(225:2) node[black, below]{$3.75 $\text{ kN}};
+
+	% \draw[thin] ($(C)+(-0.5,0) $) -- +(-2.25,0);
+	% \draw[thin] ($(C)+(0.5,0) $) -- +(2.25,0) node[right] {$x$};
+
+\end{tikzpicture}
+\end{document}

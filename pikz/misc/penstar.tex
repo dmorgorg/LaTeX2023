@@ -1,0 +1,81 @@
+% !TEX root = ../../statikz2020/statikz2020.tex
+\resizebox{0.75\textwidth}{!}{%   
+	\tikz{
+        \small
+        \def\len{6}
+        \def\ext{1}
+
+        \coordinate (O) at (0,0);
+        \coordinate (A) at ($(O)+(90:\len)$);
+        \coordinate (B) at ($(O)+(18:\len)$);
+        \coordinate (C) at ($(O)+(-54:\len)$);
+        \coordinate (D) at ($(O)+(234:\len)$);
+        \coordinate (E) at ($(O)+(162:\len)$);
+        \coordinate (AB) at ($(O)+(54:\len*0.382)$);
+        \coordinate (BC) at ($(O)+(-18:\len*0.382)$);
+        \coordinate (CD) at ($(O)+(-90:\len*0.382)$);
+        \coordinate (DE) at ($(O)+(198:\len*0.382)$);
+        \coordinate (AE) at ($(O)+(126:\len*0.382)$);
+        \coordinate (AAD) at ($(A)!0.1!(D)$);
+        \coordinate (ADD) at ($(A)!0.9!(D)$);
+        \coordinate (AAC) at ($(A)!0.1!(C)$);
+        \coordinate (ACC) at ($(A)!0.9!(C)$);
+        \coordinate (BBE) at ($(B)!0.1!(E)$);
+        \coordinate (BEE) at ($(B)!0.9!(E)$);
+        \coordinate (BBD) at ($(B)!0.1!(D)$);
+        \coordinate (BDD) at ($(B)!0.9!(D)$);
+        \coordinate (CCE) at ($(C)!0.1!(E)$);
+        \coordinate (CEE) at ($(C)!0.9!(E)$);
+        
+        \draw (O) circle (1mm)node[above right]{$O$};
+        % \draw (A) circle (1mm)node[above right]{$A$};
+        % \draw (B) circle (1mm)node[above right]{$B$};
+        % \draw (C) circle (1mm)node[above right]{$C$};
+        % \draw (D) circle (1mm)node[above right]{$D$};
+        % \draw (E) circle (1mm)node[above right]{$E$};
+        \draw (AB) circle (1mm)node[above right]{$AB$};
+        \draw (BC) circle (1mm)node[above right]{$BC$};
+        \draw (CD) circle (1mm)node[above right]{$CD$};
+        \draw (DE) circle (1mm)node[above right]{$DE$};
+        \draw (AE) circle (1mm)node[above right]{$AE$};
+        \draw (AAD) circle (1mm)node[above right]{$AAD$};
+        \draw (ADD) circle (1mm)node[above right]{$ADD$};
+        \draw (AAC) circle (1mm)node[above right]{$AAC$};
+        \draw (ACC) circle (1mm)node[above right]{$ACC$};
+        \draw (BBE) circle (1mm)node[above right]{$BBE$};
+        \draw (BEE) circle (1mm)node[above right]{$BEE$};
+        \draw (BBD) circle (1mm)node[above right]{$BBD$};
+        \draw (BDD) circle (1mm)node[above right]{$BDD$};
+        \draw (CCE) circle (1mm)node[above right]{$CCE$};
+        \draw (CEE) circle (1mm)node[above right]{$CEE$};
+
+        \draw[thin] (AE)--(AB)--(BC)--(CD)--(DE)--(AE);
+        \draw[red] (AAC)--(AB)--(BBE)--(BBD)--(BC)--(ACC)--(CCE)--(CD)--(BDD)--(ADD)--(DE)--(CEE)--(BEE)--(AE)--(AAD)--cycle;
+        \draw[blue] (AAC)--(BDD);
+        \draw[blue] (AAD)--(CCE);
+        \draw[blue] (BEE)--(ACC);
+        \draw[blue] (CEE)--(BBD);
+        \draw[blue] (ADD)--(BBE);
+
+
+        % \draw (A)--(C);
+        % \draw (C)--(E);
+        % \draw (E)--(B);
+        % \draw (B)--(D);
+        % \draw (D)--(A);
+
+        
+        
+        % \shadedraw[fill=LightGoldenrod3, lower left = LightGoldenrod3!37!black, lower right=LightGoldenrod3, upper left=LightGoldenrod3, upper right=LightGoldenrod3] (CNW)--(CNE)--(BE)--(AE)--(ANE)--(BNW)--cycle;
+
+        % \shadedraw[upper left =DarkSeaGreen3!37!black, upper right = DarkSeaGreen3!25!black, lower left=DarkSeaGreen3, lower right =DarkSeaGreen3] (CSE)--(AE)--(BE)--(BSE)--(ASW)--(C)--cycle;
+
+        % \filldraw[left color = Seashell3, right color=Seashell3!37!black, middle color=Seashell3 ] (CNW)--(BNW)--(BWNW)--(CSW)--(ASW)--(AW)--cycle;
+
+        % \fill (A) circle (1mm);
+        % \fill (B) circle (1mm);
+        % \fill (C) circle (1mm);
+
+	
+	}
+}

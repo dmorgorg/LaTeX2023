@@ -1,5 +1,6 @@
-\newcommand{\PinnedConnection}[6][0]{
-	\def\lrotate{#1}
+
+\newcommand{\EyeConnection}[6][0]{
+	\def\lrotate{#1};
 	\def\lpin{#2}
 	\def\lfill{#3}
 	\def\ldraw{#4}
@@ -10,8 +11,9 @@
 	\begin{scope}[scale=\lscale, rotate=\lrotate]
 		\filldraw[draw=\ldraw, fill=\lfill, line width=\lwidth mm] ($(\lpin) + (0.201*\h+1.0353*\r ,-0.75*\h)$) -- ++(105: 0.77646*\h+0.26795*\r) arc (15:165:\r) -- ++(-105:0.77646*\h+0.26795*\r) -- cycle;
 
-		% \shadedraw[ball color=\lfill, draw=\ldraw, line width = \lwidth mm] (\lpin) circle (1.5mm);
+		\fill[outer color=\lfill, inner color=black] (\lpin) circle (2.5mm);
+		\filldraw[fill=white, draw=\ldraw, line width = \lwidth mm] (\lpin) circle (1.25mm);
 
-		\filldraw[rounded corners=\lscale pt, draw=\ldraw, fill=\lfill, line width=\lwidth mm] ($ (\lpin) - (1,1) $) rectangle +(2,0.35);
+		\filldraw[rounded corners=\lscale pt, draw=\ldraw, fill=\lfill, line width=\lwidth mm] ($ (\lpin) - (1,1) $) rectangle +(2,0.25);
 	\end{scope}
 }
