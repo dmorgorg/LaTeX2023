@@ -1,0 +1,82 @@
+\newcommand{\PenroseTri}[9][0]{
+	\def\lrotate{#1};
+	\def\lpin{#2}
+	\def\len{#3}
+	\def\ext{#4}
+	\def\fillone{#5}
+	\def\filltwo{#6}
+	\def\fillthree{#7}
+	\def\ddraw{#8}
+	\def\lwidth{#9}
+	
+	% \coordinate (A) at (\lpin);
+	% \coordinate (B) at ($(A)+(0:\len)$);
+	% \coordinate (C) at ($(A)+(60:\len)$);	
+	
+	% \coordinate (AE) at ($(A)+(0:\ext)$);
+	% \coordinate (AW) at ($(A)+(180:\ext)$);
+	% \coordinate (ASW) at ($(A)+(240:\ext)$);
+	% \coordinate (ANE) at ($(AE)+(60:\ext)$);
+	
+	% \coordinate (BE) at ($(B)+(0:\ext)$);
+	% \coordinate (BNW) at ($(B)+(120:\ext)$);
+	% \coordinate (BSE) at ($(B)+(-60:\ext)$);
+	% \coordinate (BW) at ($(B)+(180:\ext)$);
+	% \coordinate (BWNW) at ($(BNW)+(180:\ext)$);
+	
+	% \coordinate (CNE) at ($(C)+(60:\ext)$);
+	% \coordinate (CNW) at ($(C)+(120:\ext)$);
+	% \coordinate (CSW) at ($(C)+(240:\ext)$);
+	% \coordinate (CS) at ($(CSW)+(-60:\ext)$);
+	
+	
+	\begin{scope}[rotate around={\lrotate:(\lpin)}]
+		% ugliness to avoid inadvertant use of common coordinate label clash from calling program
+		\coordinate (aaaa) at (#2);
+		\coordinate (bbbb) at ($(aaaa)+(0:\len)$);
+		\coordinate (cccc) at ($(aaaa)+(60:\len)$);	
+		
+		\coordinate (aaaaE) at ($(aaaa)+(0:\ext)$);
+		\coordinate (aaaaW) at ($(aaaa)+(180:\ext)$);
+		\coordinate (aaaaSW) at ($(aaaa)+(240:\ext)$);
+		\coordinate (aaaaNE) at ($(aaaaE)+(60:\ext)$);
+		
+		\coordinate (bbbbE) at ($(bbbb)+(0:\ext)$);
+		\coordinate (bbbbNW) at ($(bbbb)+(120:\ext)$);
+		\coordinate (bbbbSE) at ($(bbbb)+(-60:\ext)$);
+		% \coordinate (BW) at ($(bbbb)+(180:\ext)$);
+		\coordinate (bbbbWNW) at ($(bbbbNW)+(180:\ext)$);
+		
+		\coordinate (ccccNE) at ($(cccc)+(60:\ext)$);
+		\coordinate (ccccNW) at ($(cccc)+(120:\ext)$);
+		\coordinate (ccccSW) at ($(cccc)+(240:\ext)$);
+		\coordinate (ccccS) at ($(ccccSW)+(-60:\ext)$);
+		
+		\shadedraw[draw=\ddraw, lower left = \filltwo!37!black, lower right=\filltwo, upper left=\filltwo, upper right=\filltwo, line width=\lwidth mm] (ccccNW)--(ccccNE)--(bbbbE)--(aaaaE)--(aaaaNE)--(bbbbNW)--cycle;
+		
+		\shadedraw[draw=\ddraw, upper left =\fillone!37!black, upper right = \fillone!25!black, lower left=\fillone, lower right =\fillone, line width=\lwidth mm] (ccccS)--(aaaaE)--(bbbbE)--(bbbbSE)--(aaaaSW)--(ccccSW)--cycle;
+		
+		\filldraw[draw=\ddraw, left color = \fillthree, right color=\fillthree!37!black, middle color=\fillthree, line width=\lwidth mm ] (ccccNW)--(bbbbNW)--(bbbbWNW)--(ccccSW)--(aaaaSW)--(aaaaW)--cycle;
+		
+		% % \shadedraw[ball color=\fillone, line width = \lwidth mm] (A) circle (0.75mm);
+		% \shadedraw[ball color=\fillone, line width = \lwidth mm] (ANE) circle (0.5mm);
+		% \shadedraw[ball color=\fillone, line width = \lwidth mm] (AE) circle (0.5mm);
+		% \shadedraw[ball color=\fillone, line width = \lwidth mm] (AW) circle (0.5mm);
+		% \shadedraw[ball color=\fillone, line width = \lwidth mm] (ASW) circle (0.5mm);
+		
+		% % \shadedraw[ball color=\filltwo, line width = \lwidth mm] (B) circle (0.75mm);
+		% \shadedraw[ball color=\filltwo, line width = \lwidth mm] (BE) circle (0.5mm);
+		% \shadedraw[ball color=\filltwo, line width = \lwidth mm] (BNW) circle (0.5mm);
+		% \shadedraw[ball color=\filltwo, line width = \lwidth mm] (BSE) circle (0.5mm);
+		% \shadedraw[ball color=\filltwo, line width = \lwidth mm] (BWNW) circle (0.5mm);
+		
+		% % \shadedraw[ball color=\fillthree, line width = \lwidth mm] (C) circle (0.75mm) ;
+		% \shadedraw[ball color=\fillthree, line width = \lwidth mm] (CNE) circle (0.5mm);
+		% \shadedraw[ball color=\fillthree, line width = \lwidth mm] (CNW) circle (0.5mm);
+		% \shadedraw[ball color=\fillthree, line width = \lwidth mm] (CS) circle (0.5mm);
+		% \shadedraw[ball color=\fillthree, line width = \lwidth mm] (CSW) circle (0.5mm);
+		
+		% \shadedraw[ball color=\fillone, line width = \lwidth mm] (C) circle (0.75mm);
+		
+	\end{scope}
+}

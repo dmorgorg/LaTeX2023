@@ -1,45 +1,39 @@
 %!TEX option = -enable-write18
 
-\documentclass[9pt,xcolor={svgnames, x11names}]{beamer} 
-\usefonttheme{professionalfonts}
+\documentclass[9pt,svgnames,x11names]{beamer}
 
 \input{../includes/macros}
 \input{../includes/definedColors}
 \input{../pikz/components/Member}
-\input{../pikz/components/Rocker}
+\input{../pikz/components/PinnedConnection}
 \input{../pikz/components/RollerOne}
 \input{../pikz/components/RollerThree}
 \input{../pikz/components/RollerOnly}
-\input{../pikz/components/PinnedConnection}
+\input{../pikz/components/Rocker}
 \input{../pikz/components/EyeConnection}
 \input{../pikz/components/EyeConnectionB}
 \input{../pikz/components/DLDown}
 \input{../pikz/components/DLUp}
+\input{../pikz/misc/PenroseTri}
 
- \hypersetup{
-  colorlinks,
-  % citecolor=red,
-  % filecolor=orange,
-  linkcolor=staticsRed, % table of contents
-  urlcolor=staticsRed
+\hypersetup{
+    colorlinks,
+    linkcolor=staticsRed, % table of contents
+    urlcolor=staticsRed
 }
-% \usepackage{enumitem} % incompatible with Beamer?
-\everymath{\displaystyle}
+
+
+\everymath{\displaystyle} 
+\usefonttheme{professionalfonts}
 
 \usepackage[absolute,overlay]{textpos}
 \setlength{\TPHorizModule}{1.0cm}
 \setlength{\TPVertModule}{\TPHorizModule}
 \textblockorigin{0.0cm}{0.0cm}  %start all at upper left corner
-
-
-%\usepackage{amssymb}
 \usepackage{bm}
 \usepackage{verbatim} % for latex code in latex doc
-% \usepackage{shellesc}
-
 \usepackage{tikz}
 \usepackage{pgfmath}
-% \usepackage{fp}
 \tikzset{every picture/.append style={line cap=round}}
 \def\scale{1} % initialisation for pikz
 \usetikzlibrary{calc} % only works within a path
@@ -49,20 +43,10 @@
 \usetikzlibrary{shadings}
 \usetikzlibrary{intersections}
 
-
 \usetheme{Antibes}
 \usecolortheme[named=staticsRed]{structure}
-% \setbeamertemplate{items}[triangle]
-% \setbeamertemplate{subsection in toc}[subsections numbered]
-
-% \setbeamertemplate{section in toc}{%
-    % *  \inserttocsection \par}
-
-% \setbeamertemplate{subsection in toc}{
-%     -- \inserttocsubsection \par}
-
 \setbeamertemplate{blocks}[rounded][shadow=false]
-\setbeamertemplate{headline}{\vspace{.1cm}}
+\setbeamertemplate{headline}{}%{\vspace{.1cm}}
 \setbeamertemplate{navigation symbols}{} % empty braces suppresses all navigation symbols
 \setbeamertemplate{footline}{
   \hfill
@@ -82,727 +66,626 @@
 \setbeamertemplate{section in toc shaded}[default][50]
 % \setbeamertemplate{subsection in toc}[subsections numbered]
 
-
-
 \setcounter{tocdepth}{5}
-
-
 % various hacks to get around (apparent?) Beamer titlepage constraints
-\title[\color{black} Statikz\textcolor{staticsRed}{2018-\the\year}]{\Huge Statikz}
+\title[\color{black} Statikz\textcolor{staticsRed}{\;2018-\the\year}]{\Huge Statikz}
 \subtitle{} % i.e., a blank line
 \institute{\small Source code at: \lb{\footnotesize\url{https://github.com/dmorgorg/LaTeX2022}}}
 \author{} % another blanky
 \date{\small Last updated on \today}
 
-\begin{document} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[plain]
-	\titlepage
+    \titlepage
 \end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}{Table of Contents}
-	\begin{minipage}{0.9\textwidth}
-		\tableofcontents
-	\end{minipage}
-	\vfill
+    \begin{minipage}{0.9\textwidth}
+        \tableofcontents
+    \end{minipage}
+    \vfill
+
 \end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Tikz Components} %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Components %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\centering
 
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Components %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{My Tikz Components}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 % Note that use of verbatim within Beamer needs fragile setting for frame
 % Also, verbatim environment cannot be inside curly braces, {\begin{verbatim}... blows up?
+
 \begin{frame}[fragile]{Tikz Components :: Member}
-	
-	\small
-	\begin{verbatim}
-  \Member{startpt}{endpt}{outer}{inner}{stroke}{height}{radius}{line width}
-   \end{verbatim}
-	\parb
-	\vspace{2cm}
-	
-	\resizebox{0.75\textwidth}{!}{%
-		\begin{tikzpicture}
-			\coordinate (A) at (0,0);
-			\coordinate (B) at (3,3);
-			\coordinate (C) at (8,0);
-			\coordinate (D) at (6,-0.5);
-			\coordinate (E) at (2,0.5);
-			\Member{A}{B}{SlateGray}{SlateGray!25!white}{black}{0.35}{0.175}{.25}
-			\Member{A}{E}{DarkMagenta}{DarkMagenta!25!white}{black}{0.35}{0.175}{.25}
-			\Member{E}{B}{DarkRed}{DarkRed!25!white}{black}{0.35}{0.175}{.25}
-			\Member{E}{D}{DarkOliveGreen}{DarkOliveGreen!25!white}{black}{0.35}{0.175}{.25}
-			\Member{D}{B}{SteelBlue}{SteelBlue!25!white}{black}{0.35}{0.175}{.25}
-			\Member{C}{B}{DarkKhaki}{DarkKhaki!25!white}{black}{0.35}{0.175}{.25}
-			\Member{D}{C}{Goldenrod}{Goldenrod!25!white}{black}{0.35}{0.175}{.25}
-			\fill[white] (-1,0) circle (0.1mm);
-			\fill[white] (9,0) circle (0.1mm);
-		\end{tikzpicture}
-	}
-	
+
+    \small
+    \begin{verbatim}
+\Member{startpt}{endpt}{outer}{inner}{stroke}{height}{radius}{line width}
+    \end{verbatim}
+    \parb
+    \vspace{2cm}
+    \centering
+    \resizebox{0.75\textwidth}{!}{%
+        \begin{tikzpicture}
+            \coordinate (A) at (0,0);
+            \coordinate (B) at (3,3);
+            \coordinate (C) at (8,0);
+            \coordinate (D) at (6,-0.5);
+            \coordinate (E) at (2,0.5);
+
+            \Member{A}{E}{DarkOliveGreen}{DarkOliveGreen!25!white}{black}{0.35}{0.175}{.25}
+            \Member{E}{D}{DarkOliveGreen}{DarkOliveGreen!25!white}{black}{0.35}{0.175}{.25}
+            \Member{D}{C}{DarkOliveGreen}{DarkOliveGreen!25!white}{black}{0.35}{0.175}{.25}
+            \Member{D}{B}{DarkKhaki}{DarkKhaki!25!white}{black}{0.35}{0.175}{.25}
+
+            \Member{E}{B}{DarkKhaki}{DarkKhaki!25!white}{black}{0.35}{0.175}{.25}
+            \Member{C}{B}{DarkKhaki}{DarkKhaki!25!white}{black}{0.35}{0.175}{.25}
+            \Member{A}{B}{DarkKhaki}{DarkKhaki!33!white}{black}{0.35}{0.175}{.25}
+            \fill[white] (-1,0) circle (0.1mm);
+            \fill[white] (9,0) circle (0.1mm);
+        \end{tikzpicture}
+    }
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Tikz Components :: Some Example Member Colors}
+
+    \def\horiz{4}
+    \def\vert{-0.55}
+    \small
+
+
+    \centering
+    \resizebox{0.95\textwidth}{!}{%
+        \begin{tikzpicture}
+            \coordinate (A) at (0,0);
+            \coordinate (AA) at ($(A)+(5,0)$);
+            \coordinate (AAA) at ($(AA)+(\horiz,0)$);
+
+            \coordinate (B) at ($(A)+(0,\vert)$);
+            \coordinate (BB) at ($(B)+(5,0)$);
+            \coordinate (BBB) at ($(BB)+(\horiz,0)$);
+
+            \coordinate (C) at ($(B)+(0,\vert)$);
+            \coordinate (CC) at ($(C)+(5,0)$);
+            \coordinate (CCC) at ($(CC)+(\horiz,0)$);
+
+            \coordinate (D) at ($(C)+(0,\vert)$);
+            \coordinate (DD) at ($(D)+(5,0)$);
+            \coordinate (DDD) at ($(DD)+(\horiz,0)$);
+
+            \coordinate (E) at ($(D)+(0,\vert)$);
+            \coordinate (EE) at ($(E)+(5,0)$);
+            \coordinate (EEE) at ($(EE)+(\horiz,0)$);
+
+            \coordinate (F) at ($(E)+(0,\vert)$);
+            \coordinate (FF) at ($(F)+(5,0)$);
+            \coordinate (FFF) at ($(FF)+(\horiz,0)$);
+
+            \coordinate (G) at ($(F)+(0,\vert)$);
+            \coordinate (GG) at ($(G)+(5,0)$);
+            \coordinate (GGG) at ($(GG)+(\horiz,0)$);
+
+            \coordinate (H) at ($(G)+(0,\vert)$);
+            \coordinate (HH) at ($(H)+(5,0)$);
+            \coordinate (HHH) at ($(HH)+(\horiz,0)$);
+
+            \coordinate (I) at ($(H)+(0,-1)$);
+            \coordinate (II) at ($(I)+(5,0)$);
+            \coordinate (III) at ($(II)+(\horiz,0)$);
+
+            \coordinate (J) at ($(I)+(0,\vert)$);
+            \coordinate (JJ) at ($(J)+(5,0)$);
+            \coordinate (JJJ) at ($(JJ)+(\horiz,0)$);
+
+            \coordinate (K) at ($(J)+(0,\vert)$);
+            \coordinate (KK) at ($(K)+(5,0)$);
+            \coordinate (KKK) at ($(KK)+(\horiz,0)$);
+
+            \coordinate (L) at ($(K)+(0,\vert)$);
+            \coordinate (LL) at ($(L)+(5,0)$);
+            \coordinate (LLL) at ($(LL)+(\horiz,0)$);
+
+            \coordinate (M) at ($(L)+(0,\vert)$);
+            \coordinate (MM) at ($(M)+(5,0)$);
+            \coordinate (MMM) at ($(MM)+(\horiz,0)$);
+
+            \coordinate (N) at ($(M)+(0,\vert)$);
+            \coordinate (NN) at ($(N)+(5,0)$);
+            \coordinate (NNN) at ($(NN)+(\horiz,0)$);
+
+            \coordinate (O) at ($(N)+(0,\vert)$);
+            \coordinate (OO) at ($(O)+(5,0)$);
+            \coordinate (OOO) at ($(OO)+(\horiz,0)$);
+
+            \Member{A}{AA}{DarkKhaki}{DarkKhaki!25!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=DarkKhaki] (A) circle (1mm);
+            \shadedraw[ball color=DarkKhaki] (AA) circle (1mm);
+            \draw[thin, DarkKhaki] ($(AA)+(0.5,0)$)--(AAA);
+            \node[fill=white, inner sep=0.25cm] at (AAA) {\textcolor{DarkKhaki}{\{DarkKhaki\}\{DarkKhaki!25!white\}}};
+
+            \Member{B}{BB}{DarkOliveGreen}{DarkOliveGreen!25!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=DarkOliveGreen] (B) circle (1mm);
+            \shadedraw[ball color=DarkOliveGreen] (BB) circle (1mm);
+            \draw[thin, DarkOliveGreen] ($(BB)+(0.5,0)$)--(BBB);
+            \node[fill=white, inner sep=0.25cm] at (BBB) {\textcolor{DarkOliveGreen}{\{DarkOliveGreen\}\{DarkOliveGreen!25!white\}}};
+
+            \Member{C}{CC}{DarkGoldenrod}{DarkGoldenrod!22!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=DarkGoldenrod] (C) circle (1mm);
+            \shadedraw[ball color=DarkGoldenrod] (CC) circle (1mm);
+            \draw[thin, DarkGoldenrod] ($(CC)+(0.5,0)$)--(CCC);
+            \node[fill=white, inner sep=0.25cm] at (CCC) {\textcolor{DarkGoldenrod}{\{DarkGoldenrod\}\{DarkGoldenrod!25!white\}}};
+
+            \Member{D}{DD}{Olive}{Olive!25!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=Olive] (D) circle (1mm);
+            \shadedraw[ball color=Olive] (DD) circle (1mm);
+            \draw[thin, Olive] ($(DD)+(0.5,0)$)--(DDD);
+            \node[fill=white, inner sep=0.25cm] at (DDD) {\textcolor{Olive}{\{Olive\}\{Olive!25!white\}}};
+
+            \Member{E}{EE}{OliveDrab}{OliveDrab!25!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=OliveDrab] (E) circle (1mm);
+            \shadedraw[ball color=OliveDrab] (EE) circle (1mm);
+            \draw[thin, OliveDrab] ($(EE)+(0.5,0)$)--(EEE);
+            \node[fill=white, inner sep=0.25cm] at (EEE) {\textcolor{OliveDrab}{\{OliveDrab\}\{OliveDrab!25!white\}}};
+
+            \Member{F}{FF}{Sienna}{Sienna!25!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=Sienna] (F) circle (1mm);
+            \shadedraw[ball color=Sienna] (FF) circle (1mm);
+            \draw[thin, Sienna] ($(FF)+(0.5,0)$)--(FFF);
+            \node[fill=white, inner sep=0.25cm] at (FFF) {\textcolor{Sienna}{\{Sienna\}\{Sienna!25!white\}}};
+
+            \Member{G}{GG}{BurlyWood}{BurlyWood!25!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=BurlyWood] (G) circle (1mm);
+            \shadedraw[ball color=BurlyWood] (GG) circle (1mm);
+            \draw[thin, BurlyWood] ($(GG)+(0.5,0)$)--(GGG);
+            \node[fill=white, inner sep=0.25cm] at (GGG) {\textcolor{BurlyWood}{\{BurlyWood\}\{BurlyWood!25!white\}}};
+
+            \Member{H}{HH}{Tan}{Tan!25!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=Tan] (H) circle (1mm);
+            \shadedraw[ball color=Tan] (HH) circle (1mm);
+            \draw[thin, Tan] ($(HH)+(0.5,0)$)--(HHH);
+            \node[fill=white, inner sep=0.25cm] at (HHH) {\textcolor{Tan}{\{Tan\}\{Tan!25!white\}}};
+
+            \Member{I}{II}{PeachPuff4}{PeachPuff2}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=PeachPuff4] (I) circle (1mm);
+            \shadedraw[ball color=PeachPuff4] (II) circle (1mm);
+            \draw[thin, PeachPuff4] ($(II)+(0.5,0)$)--(III);
+            \node[fill=white, inner sep=0.25cm] at (III) {\textcolor{PeachPuff4}{\{PeachPuff4\}\{PeachPuff2\}}};
+
+            \Member{J}{JJ}{Bisque4}{Bisque2}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=Bisque4] (J) circle (1mm);
+            \shadedraw[ball color=Bisque4] (JJ) circle (1mm);
+            \draw[thin, Bisque4] ($(JJ)+(0.5,0)$)--(JJJ);
+            \node[fill=white, inner sep=0.25cm] at (JJJ) {\textcolor{Bisque4}{\{Bisque4\}\{Bisque2\}}};
+
+            \Member{K}{KK}{Burlywood4}{Burlywood2}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=Burlywood4] (K) circle (1mm);
+            \shadedraw[ball color=Burlywood4] (KK) circle (1mm);
+            \draw[thin, Burlywood4] ($(KK)+(0.5,0)$)--(KKK);
+            \node[fill=white, inner sep=0.25cm] at (KKK) {\textcolor{Burlywood4}{\{Burlywood4\}\{Burlywood2\}}};
+
+            \Member{L}{LL}{Cornsilk4}{Cornsilk2}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=Cornsilk4] (L) circle (1mm);
+            \shadedraw[ball color=Cornsilk4] (LL) circle (1mm);
+            \draw[thin, Cornsilk4] ($(LL)+(0.5,0)$)--(LLL);
+            \node[fill=white, inner sep=0.25cm] at (LLL) {\textcolor{Cornsilk4}{\{Cornsilk4\}\{Cornsilk2\}}};
+
+            \Member{M}{MM}{Honeydew4}{Honeydew2}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=Honeydew4] (M) circle (1mm);
+            \shadedraw[ball color=Honeydew4] (MM) circle (1mm);
+            \draw[thin, Honeydew4] ($(MM)+(0.5,0)$)--(MMM);
+            \node[fill=white, inner sep=0.25cm] at (MMM) {\textcolor{Honeydew4}{\{Honeydew4\}\{Honeydew2\}}};
+
+            \Member{N}{NN}{Seashell4}{Seashell2}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=Seashell4] (N) circle (1mm);
+            \shadedraw[ball color=Seashell4] (NN) circle (1mm);
+            \draw[thin, Seashell4] ($(NN)+(0.5,0)$)--(NNN);
+            \node[fill=white, inner sep=0.25cm] at (NNN) {\textcolor{Seashell4}{\{Seashell4\}\{Seashell2\}}};
+
+            \Member{O}{OO}{Wheat4}{Wheat2}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=Wheat4] (O) circle (1mm);
+            \shadedraw[ball color=Wheat4] (OO) circle (1mm);
+            \draw[thin, Wheat4] ($(OO)+(0.5,0)$)--(OOO);
+            \node[fill=white, inner sep=0.25cm] at (OOO) {\textcolor{Wheat4}{\{Wheat4\}\{Wheat2\}}};
+        \end{tikzpicture}
+    }
+
+\end{frame}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[fragile]{Tikz Components :: Some More Member Colors}
+    \small
+
+    \parb
+    \centering
+    \resizebox{0.75\textwidth}{!}{%
+        \begin{tikzpicture}
+            \coordinate (A) at (0,0);
+            \coordinate (AA) at ($(A)+(5,0)$);
+            \coordinate (AAA) at ($(AA)+(3,0)$);
+
+            \coordinate (B) at ($(A)+(0,-0.5)$);
+            \coordinate (BB) at ($(B)+(5,0)$);
+            \coordinate (BBB) at ($(BB)+(3,0)$);
+
+            \coordinate (C) at ($(B)+(0,-0.5)$);
+            \coordinate (CC) at ($(C)+(5,0)$);
+            \coordinate (CCC) at ($(CC)+(3,0)$);
+
+            \coordinate (D) at ($(C)+(0,-0.5)$);
+            \coordinate (DD) at ($(D)+(5,0)$);
+            \coordinate (DDD) at ($(DD)+(3,0)$);
+
+            \coordinate (E) at ($(D)+(0,-0.5)$);
+            \coordinate (EE) at ($(E)+(5,0)$);
+            \coordinate (EEE) at ($(EE)+(3,0)$);
+
+            \coordinate (F) at ($(E)+(0,-0.5)$);
+            \coordinate (FF) at ($(F)+(5,0)$);
+            \coordinate (FFF) at ($(FF)+(3,0)$);
+
+            \coordinate (G) at ($(F)+(0,-0.5)$);
+            \coordinate (GG) at ($(G)+(5,0)$);
+            \coordinate (GGG) at ($(GG)+(3,0)$);
+
+            \coordinate (H) at ($(G)+(0,-0.5)$);
+            \coordinate (HH) at ($(H)+(5,0)$);
+            \coordinate (HHH) at ($(HH)+(3,0)$);
+
+            \coordinate (I) at ($(H)+(0,-1)$);
+            \coordinate (II) at ($(I)+(5,0)$);
+            \coordinate (III) at ($(II)+(3,0)$);
+
+            \coordinate (J) at ($(I)+(0,-0.5)$);
+            \coordinate (JJ) at ($(J)+(5,0)$);
+            \coordinate (JJJ) at ($(JJ)+(3,0)$);
+
+            \coordinate (K) at ($(J)+(0,-0.5)$);
+            \coordinate (KK) at ($(K)+(5,0)$);
+            \coordinate (KKK) at ($(KK)+(3,0)$);
+
+            \coordinate (L) at ($(K)+(0,-0.5)$);
+            \coordinate (LL) at ($(L)+(5,0)$);
+            \coordinate (LLL) at ($(LL)+(3,0)$);
+
+            \coordinate (M) at ($(L)+(0,-0.5)$);
+            \coordinate (MM) at ($(M)+(5,0)$);
+            \coordinate (MMM) at ($(MM)+(3,0)$);
+
+            \coordinate (N) at ($(M)+(0,-0.5)$);
+            \coordinate (NN) at ($(N)+(5,0)$);
+            \coordinate (NNN) at ($(NN)+(3,0)$);
+
+            \coordinate (O) at ($(N)+(0,-0.5)$);
+            \coordinate (OO) at ($(O)+(5,0)$);
+            \coordinate (OOO) at ($(OO)+(3,0)$);
+
+            \Member{A}{AA}{DarkKhaki}{DarkKhaki!33!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=DarkKhaki] (A) circle (1mm);
+            \shadedraw[ball color=DarkKhaki] (AA) circle (1mm);
+            \draw[thin, DarkKhaki] ($(AA)+(0.5,0)$)--(AAA);
+            \node[fill=white, inner sep=0.25cm] at (AAA) {\textcolor{DarkKhaki}{DarkKhaki}};
+
+            \Member{B}{BB}{DarkOliveGreen}{DarkOliveGreen!33!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=DarkOliveGreen] (B) circle (1mm);
+            \shadedraw[ball color=DarkOliveGreen] (BB) circle (1mm);
+            \draw[thin, DarkOliveGreen] ($(BB)+(0.5,0)$)--(BBB);
+            \node[fill=white, inner sep=0.25cm] at (BBB) {\textcolor{DarkOliveGreen}{DarkOliveGreen}};
+
+            \Member{C}{CC}{DarkGoldenrod}{DarkGoldenrod!33!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=DarkGoldenrod] (C) circle (1mm);
+            \shadedraw[ball color=DarkGoldenrod] (CC) circle (1mm);
+            \draw[thin, DarkGoldenrod] ($(CC)+(0.5,0)$)--(CCC);
+            \node[fill=white, inner sep=0.25cm] at (CCC) {\textcolor{DarkGoldenrod}{DarkGoldenrod}};
+
+            \Member{D}{DD}{Olive}{Olive!33!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=Olive] (D) circle (1mm);
+            \shadedraw[ball color=Olive] (DD) circle (1mm);
+            \draw[thin, Olive] ($(DD)+(0.5,0)$)--(DDD);
+            \node[fill=white, inner sep=0.25cm] at (DDD) {\textcolor{Olive}{Olive}};
+
+            \Member{E}{EE}{OliveDrab}{OliveDrab!33!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=OliveDrab] (E) circle (1mm);
+            \shadedraw[ball color=OliveDrab] (EE) circle (1mm);
+            \draw[thin, OliveDrab] ($(EE)+(0.5,0)$)--(EEE);
+            \node[fill=white, inner sep=0.25cm] at (EEE) {\textcolor{OliveDrab}{OliveDrab}};
+
+            \Member{F}{FF}{Sienna}{Sienna!33!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=Sienna] (F) circle (1mm);
+            \shadedraw[ball color=Sienna] (FF) circle (1mm);
+            \draw[thin, Sienna] ($(FF)+(0.5,0)$)--(FFF);
+            \node[fill=white, inner sep=0.25cm] at (FFF) {\textcolor{Sienna}{Sienna}};
+
+            \Member{G}{GG}{BurlyWood}{BurlyWood!33!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=BurlyWood] (G) circle (1mm);
+            \shadedraw[ball color=BurlyWood] (GG) circle (1mm);
+            \draw[thin, BurlyWood] ($(GG)+(0.5,0)$)--(GGG);
+            \node[fill=white, inner sep=0.25cm] at (GGG) {\textcolor{BurlyWood}{BurlyWood}};
+
+            \Member{H}{HH}{Tan}{Tan!33!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=Tan] (H) circle (1mm);
+            \shadedraw[ball color=Tan] (HH) circle (1mm);
+            \draw[thin, Tan] ($(HH)+(0.5,0)$)--(HHH);
+            \node[fill=white, inner sep=0.25cm] at (HHH) {\textcolor{Tan}{Tan}};
+
+            \Member{I}{II}{SkyBlue}{SkyBlue!33!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=SkyBlue] (I) circle (1mm);
+            \shadedraw[ball color=SkyBlue] (II) circle (1mm);
+            \draw[thin, SkyBlue] ($(II)+(0.5,0)$)--(III);
+            \node[fill=white, inner sep=0.25cm] at (III) {\textcolor{SkyBlue}{SkyBlue}};
+
+            \Member{J}{JJ}{LightSkyBlue}{LightSkyBlue!33!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=LightSkyBlue] (J) circle (1mm);
+            \shadedraw[ball color=LightSkyBlue] (JJ) circle (1mm);
+            \draw[thin, LightSkyBlue] ($(JJ)+(0.5,0)$)--(JJJ);
+            \node[fill=white, inner sep=0.25cm] at (JJJ) {\textcolor{LightSkyBlue}{LightSkyBlue}};
+
+            \Member{K}{KK}{CadetBlue}{CadetBlue!33!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=CadetBlue] (K) circle (1mm);
+            \shadedraw[ball color=CadetBlue] (KK) circle (1mm);
+            \draw[thin, CadetBlue] ($(KK)+(0.5,0)$)--(KKK);
+            \node[fill=white, inner sep=0.25cm] at (KKK) {\textcolor{CadetBlue}{CadetBlue}};
+
+            \Member{L}{LL}{DarkCyan}{DarkCyan!33!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=DarkCyan] (L) circle (1mm);
+            \shadedraw[ball color=DarkCyan] (LL) circle (1mm);
+            \draw[thin, DarkCyan] ($(LL)+(0.5,0)$)--(LLL);
+            \node[fill=white, inner sep=0.25cm] at (LLL) {\textcolor{DarkCyan}{DarkCyan}};
+
+            \Member{M}{MM}{Teal}{Teal!33!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=Teal] (M) circle (1mm);
+            \shadedraw[ball color=Teal] (MM) circle (1mm);
+            \draw[thin, Teal] ($(MM)+(0.5,0)$)--(MMM);
+            \node[fill=white, inner sep=0.25cm] at (MMM) {\textcolor{Teal}{Teal}};
+
+            \Member{N}{NN}{SteelBlue}{SteelBlue!33!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=SteelBlue] (N) circle (1mm);
+            \shadedraw[ball color=SteelBlue] (NN) circle (1mm);
+            \draw[thin, SteelBlue] ($(NN)+(0.5,0)$)--(NNN);
+            \node[fill=white, inner sep=0.25cm] at (NNN) {\textcolor{SteelBlue}{SteelBlue}};
+
+            \Member{O}{OO}{LightSteelBlue}{LightSteelBlue!33!white}{black}{0.35}{0.175}{.125}
+            \shadedraw[ball color=LightSteelBlue] (O) circle (1mm);
+            \shadedraw[ball color=LightSteelBlue] (OO) circle (1mm);
+            \draw[thin, LightSteelBlue] ($(OO)+(0.5,0)$)--(OOO);
+            \node[fill=white, inner sep=0.25cm] at (OOO) {\textcolor{LightSteelBlue}{LightSteelBlue}};
+        \end{tikzpicture}
+    }
+
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Tikz Components :: PinnedConnection}
-	
-	\small
-	\begin{verbatim}
-    \PinnedConnection[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
+
+    \small
+    \begin{verbatim}
+\PinnedConnection[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
+   
+    \end{verbatim}
+
+    \centering
+    \vspace{1cm}
 
     \tikz{
-      \coordinate (A) at (0,0);
-      \PinnedConnection{A}{DarkKhaki}{Black}{2}{0.5}
+        \coordinate (A) at (0,0);
+        % \PinnedConnection[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
+        \PinnedConnection{A}{DarkKhaki}{Black}{1}{0.25}
     }
-  \end{verbatim}
-	
-	\vspace{1cm}
-	
-	\tikz{
-		\coordinate (A) at (0,0);
-		% \PinnedConnection[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
-		\PinnedConnection{A}{DarkKhaki}{Black}{2}{0.5}
-	}
-	
+
 \end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Tikz Components :: RollerOne}
-	
-	\footnotesize
-	\begin{verbatim}
+
+    \footnotesize
+    \begin{verbatim}
     \RollerOne[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
   \end{verbatim}
-	
-	\vspace{1cm}
-	
-	\tikz{
-		\coordinate (A) at (0,0);
-		\RollerOne{A}{DarkKhaki}{Black}{2}{0.5}
-	}
-	
+
+    \centering
+    \vspace{1cm}
+
+    \tikz{
+        \coordinate (A) at (0,0);
+        \RollerOne{A}{DarkKhaki}{Black}{1}{0.25}
+    }
+
 \end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Tikz Components :: RollerThree}
-	
-	\footnotesize
-	\begin{verbatim}
+
+    \footnotesize
+    \begin{verbatim}
     \RollerThree[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
   \end{verbatim}
-	
-	\vspace{1cm}
-	
-	\tikz{
-		\coordinate (A) at (0,0);
-		\RollerThree{A}{DarkKhaki}{Black}{2}{0.5}
-	}
-	
+
+    \vspace{1cm}
+    \centering
+
+    \tikz{
+        \coordinate (A) at (0,0);
+        \RollerThree{A}{DarkKhaki}{Black}{1}{0.25}
+    }
+
 \end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Tikz Components :: RollerOnly}
-	
-	\footnotesize
-	\begin{verbatim}
+
+    \footnotesize
+    \begin{verbatim}
     \RollerOnly[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
   \end{verbatim}
-	
-	\vspace{1cm}
-	
-	\tikz{
-		\coordinate (A) at (0,0);
-		\RollerOnly{A}{DarkKhaki}{Black}{2}{0.5}
-	}
-	
+
+    \centering
+    \vspace{1cm}
+
+    \tikz{
+        \coordinate (A) at (0,0);
+        \RollerOnly{A}{DarkKhaki}{Black}{1}{0.25}
+    }
+
 \end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Tikz Components :: Rocker}
-	
-	\footnotesize
-	\begin{verbatim}
+
+    \footnotesize
+    \begin{verbatim}
     \Rocker[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
   \end{verbatim}
-	
-	\vspace{1cm}
-	
-	\tikz{
-		\coordinate (A) at (0,0);
-		% \Rocker[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
-		\Rocker{A}{DarkKhaki}{Black}{2}{0.5}
-	}
-	
+    \centering
+    \vspace{1cm}
+
+    \tikz{
+        \coordinate (A) at (0,0);
+        % \Rocker[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
+        \Rocker{A}{DarkKhaki}{Black}{1}{0.25}
+    }
+
 \end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Tikz Components :: EyeConnection}
-	
-	\footnotesize
-	\begin{verbatim}
+
+    \footnotesize
+    \begin{verbatim}
     \EyeConnection[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
   \end{verbatim}
-	
-	\vspace{1cm}
-	
-	\tikz{
-		\coordinate (A) at (0,0);
-		\EyeConnection{A}{DarkKhaki}{Black}{2}{0.5}
-	}
-	
+
+    \vspace{1cm}
+    \centering
+
+    \tikz{
+        \coordinate (A) at (0,0);
+        \EyeConnection{A}{DarkKhaki}{Black}{1}{0.25}
+    }
+
 \end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Tikz Components :: EyeConnectionB}
-	
-	\small
-	\begin{verbatim}
+
+    \small
+    \begin{verbatim}
     \EyeConnectionB[rotate=0]{coordinate}{fill}{draw}{scale}{line width}
   \end{verbatim}
-	
-	\vspace{1cm}
-	
-	\tikz{
-		\coordinate (A) at (0,0);
-		\EyeConnectionB{A}{DarkKhaki}{Black}{2}{0.5}
-	}
-	
+
+    \vspace{1cm}
+    \centering
+    \tikz{
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (0,-1);
+        \EyeConnectionB{A}{DarkKhaki}{Black}{1}{0.25}
+    }
+
 \end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Tikz Components :: DLDown}
-	
-	\footnotesize
-	\begin{verbatim}
+
+    \footnotesize
+    \begin{verbatim}
     \DLDown[rotate]{tl}{tr}{b}{fill}{draw}{spaces}{scale}{lineWidth}
 
     \DLDown[25]{A}{B}{C}{SlateGray3}{SlateGray4!75!black}{5}{1}{0.375}
   \end{verbatim}
-	
-	\tikz{
-		\coordinate (A) at (0,0);
-		\coordinate (B) at (4,3);
-		\coordinate (C) at (0,-1);
-		% \DLDown[rotate]{tl}{tr}{b}{fill}{draw}{spaces}{scale}{lineWidth}
-		\DLDown[25]{A}{B}{C}{SlateGray3}{SlateGray4!75!black}{5}{1}{0.375}
-	}
-	
+    \centering
+    \tikz{
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (4,3);
+        \coordinate (C) at (0,-1);
+        % \DLDown[rotate]{tl}{tr}{b}{fill}{draw}{spaces}{scale}{lineWidth}
+        \DLDown[25]{A}{B}{C}{SlateGray3}{SlateGray4!75!black}{5}{1}{0.375}
+    }
+
 \end{frame}
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 \begin{frame}[fragile]{Tikz Components :: DLUp}
-	
-	\footnotesize
-	\begin{verbatim}
+
+    \footnotesize
+    \begin{verbatim}
     \DLUp[rotate]{tl}{tr}{b}{fill}{draw}{spaces}{scale}{lineWidth}
 
     \DLUp[25]{A}{B}{C}{SlateGray3}{SlateGray4!75!black}{5}{1}{0.375}
   \end{verbatim}
-	
-	\tikz{
-		\coordinate (A) at (0,0);
-		\coordinate (B) at (4,3);
-		\coordinate (C) at (0,-1);
-		% \DLUp[rotate]{tl}{tr}{b}{fill}{draw}{spaces}{scale}{lineWidth}
-		\DLUp[25]{A}{B}{C}{SlateGray3}{SlateGray4!75!black}{5}{1}{0.375}
-	}
-	
+    \centering
+    \tikz{
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (4,3);
+        \coordinate (C) at (0,-1);
+        % \DLUp[rotate]{tl}{tr}{b}{fill}{draw}{spaces}{scale}{lineWidth}
+        \DLUp[25]{A}{B}{C}{SlateGray3}{SlateGray4!75!black}{5}{1}{0.375}
+    }
+
 \end{frame}
 
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Miscellany}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Misc Bits}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/misc/penrose}
-	\input{../pikz/misc/penrose}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-% \begin{frame}{pikz/misc/penstar}
-%   \input{../pikz/misc/penstar}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+% \begin{frame}
+%     \centering
+%     \input{../pikz/misc/penrose}
 % \end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
-\section{Math Review}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/01MathReview/01MR01}
-	\resizebox{0.75\textwidth}{!}{%
-		\input{../pikz/01MathReview/01MR01}
-	}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/01MathReview/01MR01Qwizm}
-	\resizebox{0.75\textwidth}{!}{%
-		\input{../pikz/01MathReview/01MR01Qwizm}
-	}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/01MathReview/01MR02}
-	\resizebox{0.75\textwidth}{!}{%
-		\input{../pikz/01MathReview/01MR02}
-	}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\begin{frame}{pikz/01MathReview/01MR02Qwizm}
-	\resizebox{0.75\textwidth}{!}{%
-		\input{../pikz/01MathReview/01MR02Qwizm}
-	}
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/01MathReview/01MR03}
-	\input{../pikz/01MathReview/01MR03}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/01MathReview/01MR03Qwizm}
-	\input{../pikz/01MathReview/01MR03Qwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/01MathReview/01MR04}
-	\resizebox{0.5\textwidth}{!}{%
-		\input{../pikz/01MathReview/01MR04}
-	}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/01MathReview/01MR04Qwizm}
-	\input{../pikz/01MathReview/01MR04Qwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/01MathReview/01MR05}
-	\input{../pikz/01MathReview/01MR05}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/01MathReview/01MR05Qwizm}
-	\input{../pikz/01MathReview/01MR05Qwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/01MathReview/01MR06}
-	\input{../pikz/01MathReview/01MR06}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/01MathReview/01MR06Qwizm}
-	\input{../pikz/01MathReview/01MR06Qwizm}
-\end{frame}
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Forces \& Components}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Frames \& Machines}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF01a}
-	\input{../pikz/09Frames/09CF01a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF01aQwizm}
-	\input{../pikz/09Frames/09CF01aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF01b}
-	\input{../pikz/09Frames/09CF01b}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF01bQwizm}
-	\input{../pikz/09Frames/09CF01bQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF01c}
-	\input{../pikz/09Frames/09CF01c}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF01cQwizm}
-	\input{../pikz/09Frames/09CF01cQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF02a}
-	\input{../pikz/09Frames/09CF02a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF02aQwizm}
-	\input{../pikz/09Frames/09CF02aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF02b}
-	\input{../pikz/09Frames/09CF02b}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF02bQwizm}
-	\input{../pikz/09Frames/09CF02bQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF02c}
-	\input{../pikz/09Frames/09CF02c}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF02cQwizm}
-	\input{../pikz/09Frames/09CF02cQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF03a}
-	\input{../pikz/09Frames/09CF03a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF03aQwizm}
-	\input{../pikz/09Frames/09CF03aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF03b}
-	\input{../pikz/09Frames/09CF03b}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF03bQwizm}
-	\input{../pikz/09Frames/09CF03bQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF04a}
-	\input{../pikz/09Frames/09CF04a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF04aQwizm}
-	\input{../pikz/09Frames/09CF04aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF04b}
-	\input{../pikz/09Frames/09CF04b}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF04bQwizm}
-	\input{../pikz/09Frames/09CF04bQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF05a}
-	\input{../pikz/09Frames/09CF05a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF05aQwizm}
-	\input{../pikz/09Frames/09CF05aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF05b}
-	\input{../pikz/09Frames/09CF05b}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF05bQwizm}
-	\input{../pikz/09Frames/09CF05bQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF06a}
-	\input{../pikz/09Frames/09CF06a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF06aQwizm}
-	\input{../pikz/09Frames/09CF06aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF06b}
-	\input{../pikz/09Frames/09CF06b}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF06bQwizm}
-	\input{../pikz/09Frames/09CF06bQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF07a}
-	\input{../pikz/09Frames/09CF07a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF07aQwizm}
-	\input{../pikz/09Frames/09CF07aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF07b}
-	\input{../pikz/09Frames/09CF07b}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF07bQwizm}
-	\input{../pikz/09Frames/09CF07bQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF08a}
-	\input{../pikz/09Frames/09CF08a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF08aQwizm}
-	\input{../pikz/09Frames/09CF08aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF09a}
-	\input{../pikz/09Frames/09CF09a.tex}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF09aQwizm}
-	\input{../pikz/09Frames/09CF09aQwizm}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF09aQwizm}
-	\input{../pikz/09Frames/09CF09aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF10a}
-	\input{../pikz/09Frames/09CF10a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF10aQwizm}
-	\input{../pikz/09Frames/09CF10aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF10b}
-	\input{../pikz/09Frames/09CF10b}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF10bQwizm}
-	\input{../pikz/09Frames/09CF10bQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF11a}
-	\input{../pikz/09Frames/09CF11a}
-\end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF11aQwizm}
-	\input{../pikz/09Frames/09CF11aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF12a}
-	\input{../pikz/09Frames/09CF12a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF12aQwizm}
-	\input{../pikz/09Frames/09CF12aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF12b}
-	\input{../pikz/09Frames/09CF12b}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF12bQwizm}
-	\input{../pikz/09Frames/09CF12bQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF13a}
-	\input{../pikz/09Frames/09CF13a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF13aQwizm}
-	\input{../pikz/09Frames/09CF13aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF14a}
-	\input{../pikz/09Frames/09CF14a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF14aQwizm}
-	\input{../pikz/09Frames/09CF14aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF15a}
-	\input{../pikz/09Frames/09CF15a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF15aQwizm}
-	\input{../pikz/09Frames/09CF15aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF16a}
-	\input{../pikz/09Frames/09CF16a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF16aQwizm}
-	\input{../pikz/09Frames/09CF16aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF17a}
-	\input{../pikz/09Frames/09CF17a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Frames/09CF17aQwizm}
-	\input{../pikz/09Frames/09CF17aQwizm}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\section{Machines}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-\begin{frame}{pikz/09Machines/09M01a}
-	\input{../pikz/09Machines/09M01a}
-\end{frame}
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-
-
-
+\begin{frame}[fragile]{Misc Tikz :: Penrose Triangle}
+
+    \footnotesize
+    \begin{verbatim}
+\PenroseTri[rotate]{coord}{length}{extend}{fillbottom}{fillright}
+                                            {fillleft}{draw}{lineWidth}
+  \end{verbatim}
+    \centering
+
+
+    \tikz{
+        \coordinate (A) at (0,0);
+        \coordinate (B) at (3,0);
+        \coordinate (C) at (6,0);
+        \coordinate (D) at (9,0);
+        \coordinate (E) at (0,-3);
+        \coordinate (F) at (2.25,-3);
+        \coordinate (G) at (4.5,-3);
+        \coordinate (H) at (6.75,-3);
+        \coordinate (I) at (9,-3);
+        % \coordinate (J) at (10,-3);
+        \PenroseTri{A}{2.5}{0.5}{DarkSeaGreen}{LightGoldenrod3}{Seashell3}{black}{0.125}
+        \PenroseTri[30]{B}{2.5}{0.5}{DarkSeaGreen}{LightGoldenrod3}{Seashell3}{black}{0.125}
+        \PenroseTri[60]{C}{2.5}{0.5}{DarkSeaGreen}{LightGoldenrod3}{Seashell3}{black}{0.125}
+        \PenroseTri[90]{D}{2.5}{0.5}{DarkSeaGreen}{LightGoldenrod3}{Seashell3}{black}{0.125}
+
+        \PenroseTri{E}{2}{0.25}{LightSteelBlue}{SkyBlue}{SteelBlue}{black}{0.125}
+        \PenroseTri[30]{F}{2}{0.25}{LightSteelBlue}{SkyBlue}{SteelBlue}{black}{0.125}
+        \PenroseTri[60]{G}{2}{0.25}{LightSteelBlue}{SkyBlue}{SteelBlue}{black}{0.125}
+        \PenroseTri[90]{H}{2}{0.25}{LightSteelBlue}{SkyBlue}{SteelBlue}{black}{0.125}
+        \PenroseTri[120]{I}{2}{0.25}{LightSteelBlue}{SkyBlue}{SteelBlue}{black}{0.125}
+        % \PenroseTri[150]{J}{2}{0.25}{LightSteelBlue}{SkyBlue}{SteelBlue}{black}{0.125}
+    }
+
+\end{frame}
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 \end{document}

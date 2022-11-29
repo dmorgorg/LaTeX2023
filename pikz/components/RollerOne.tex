@@ -10,15 +10,15 @@
 	\def\lwidth{#6}
 	\def\h{1}
 	\def\r{0.3}
-
+	
 	\begin{scope}[scale=\lscale, rotate=\rotate, line width=\lwidth mm]
-
+		
 		\shadedraw[ball color=\lfill!50, draw=\ldraw] ($ (\pin) + (0,-0.6*\h)$) circle (\h*4 mm);
 		\filldraw[rounded corners=2pt, draw=\ldraw, fill=\lfill] ($(\pin) + (-0.52494*\h,-.8*\h)$) -- ++(1.05*\h, 0) -- ++(105:0.9059)arc(15:165:\r) -- cycle;
-		\shadedraw[ball color=\lfill, draw=\ldraw, line width=2*\lwidth pt] (\pin) circle (\lscale mm);
-		\shadedraw[ball color=\lfill, draw=\ldraw, line width=\lwidth pt] ($ (\pin) + (0,-0.6*\h)$) circle (\h*0.5 mm);
-
-
-
+		\shadedraw[ball color=\lfill, draw=\ldraw] (\pin) circle (\lscale mm);
+		\shadedraw[ball color=\lfill, draw=\ldraw] ($ (\pin) + (0,-0.6*\h)$) circle (\h*0.5 mm);
+		
+		
+		
 	\end{scope}
 }

@@ -11,38 +11,38 @@
 	\def\spaces{#7}
 	\def\lscale{#8}
 	\def\llinewidth{#9}
-
+	
 	\def\tocm{0.0351459804}
 	\providecommand\tiplength{5pt}
-
+	
 	\gettikzxy{(\tl)}{\tlx}{\tly};
 	\gettikzxy{(\tr)}{\trx}{\try};
 	\gettikzxy{(\b)}{\bx}{\by};
-
+	
 	\pgfmathparse{\trx-\tlx} \let\dx\pgfmathresult
 	\pgfmathparse{\try-\tly} \let\dy\pgfmathresult
 	\pgfmathparse{round(\tocm*\dx*100)/100} \let\dxcm\pgfmathresult
 	\pgfmathparse{round(\tocm*\dy*100)/100} \let\dycm\pgfmathresult
-
+	
 	\coordinate (midBase) at (\tlx/2+\trx/2, \by);
-
+	
 	\gettikzxy{(midBase)}{\mx}{\my}
 	\pgfmathparse{round(\tocm*\mx*100)/100} \let\mxcm\pgfmathresult
 	\pgfmathparse{round(\tocm*\my*100)/100} \let\mycm\pgfmathresult
-
-
+	
+	
 	\pgfmathparse{\dxcm/\spaces} \let\xspacing\pgfmathresult
 	\pgfmathparse{\dycm/\spaces} \let\yspacing\pgfmathresult
 	% \numarrows is actually one less than the number of arrows since we start a 0
 	\pgfmathparse{\spaces-1} \let\numarrows\pgfmathresult
-
+	
 	\begin{scope}[scale=\lscale, rotate around ={\rotate:(midBase)}, line cap = round, line join = round, line width = \llinewidth mm]
 		\fill[\lfill] (\tlx, \tly) -- (\trx, \try) -- (\trx, \by) -- (\tlx, \by);
 		\draw[\ldraw, thin] (\tlx, \tly) -- (\trx, \try) -- (\trx, \by) -- (\tlx, \by) -- cycle;
-
+		
 		\pgfmathparse{abs(\try - \by)} \let\ryy\pgfmathresult
 		\pgfmathparse{abs(\tly - \by)} \let\lyy\pgfmathresult
-
+		
 		% \pgfmathparse{\lyy>\tiplength && \ryy>\tiplength}
 		% \ifnum\pgfmathresult=1
 		% 	\draw[\ldraw, {Latex[length=\tiplength]}-{Latex[length=\tiplength]},line width=\llinewidth] (\tlx,\by) -- (\tlx, \tly) -- (\trx,\try) -- (\trx,\by);
@@ -63,7 +63,7 @@
 		% \ifnum\pgfmathresult=1
 		% 	\draw[\ldraw, {Latex[length=\tiplength]}-,line width=\llinewidth] (\tlx,\by) -- (\tlx, \tly) -- (\trx,\try) -- (\trx,\by);
 		% \fi
-	
+		
 		\begin{scope}
 			\clip (\tlx,\tly) -- (\trx, \try) -- (\trx,\by) -- (\tlx,\by) ;
 			\foreach \i in {1,...,\numarrows}
@@ -71,17 +71,17 @@
 			\def\y{\i*\yspacing}
 			\draw[\ldraw, {Latex[length=\tiplength]}-, line width = \llinewidth pt] ($ (\tlx,\tly)+(\x,\y) $) -- ($ (\tlx,\by)+(\x,0) $);
 		\end{scope}
-
+		
 		\pgfmathparse{\ryy>\tiplength}
 		\ifnum\pgfmathresult=1
 			\draw[\ldraw, {Latex[length=\tiplength]}-,line width=\llinewidth] (\trx,\try) -- (\trx,\by);
 		\fi
-
+		
 		\pgfmathparse{\lyy>\tiplength}
 		\ifnum\pgfmathresult=1
 			\draw[\ldraw, {Latex[length=\tiplength]}-,line width=\llinewidth] (\tlx,\tly) -- (\tlx,\by);
 		\fi
-
+		
 		
 	\end{scope}
 	
