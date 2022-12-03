@@ -1,0 +1,206 @@
+\begin{frame}{Geometry :: Belt-Length}
+    % \setbeamercolor{normal text}{fg=gray,bg=}
+    % for highlighting current enumeration item
+    % \setbeamercolor{alerted text}{fg=black,bg=}
+    % \usebeamercolor{normal text}
+    \small
+
+    \begin{textblock*}{0.6\textwidth}(1cm, 1cm)
+        \pgfsetroundjoin
+        \pgfsetroundcap
+        \centering
+        % \small
+        \tikz{
+            \begin{scope}[scale=0.65]
+                \def\rA{1}
+                \def\rB{2.5}
+                \def\d{6}
+                \coordinate (A) at (0,0);
+                \coordinate (B) at (\d,0);
+                \coordinate (AA) at (-\rA,0);
+                \coordinate (Bprime) at ($(B)+(\rB,0)$);
+                \filldraw[fill=Gainsboro] (A) circle [radius=\rA];
+                \filldraw[fill=Gainsboro, name path=bigly] (B) circle [radius=\rB];
+
+                \fill (B) circle (.6mm) node[above, xshift=1.5mm]{$B$};
+
+                \only<1-11>{
+                    \draw[red, thick, latex-latex] (A)--node[fill=Gainsboro,inner sep=0.1mm]{$r$}+(225:\rA);
+                    \draw[red, thick, latex-latex] (B)--node[pos=0.77, fill=Gainsboro,inner sep=0.25mm]{$R$}+(-45:\rB);
+                    \fill (A) circle [radius=.6mm] node[below, xshift=1.5mm]{$A$};
+                }
+
+                \only<1>{
+                    % some slight 'alterations' in later decimal digits to close the path
+                    \draw[very thick, ForestGreen] ($(A)+(-1,0)$) arc (180:105:\rA cm) -- ++(14.5:5.815) arc (104.5:-104.5:\rB cm)--++(165.5:5.806)arc(255.5:180:\rA);
+                }
+
+
+                \tikzmath{
+                    \r2=\rA-\rB;
+                }
+
+                \only<1-4>{
+                    \draw[red, thick, latex-latex] (A)--node[fill=white,inner sep=0.5mm]{$d$}(B);
+                }
+                \onslide<2-8>{
+                    \draw[name path=concentric, blue] (B) circle [radius=\r2];
+                }
+                \onslide<3-8>{
+                    \draw[name path=semi, blue] ($ (A)!.5!(B)$) circle [radius=3];
+                }
+                \only<4>{
+                    \fill [name intersections={of=concentric and semi}]
+                    (intersection-1) circle (2pt) node[below, xshift=1mm] {$D$};
+                }
+                \onslide<4>{
+                    % /tikz/intersection/by=<hcomma-separated list> in pgf/tikz manual
+                    \fill [name intersections={of=concentric and semi, by={D, C}}]
+                    (intersection-2) circle (2pt) node[above, xshift=1mm] {$C$};
+                }
+                \onslide<5-8>{
+                    \filldraw[ thick, fill=green!25!white, draw=black] (A)--(B)--(C)--cycle;
+                    \fill (C) circle (0.6mm) node[above, xshift=1mm] {$C$};
+                }
+                \onslide<5-11>{
+                    \node at (B)[xshift=-1.5mm, yshift=1.3mm] {$\theta$};
+                    \node[below] at ($ (A)!0.5!(B) $) {$d$};
+                }
+                \onslide<6-8>{
+                    \draw[name path=CCprime, thick] (B)--($ (B)!1.67!(C) $);
+                    \fill [name intersections={of=CCprime and bigly, by={Cprime, Dprime}}];
+                    % (Cprime) circle (0.6mm) node[above, xshift=1mm] {$C'$};
+                }
+                \onslide<6-11>{
+                    \fill (Cprime) circle (0.6mm)node[above, xshift=1mm] {$C'$};
+                }
+                \onslide<7-8>{
+                    \coordinate(deltaBC) at ($ (C)-(B) $);
+                    \gettikzxy{(deltaBC)}{\dx}{\dy}
+                    \pgfmathparse{\dx==0}
+                    \ifnum\pgfmathresult=1 % \dx == 0
+                        \pgfmathsetmacro{\rot}{\dy > 0 ? 90 : -90}
+                    \else
+                        \pgfmathsetmacro{\rot}{\dx > 0 ? atan(\dy / \dx) : 180 + atan(\dy / \dx)}
+                    \fi
+                    \coordinate (Aprime) at (\rot:\rA);
+                    \fill (Aprime) circle (0.6mm) node[above, xshift=1mm] {$A'$};
+                    \draw[thick] (A) -- (Aprime);
+                }
+                \onslide<7-11>{
+                    \draw (B)--(Cprime);
+                    \draw (A)--(Aprime);
+                }
+                \onslide<8-11>{
+                    \fill (Aprime) circle (0.65mm) node[above, xshift=1mm] {$A'$};
+                    \draw[very thick, ForestGreen] (Aprime)--(Cprime);
+                }
+                \onslide<9-11>{
+                    \fill (AA) circle (0.65mm) node[left] {$D$};
+                    \fill (Bprime) circle (0.65mm) node[right] {$E$};
+                    \draw (AA) -- (Bprime);
+                    \node at (A)[xshift=-1.5mm, yshift=1.3mm] {$\theta$};
+                }
+                \onslide<10-11>{
+                    \pgfsetbuttcap
+                    \draw[very thick, ForestGreen] (AA) arc (180:105:\rA cm);
+                    \draw[very thick, ForestGreen] (Cprime) arc (104.5:0:\rB cm);
+                }
+                \onslide<12>{
+                    \fill (A) circle [radius=.6mm] node[above, xshift=-1.5mm]{$A$};
+                    \footnotesize
+                    \draw[red, thick, latex-latex] (A)--node[pos=0.37,fill=white]{$30.0\,$cm}(B);
+                    % some slight 'alterations' in later decimal digits to close the path
+                    \draw[very thick, ForestGreen] ($(A)+(-1,0)$) arc (180:105:\rA cm) -- ++(14.5:5.815) arc (104.5:-104.5:\rB cm)--++(165.5:5.806)arc(255.5:180:\rA);
+                    \draw[red, thick, latex-latex] (A)--node[rotate=-45,fill=Gainsboro,inner sep=0.35mm]{$6.00\,$cm}+(225:\rA);
+                    \draw[red, thick, latex-latex] (B)--node[rotate=45,fill=Gainsboro,inner sep=0.35mm]{$15.00\,$cm}+(-45:\rB);
+                }
+            \end{scope}
+        }
+    \end{textblock*}
+
+    \begin{textblock*}{0.4\textwidth}(8.25cm, 1.75cm)
+        \mini{
+            Two pulleys, centred at $A$ and $B$, have radii $r$ and $R$. The distance from $A$ to $B$ is $d$. \parm
+            Determine the length of the belt required to go round both pulleys.
+        }
+    \end{textblock*}
+
+    \begin{textblock*}{0.475\textwidth}(0.5cm, 5.125cm)
+
+        \begin{enumerate}
+            \item<2-5 | alert@2> Construct a circle, diameter $R\!-\!r$, centred at $B$.
+            \item<3-5 | alert@3> Construct a circle with diameter $AB$.
+            \item<4-5 | alert@4> These two circles intersect at $C$ and $D$. Due to the horizontal axis of symmetry through $A$ and $B$, we only need perform calculations on one half of the system.
+                \suspend
+        \end{enumerate}
+
+    \end{textblock*}
+
+    \begin{textblock*}{0.475\textwidth}(6.5cm, 5.125cm)
+        \begin{enumerate}
+            \resume
+            \item<5-8 | alert@5> Consider $\triangle ABC$: $\angle ACB=90^\circ$ since it is an angle inscribed in a semicircle. Then:
+                \begin{align*}
+                    AC     & = \sqrt{d^2-(R-r)^2}                                 \\
+                    \theta & = \sin^{-1}\left(\frac{\sqrt{d^2-(R-r)^2}}{d}\right)
+                \end{align*}
+                \suspend
+        \end{enumerate}
+    \end{textblock*}
+
+
+
+
+    \begin{textblock*}{0.475\textwidth}(0.5cm, 5.125cm)
+
+        \begin{enumerate}
+            \resume
+            \item<6-10 | alert@6> Extend line $BC$ to $C'$ on the circumference of pulley $B$. $CC'$ has length $r$.
+            \item<7-10 | alert@7> Draw $AA'$, of length $r$ and parallel to $CC'$, as shown.
+            \item<8-10 | alert@8> Draw $A'\!C'$: $A'\!C'\!C\!A$ is a rectangle so
+                \[ A'\!C' = AC = \sqrt{d^2-(R-r)^2} \]
+                \suspend
+        \end{enumerate}
+    \end{textblock*}
+
+    \begin{textblock*}{0.475\textwidth}(6.5cm, 5.125cm)
+        \begin{enumerate}
+            \resume
+            \item<9-11 | alert@9> $A'\!C'$ is the (top) part of the belt that is tangential to the pulleys at $A'$ and $C'$. We now need to find the arc-lengths from $D$ to $A'$ and from $C'$ to $E$.
+                \item<10-11 | alert@10>The angles ($\theta$ and $\pi\!-\!\theta$) that these arcs subtend at the pulley centres, with  the radius of each pulley, are used to determine the arc-lengths ($\theta$ in radians):
+                $$ D\!A'=r\theta \text{ and } C'\!D=R(\pi\!-\!\theta) $$
+                \suspend
+        \end{enumerate}
+    \end{textblock*}
+
+    \begin{textblock*}{1\textwidth}(0.5cm, 5.5cm)
+        \minit[0.475]{
+            \begin{enumerate}
+                \resume
+                \item<11 | alert@11> {
+                    Belt-length:
+                    \begin{align*}
+                               & =2\left(DA'+A'C'+C'E\right)                                     \\
+                               & =2\left(r\theta + \sqrt{d^2-(R-r)^2} + R(\pi\!-\!\theta)\right) \\
+                        \intertext{ where }
+                        \theta & = \sin^{-1}\left(\frac{\sqrt{d^2-(R-r)^2}}{d}\right)
+                    \end{align*}
+                    }
+            \end{enumerate}
+        }
+    \end{textblock*}
+
+    \begin{textblock*}{1\textwidth}(1cm, 5.5cm)
+        \mini[1]{
+            \only<12>{ \underline{Example}:
+                \begin{gather*}
+                    \theta = \sin^{-1}\left(\frac{\sqrt{d^2-(R-r)^2}}{d}\right) = \sin^{-1}\left( \frac{\sqrt{6.00^2-1.50^2}}{6.00} \right)= 1.3181\  \text{(radians)}\\
+                    \text{B-L} = 2\left( 6.00\times1.3181+\sqrt{6.00^2-1.50^2}+15.00\times(\pi-1.3181) \right) = 82.141
+                \end{gather*}
+                \centering\parb
+                \underline{The belt length is $82.1\,$cm.}
+            }
+        }
+    \end{textblock*}
+\end{frame}

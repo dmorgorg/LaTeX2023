@@ -1,0 +1,19 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+\tikz[scale=\scale]{
+
+ \coordinate (A) at (0,0);
+
+ \small
+
+ \draw[thick, -latex, black] (A) -- +(1.52,0)node[right, black]{$2.0425\,$kN};
+ \draw[thick, -latex, black] (A) -- +(0,2.88)node[above, black]{$5.7670\,$kN};
+ \draw[very thin, gray] ($(A)+(1.52,-0.5)$)--+(0,3.88);
+ \draw[very thin, gray] ($(A)+(-0.5,2.88)$)--+(2.52,0);
+ \draw[very thick, -latex, saitMaroon] (C)--node[yshift=-.75mm,above, sloped]{$R_A$}+(1.52,2.88);
+ \draw[latex-latex, thin, black, line cap=round] ($(A)+(1.125,0)$)arc(0:62.2:1.125)node[midway, fill=white, inner sep=0.2mm]{$\theta$};
+
+ \node[below left] at (C) {$A$};
+
+ \draw ($(A)+(-1.25,-1)$) rectangle ($(A)+(4,4.125)$);
+}

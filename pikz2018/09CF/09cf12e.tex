@@ -1,0 +1,41 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+
+\begin{tikzpicture}[scale=\scale]
+
+ \small
+
+ \coordinate (A) at (0,-1);
+ \coordinate (C) at (5.5,-1);
+ \coordinate (B) at (2.5,-1);
+ \coordinate (BBB) at (2.25,0);
+ \coordinate (P) at (-3.25,-2.25);
+
+ \gettikzxy{(E)}{\Ex}{\Ey}
+ \gettikzxy{(B)}{\Bx}{\By}
+ \gettikzxy{(C)}{\Cx}{\Cy}
+ \gettikzxy{(A)}{\Ax}{\Ay}
+ \gettikzxy{(P)}{\Px}{\Py}
+
+ \pgfoonew \AC=new rrect(A,C,gray!35,gray!35,black,0.4,0.2,0.75,0.125)
+
+ \small
+
+ \draw[saitMaroon, very thick, -latex] (BB)--+(0,-1.5)node[yshift=-0.125cm, black]{$R_B=3.8506\,\text{kN}$};
+ % \draw[saitMaroon, very thick, -latex] (BB)--+(0,-1.5)node[yshift=-0.125cm]{$R_B$\textcolor{black} {$=3.8506\,\text{kN}$}};
+ \draw[saitMaroon, very thick, -latex] (A)--+(0,1.5)node[yshift=0.125cm]{$A_y$};
+ \draw[saitMaroon, very thick, -latex] (A)--+(1.5,0)node[yshift=0.3125cm]{$A_x$};
+ \draw[saitMaroon, very thick, -latex] (C)--+(0,1.5)node[yshift=0.125cm]{$C_y$};
+
+
+ \draw[ball color=Bisque4] (C) circle (0.075cm)node[xshift=0.1375cm, yshift=0.275cm]{$C$};
+ \draw[ball color=Bisque4] (A) circle (0.0875cm)node[xshift=0.1375cm, yshift=0.275cm]{$A$};
+ \draw[ball color=Bisque4] (BB) circle (0.0875cm)node[yshift=0.375cm]{$B$};
+
+ \draw (\Cx,\Cy-0.3cm) -- (\Cx, \Py+0.25cm);
+ \draw (\Ax,\Ay-0.3cm) -- (\Ax, \Py+0.25cm);
+ \draw[latex-latex] (\Ax,\Py+0.5cm)--node[fill=white,inner sep=0.5mm]{$2.75\,$m}(\Bx,\Py+0.5cm);
+ \draw[latex-latex] (\Bx,\Py+0.5cm)--node[fill=white,inner sep=0.5mm]{$3.30\,$m}(\Cx,\Py+0.5cm);
+
+
+\end{tikzpicture}

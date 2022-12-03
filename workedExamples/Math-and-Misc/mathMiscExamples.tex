@@ -1,0 +1,156 @@
+%!TEX option = -enable-write18
+
+\documentclass[9pt,svgnames,x11names]{beamer}
+
+\input{../../includes/macros}
+\input{../../includes/definedColors}
+\input{../../pikz/components/Member}
+\input{../../pikz/components/PinnedConnection}
+\input{../../pikz/components/RollerOne}
+\input{../../pikz/components/RollerThree}
+\input{../../pikz/components/RollerOnly}
+\input{../../pikz/components/Rocker}
+\input{../../pikz/components/EyeConnection}
+\input{../../pikz/components/EyeConnectionB}
+\input{../../pikz/components/DLDown}
+\input{../../pikz/components/DLUp}
+\input{../../pikz/misc/PenroseTri}
+
+\def\thisColor{staticsRed}
+
+\hypersetup{
+    colorlinks,
+    linkcolor=\thisColor, % table of contents
+    urlcolor=\thisColor
+}
+
+\everymath{\displaystyle} 
+\usefonttheme{professionalfonts}
+
+\usepackage[absolute,overlay]{textpos}
+\setlength{\TPHorizModule}{1.0cm}
+\setlength{\TPVertModule}{\TPHorizModule}
+\textblockorigin{0.0cm}{0.0cm}  %start all at upper left corner
+\usepackage{bm}
+\usepackage{verbatim} % for latex code in latex doc
+\usepackage{tikz}
+\usepackage{pgfmath}
+\tikzset{every picture/.append style={line cap=round}}
+\def\scale{1} % initialisation for pikz
+\usetikzlibrary{calc} % only works within a path
+% \usetikzlibrary{fpu}
+\usetikzlibrary{math} % if then else etc.
+\usetikzlibrary{arrows.meta}
+\usetikzlibrary{shadings}
+\usetikzlibrary{intersections}
+
+% \usetheme{Antibes}
+\usecolortheme[named=\thisColor]{structure}
+
+\setcounter{tocdepth}{5}
+
+
+% \setbeamertemplate{headline}{}%{\vspace{.1cm}}
+% \setbeamertemplate{navigation symbols}{} % empty braces suppresses all navigation symbols
+\setbeamertemplate{footline}{
+  \hfill
+  \insertshorttitle
+  \quad
+  \insertsection
+%   :\!\! % colon, two negative thinspaces
+\,
+  \insertsubsection
+  \quad
+  \insertframenumber/\inserttotalframenumber
+  \quad{ }
+  \vspace{0.125cm}
+}
+\addtobeamertemplate{footline}{\hypersetup{linkcolor=black}}{}
+\setbeamertemplate{navigation symbols}{} % empty braces suppresses all navigation symbols
+% \setbeamerfont{alerted text}{series=\bfseries}
+\setbeamertemplate{enumerate items}[default] % circle, ball, square
+
+
+\setbeamercolor{title}{fg=black,bg=\thisColor} % main title block on title page
+\setbeamercolor{frametitle}{fg=black, bg=\thisColor} % all frames with titles
+\setbeamercolor{normal text}{fg=black,bg=} % bg= makes all slide backgrounds transparent
+\setbeamercolor{alerted text}{fg=green!50!black} % alerted text, highlighted enum items in this document
+\setbeamercolor{structure}{fg=\thisColor} % numbers for enumerated items, etc.
+\setbeamercolor{item}{fg=gray} % just the number, not item text. Same as 'structure'?
+\setbeamercolor{structure item}{fg=red} % nope...
+
+
+% \setbeamertemplate{section i}[default][50]
+% no block for numbers in toc
+\setbeamertemplate{section in toc}[sections numbered]
+\setbeamertemplate{subsection in toc}[subsections numbered]
+\setbeamertemplate{subsubsection in toc}[subsubsections numbered]
+% doesn't seem to work on subsubsections
+% \setbeamertemplate{subsubsection in toc}[subsubsections numbered]
+
+% all enumeration item blocks
+% \setbeamercolor{item projected}{bg=\thisColor}
+
+
+
+% \setbeamercolor{item projected}{fg=\thisColor}
+
+
+
+
+% various hacks to get around (apparent?) Beamer titlepage constraints
+\title[\textcolor{black}{ Misc Examples }\textcolor{\thisColor}{\;2018-\the\year}]{\Huge Miscellaneous Examples}
+\subtitle{} % i.e., a blank line
+\institute{\small Source code at: \lb{\footnotesize\url{https://github.com/dmorgorg/LaTeX2022}}}
+\author{} % another blanky
+\date{\small Last updated on \today}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}[plain]
+    \titlepage
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\begin{frame}{Table of Contents}
+    \cmini[0.5]{
+        \tableofcontents
+    }
+
+
+    \vfill
+
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Math}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Geometry}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \subsubsection{Construct a 30-degree angle}
+% \input{examples/thirty-degree-angle-construct.tex}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+% \subsubsection{Belt-Length}
+% \input{examples/belt-length}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Miscellaneous}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Web}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+\subsubsection{Dynamic Font-Sizes With CSS}
+\input{examples/font-sizes}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\end{document}

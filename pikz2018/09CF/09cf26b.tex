@@ -1,0 +1,33 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+
+\begin{tikzpicture}[scale=\scale]
+
+ \small
+
+
+ \coordinate (E) at (0, 0);
+ \coordinate (G) at ($(E)+(59.036:1.5921)$);
+ \coordinate (F) at ($(E)+(133.53:1.5921)$);
+ \coordinate (O) at ($(E)+(96.285:2)$);
+ \coordinate (FF) at ($(E)+(133.53:4)$);
+ \coordinate (GG) at ($(E)+(59.037:4)$);
+
+% \draw ($(E)+(-2,0)$) -- ($(E)+(2,0)$);
+\draw (FF)--($(FF)!1.3!(E)$);
+\draw (GG)--($(GG)!1.3!(E)$);
+\draw (O) circle (1.2105cm);
+
+\node[xshift=-1.5mm, yshift=-1mm] at (F){$F$};
+\node[xshift=1mm, yshift=-1mm] at (G){$G$};
+\node[yshift=-3mm] at (E){$E$};
+\fill (O) circle (1pt) node[yshift=2mm]{$O$};
+
+
+
+
+
+
+
+
+\end{tikzpicture}

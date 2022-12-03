@@ -68,7 +68,7 @@
 
 \setcounter{tocdepth}{5}
 % various hacks to get around (apparent?) Beamer titlepage constraints
-\title[\color{black} Statikz\textcolor{staticsRed}{\;2018-\the\year}]{\Huge Statikz}
+\title[\color{black} tikz\textcolor{staticsRed}{\;2018-\the\year}]{\Huge tikzPikz}
 \subtitle{} % i.e., a blank line
 \institute{\small Source code at: \lb{\footnotesize\url{https://github.com/dmorgorg/LaTeX2022}}}
 \author{} % another blanky
@@ -95,7 +95,7 @@
 
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%% Components %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{My Tikz Components}
+\section{Tikz Components}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
@@ -110,7 +110,6 @@
 \Member{startpt}{endpt}{outer}{inner}{stroke}{height}{radius}{line width}
     \end{verbatim}
     \parb
-    \vspace{2cm}
     \centering
     \resizebox{0.75\textwidth}{!}{%
         \begin{tikzpicture}
@@ -640,15 +639,11 @@
 \end{frame}
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-\section{Miscellany}
+\section{Misc Tikz}
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
 
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
-% \begin{frame}
-%     \centering
-%     \input{../pikz/misc/penrose}
-% \end{frame}
-%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
 
 \begin{frame}[fragile]{Misc Tikz :: Penrose Triangle}
 
@@ -658,7 +653,6 @@
                                             {fillleft}{draw}{lineWidth}
   \end{verbatim}
     \centering
-
 
     \tikz{
         \coordinate (A) at (0,0);
@@ -670,7 +664,6 @@
         \coordinate (G) at (4.5,-3);
         \coordinate (H) at (6.75,-3);
         \coordinate (I) at (9,-3);
-        % \coordinate (J) at (10,-3);
         \PenroseTri{A}{2.5}{0.5}{DarkSeaGreen}{LightGoldenrod3}{Seashell3}{black}{0.125}
         \PenroseTri[30]{B}{2.5}{0.5}{DarkSeaGreen}{LightGoldenrod3}{Seashell3}{black}{0.125}
         \PenroseTri[60]{C}{2.5}{0.5}{DarkSeaGreen}{LightGoldenrod3}{Seashell3}{black}{0.125}
@@ -681,11 +674,30 @@
         \PenroseTri[60]{G}{2}{0.25}{LightSteelBlue}{SkyBlue}{SteelBlue}{black}{0.125}
         \PenroseTri[90]{H}{2}{0.25}{LightSteelBlue}{SkyBlue}{SteelBlue}{black}{0.125}
         \PenroseTri[120]{I}{2}{0.25}{LightSteelBlue}{SkyBlue}{SteelBlue}{black}{0.125}
-        % \PenroseTri[150]{J}{2}{0.25}{LightSteelBlue}{SkyBlue}{SteelBlue}{black}{0.125}
     }
 
 \end{frame}
 
 
+
 %%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Statics}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{06:Equilibrium of Rigid Bodies}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\def\scale{0.875}
+\centering
+\begin{frame}{06erb01.tex}
+    \input{../pikz/06ERB/06erb01.tex}
+\end{frame}
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\section{Misc. Nerdery}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\subsection{Geometry}
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+
+
+
+
 \end{document}

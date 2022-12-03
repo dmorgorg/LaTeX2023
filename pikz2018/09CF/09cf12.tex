@@ -1,0 +1,63 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+
+\begin{tikzpicture}[scale=\scale]
+
+ \small
+
+ \coordinate (A) at (0,0);
+ \coordinate (D) at (0, 3.5);
+ \coordinate (C) at (5.5,0);
+ \coordinate (B) at (2.5,0);
+ \coordinate (BB) at (2.75,0);
+ \coordinate (BBB) at (2.25,0);
+ \coordinate (P) at (-3.25,-2.5);
+
+ \gettikzxy{(E)}{\Ex}{\Ey}
+ \gettikzxy{(D)}{\Dx}{\Dy}
+ \gettikzxy{(B)}{\Bx}{\By}
+ \gettikzxy{(C)}{\Cx}{\Cy}
+ \gettikzxy{(A)}{\Ax}{\Ay}
+ \gettikzxy{(P)}{\Px}{\Py}
+
+ \pgfoonew \AC=new rrect(A,C,DarkSlateGray4,DarkSlateGray3,black,0.4,0.2,0.75,0.125)
+ \pgfoonew \collar=new rrect(BB,BBB,DarkSlateGray4,DarkSlateGray3,black,0.5,0,0.4,0.125)
+\small
+
+
+
+ \shade[right color=LemonChiffon4, left color=LemonChiffon2] (\Ax-0.5cm,\Ay-3cm)rectangle(\Dx-2cm, \Dy+1.5cm);
+ \shade[top color=LemonChiffon4,bottom color=LemonChiffon2] (\Cx-1cm,\Cy-0.5cm)rectangle(\Cx+1cm,\Cy-1.5cm);
+
+
+
+
+ % \pgfoonew \AC=new rrect(A,C,gray!50,gray!20,black,0.4,0,0.75,0.125)
+ \begin{scope}[xshift=-0.75cm,yshift=1.875cm]
+  \DLOne[-54.462]{(0,2)}{(4.3012,2)}{(0,0)}{LemonChiffon3}{black}{7}{1}{0.75};
+ \end{scope}
+ \node[rotate=-54.462] at (3.25,3.25){$1.024\,$kN/m};
+
+ \pgfoonew \DB=new rrect(D,B,DarkSlateGray4,DarkSlateGray3,black,0.4,0.4,0.4,0.125)
+
+
+ \PinnedConnection[-90]{A}{LemonChiffon3}{black}{0.5}{0.1}
+ \PinnedConnection[-90]{D}{LemonChiffon3}{black}{0.5}{0.1}
+ \Rocker{C}{LemonChiffon3}{black}{0.5}{0.1}
+
+
+
+ \draw[ball color=Bisque4] (C) circle (0.075cm)node[yshift=0.275cm]{$C$};
+ \draw[ball color=Bisque4] (D) circle (0.0875cm)node[yshift=0.275cm]{$D$};
+ \draw[ball color=Bisque4] (A) circle (0.0875cm)node[yshift=0.275cm]{$A$};
+ \draw[ball color=Bisque4] (B) circle (0.0875cm)node[yshift=-0.375cm]{$B$};
+
+ \draw (\Dx-0.25cm,\Dy) -- (\Px, \Dy);
+ \draw (\Ax-0.25cm,\Ay) -- (\Px, \Ay);
+ \draw (\Bx,\By-0.875cm) -- (\Bx, \Py);
+ \draw (\Cx,\Cy-0.25cm) -- (\Cx, \Py);
+ \draw (\Ax,\Ay-0.3cm) -- (\Ax, \Py);
+ \draw[latex-latex] (\Px+0.5cm,\Dy)--node[fill=white,inner sep=0.5mm]{$3.85\,$m}(\Px+0.5cm,\Ay);
+ \draw[latex-latex] (\Ax,\Py+0.5cm)--node[fill=white,inner sep=0.5mm]{$2.75\,$m}(\Bx,\Py+0.5cm);
+ \draw[latex-latex] (\Bx,\Py+0.5cm)--node[fill=white,inner sep=0.5mm]{$3.30\,$m}(\Cx,\Py+0.5cm);
+\end{tikzpicture}

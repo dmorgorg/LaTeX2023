@@ -1,0 +1,84 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+
+\begin{tikzpicture}[scale=\scale]
+
+ \small
+
+
+ \coordinate (A) at (0, 0);
+ \coordinate (B) at (2, 0);
+ \coordinate (C) at (6, 0);
+ \coordinate (D) at (10, 0);
+ \coordinate (E) at (4, 2);
+ \coordinate (F) at (6, 2);
+ \coordinate (G) at (10, 2);
+ \coordinate (H) at (10, 4);
+ \coordinate (P) at (13, -1.75);
+ \coordinate (Q) at (12.375, -1.375);
+
+ \gettikzxy{(A)}{\Ax}{\Ay}
+ \gettikzxy{(B)}{\Bx}{\By}
+ \gettikzxy{(C)}{\Cx}{\Cy}
+ \gettikzxy{(D)}{\Dx}{\Dy}
+ \gettikzxy{(E)}{\Ex}{\Ey}
+ \gettikzxy{(F)}{\Fx}{\Fy}
+ \gettikzxy{(G)}{\Gx}{\Gy}
+ \gettikzxy{(H)}{\Hx}{\Hy}
+ \gettikzxy{(P)}{\Px}{\Py}
+ \gettikzxy{(Q)}{\Qx}{\Qy}
+
+ \def\offset{0.25}
+\normalsize
+
+ \shade[left color=Cornsilk4, right color=Cornsilk2] ($(H)+(0.375,1)$) rectangle ($(D)+(1.375,-2.5)$);
+ \PinnedConnection[90]{D}{Cornsilk3}{black}{0.375}{.125}
+ \PinnedConnection[90]{G}{Cornsilk3}{black}{0.375}{.125}
+ \PinnedConnection[90]{H}{Cornsilk3}{black}{0.375}{.125}
+
+ \pgfoonew \AD=new rrect(A,D,OliveDrab4,OliveDrab3,black,0.35,0.35,0.35,0.125)
+ \pgfoonew \EG=new rrect(E,G,OliveDrab4,OliveDrab3,black,0.35,0.35,0.35,0.125)
+ \pgfoonew \BE=new rrect(B,E,NavajoWhite4,NavajoWhite3,black,0.1,0.1,0.1,0.125)
+ \pgfoonew \FH=new rrect(F,H,NavajoWhite4,NavajoWhite3,black,0.1,0.1,0.1,0.125)
+
+ \draw[very thick, saitBlue, -latex] (A) -- (\Ax,\Py-\offset cm)node[yshift=-0.125cm,black]{$41.5\,\textsf{kN}$};
+ \draw[very thick, saitBlue, -latex] (\Fx,\By) -- (\Fx,\Py-\offset cm)node[yshift=-0.125cm,black]{$41.5\,\textsf{kN}$};
+ \shadedraw[ball color=Cornsilk4, line width=0.125mm] (A) circle (2pt)node[yshift=0.275cm]{$A$};
+ \shadedraw[ball color=Cornsilk4, line width=0.125mm] (B) circle (2pt)node[yshift=0.275cm]{$B$};
+ \shadedraw[ball color=Cornsilk4, line width=0.125mm] (C) circle (2pt)node[yshift=0.275cm, xshift=-1.5mm]{$C$};
+ \shadedraw[ball color=Cornsilk4, line width=0.125mm] (D) circle (2pt)node[yshift=0.275cm, xshift=-1.5mm]{$D$};
+ \shadedraw[ball color=Cornsilk4, line width=0.125mm] (E) circle (2pt)node[yshift=0.275cm]{$E$};
+ \shadedraw[ball color=Cornsilk4, line width=0.125mm] (F) circle (2pt)node[yshift=0.275cm, xshift=-1.5mm]{$F$};
+ \shadedraw[ball color=Cornsilk4, line width=0.125mm] (G) circle (2pt)node[yshift=0.275cm, xshift=-1.5mm]{$G$};
+ \shadedraw[ball color=Cornsilk4, line width=0.125mm] (H) circle (2pt)node[yshift=0.275cm, xshift=-1.5mm]{$H$};
+
+ % \draw[thin] (\Ax, \Ay-\offset cm) -- (\Ax,\Py);
+ \draw[thin] (\Bx, \By-\offset cm) -- (\Bx,\Py);
+ \draw[thin] (\Ex, \By-\offset cm) -- (\Ex,\Py);
+ % \draw[thin] (\Dx, \Dy-\offset cm) -- (\Dx,\By+\offset cm);
+ % \draw[thin] (\Dx, \By-\offset cm) -- (\Dx,\Py);
+ % \draw[thin] (\Ex, \Ey-\offset cm) -- (\Ex,\By+\offset cm);
+ % \draw[thin] (\Ex, \By-\offset cm) -- (\Ex,\Py);
+ \draw[thin] (\Gx, \Hy-\offset cm) -- (\Gx,\Gy+\offset cm);
+ \draw[thin] (\Fx, \Fy-\offset cm) -- (\Fx,\Cy+\offset cm);
+ \draw[thin] (\Ex, \Fy-\offset cm) -- (\Ex,\Cy+\offset cm);
+ \draw[thin] (\Gx, \Fy-\offset cm) -- (\Gx,\Cy+\offset cm);
+ \draw[thin] (\Gx, \Cy-\offset cm) -- (\Gx,\Py);
+ \draw[thin] (\Hx+2*\offset cm, \Dy) -- (\Px,\Dy);
+ \draw[thin] (\Hx+2*\offset cm, \Fy) -- (\Px,\Fy);
+ \draw[thin] (\Hx+2*\offset cm, \Hy) -- (\Px,\Hy);
+
+ \draw[latex-latex] (\Qx,\Hy)--node[fill=white, inner sep=0.5mm]{$1.000\,\textsf{m}$}(\Qx,\Gy);
+ \draw[latex-latex] (\Qx,\Gy)--node[fill=white, inner sep=0.5mm]{$1.000\,\textsf{m}$}(\Qx,\Dy);
+ \draw[latex-latex] (\Ax,\Qy)--node[fill=white, inner sep=0.1mm]{$1.000\,\textsf{m}$}(\Bx,\Qy);
+ \draw[latex-latex] (\Bx,\Qy)--node[fill=white, inner sep=0.1mm]{$1.000\,\textsf{m}$}(\Ex,\Qy);
+ \draw[latex-latex] (\Ex,\Qy)--node[fill=white, inner sep=0.1mm]{$1.000\,\textsf{m}$}(\Fx,\Qy);
+ \draw[latex-latex] (\Cx,\Qy)--node[fill=white, inner sep=0.5mm]{$2.00\,\textsf{m}$}(\Dx,\Qy);
+
+
+
+
+
+
+
+\end{tikzpicture}

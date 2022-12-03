@@ -1,0 +1,81 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+
+\begin{tikzpicture}[scale=\scale]
+
+ \small
+
+
+ \coordinate (E) at (0, 0);
+ \coordinate (A) at (-1.8, -2.7);
+ \coordinate (B) at (2.85, -2.7);
+ \coordinate (P) at (-3.875, -4);
+ \coordinate (PP) at (-3.25, -3.625);
+ \coordinate (I) at ($(A)!1.75!(E)$);
+ \coordinate (H) at ($(B)!2!(E)$);
+ \coordinate (C) at ($(A)!0.3!(E)$);
+ \coordinate (D) at ($(B)!0.3!(E)$);
+ \coordinate (O) at ($(E)+(96.285:2)$);
+ \coordinate (F) at ($(O)+(226.47:.8)$);
+ \coordinate (G) at ($(E)+(56.3101:1.3565)$);
+
+
+
+ \gettikzxy{(A)}{\Ax}{\Ay}
+ \gettikzxy{(B)}{\Bx}{\By}
+ \gettikzxy{(C)}{\Cx}{\Cy}
+ \gettikzxy{(D)}{\Dx}{\Dy}
+ \gettikzxy{(E)}{\Ex}{\Ey}
+ \gettikzxy{(P)}{\Px}{\Py}
+ \gettikzxy{(PP)}{\PPx}{\PPy}
+
+ \footnotesize
+
+ % \pgfoonew \BH=new rrect(B,H,Tan4,Tan3,black,0.35,0.35,0.35,0.125)
+
+ \pgfoonew \AI=new rrect(A,I,gray!50,gray!50,black,0.35,0.35,0.35,0.125)
+ \draw[very thick, saitMaroon, -latex] (C)--+(2,0)node[right, black]{$T_{CD}$};
+ \node[below right] at (A){$A$};
+ \node[below right] at (C){$C$};
+ \node[below right] at (E){$E$};
+ \node[below right] at (G){$G$};
+
+
+
+ \draw[thin] (\Ex-0.5cm,\Ey)--(\Px,\Ey);
+ \draw[thin] (\Cx-.35cm,\Cy)--(\Px,\Cy);
+ \draw[latex-latex] (\PPx,\Cy)--node[fill=white,inner sep=0.3mm, pos=0.625]{$405\,\textsf{mm}$}(\PPx,\Ey);
+ \draw ($(E)+(146.31:0.35)$)--+(146.31:1.65);
+ \draw[latex-latex]($(E)+(146.31:1.75)$) -- node[fill=white]{$271.29\,\textsf{mm} $}($(G)+(146.31:1.75)$);
+
+
+
+
+ \draw[very thick, saitBlue, latex-] (G)--+(146.31:2)node[black, above left]{$2.5065\,\textsf{kN}$};
+\draw[latex-latex] ($(E)+(-1.75,0)$)arc(180:146.31:1.75)node[midway, fill=white, inner sep=0.4mm,xshift=-0.125cm]{$33.690\degree$};
+
+
+
+ % \draw[very thick, saitMaroon, -latex] (A)--+(1.25,0)node[above, black]{$A_x$};
+ \draw[very thick, saitBlue, -latex] (A)--+(0,1.25)node[yshift=1mm,xshift=-1.5mm, black]{$2.3548\,\textsf{kN}$};
+ % \draw[very thick, saitMaroon, -latex] (B)--+(0,1.25)node[above, black]{$B_y$};
+ \draw[latex-latex] (\Ax,\PPy)--node[fill=white,inner sep=0.3mm]{$360\,\textsf{mm}$}(\Ex,\PPy);
+ % \draw[latex-latex] (\Ex,\PPy)--node[fill=white,inner sep=0.3mm]{$570\,\textsf{mm}$}(\Bx,\PPy);
+ \draw[thin] (\Ex,\Ey-0.5cm)--(\Ex,\Py);
+ \draw[thin] (\Ax,\Ay-0.35cm)--(\Ax,\Py);
+ % \draw[thin] (\Bx,\By-0.2cm)--(\Bx,\Py);
+ % \fill (O)circle (1pt)node[above] {$O$};
+
+ \draw[very thick, saitMaroon, -latex] (E)--+(0,1.25)node[left, yshift=-0.25cm, black]{$E_y$};
+ \draw[very thick, saitMaroon, -latex] (E)--+(1.25,0)node[above, black]{$E_x$};
+ \fill[black] (E) circle (2pt);
+ \fill[black] (A) circle (2pt);
+ \fill[black] (C) circle (2pt);
+ \fill (G) circle (2pt);
+
+
+
+
+
+
+\end{tikzpicture}

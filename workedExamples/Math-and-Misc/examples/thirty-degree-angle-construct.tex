@@ -1,0 +1,123 @@
+\begin{frame}{Geometry :: Construct A $30^\circ$ Angle With A Pair Of Compasses}
+
+    % \setbeamercolor{alerted text}{fg=green!50!black}
+    \begin{textblock*}{0.8\textwidth}(2cm, 1cm)
+        \pgfsetroundjoin
+        \pgfsetroundcap
+        \centering
+
+        \tikz{
+            \begin{scope}[scale=0.85]
+
+                \coordinate (A) at (0,0);
+                \coordinate (B) at (4,0);
+                \coordinate (C) at (2,3.464);
+                \coordinate (D) at ($ (B)!.5!(C) $);
+
+                \uncover<1>{
+                    \draw[thick] (D)--(A)--(B);
+                    \node at ($ (A)+(13.75:1cm) $){$30^\circ $};
+                }
+
+                \uncover<2-5>{
+                    \draw[gray] ($(A)+(-1,0)$) -- ($(B)+(1,0)$);
+                }
+                \uncover<2-4>{
+                    \filldraw[fill=white, draw=black] (A) circle (0.3mm);
+                }
+                \uncover<2-8>{
+                    \node[above left] at (A){$A$};
+                }
+                \uncover<3-8>{
+                    \node[above right] at (B){$B$};
+                }
+                \uncover<4-7>{
+                    \node[above] at (C){$C$};
+                }
+                \uncover<3-5>{
+                    \draw[gray] (B) arc (0:70:4cm);
+                    \draw[gray] (B) arc (0:-5:4cm);
+                }
+
+                \uncover<3-4>{
+                    \filldraw[fill=white, draw=black] (B) circle (0.3mm);
+                }
+                \uncover<3>{
+                    \draw[red, thick, latex-latex] (A) -- node[above, sloped]{$r$}+(30:4cm);
+                }
+                \uncover<4-5>{
+                    \draw[gray] (A) arc (180:110:4cm);
+                    \draw[gray] (A) arc (180:185:4cm);
+                }
+                \uncover<4>{
+                    \filldraw[fill=white, draw=black] (C) circle (0.3mm);
+                    \filldraw[fill=white, draw=black] (A) circle (0.3mm);
+                }
+                \uncover<4>{
+                    \draw[red, thick, latex-latex] (B) -- node[above, sloped]{$r$}+(150:4cm);
+                }
+                \uncover<5>{
+                    \draw[thick] (A)--node[above]{$r$}(B)--node[above, sloped]{$r$}(C)--node[above, sloped]{$r$}cycle;
+                    \node at ($ (A)+(25:0.5cm) $){$60^\circ $};
+                    \node at ($ (B)+(155:0.5cm) $){$60^\circ $};
+                    \node at ($ (C)+(270:0.625cm) $){$60^\circ $};
+                }
+                \uncover<6-7>{
+                    \draw[thick] (A)--(B)--(C)--cycle;
+                    \draw[gray] ($ (C)!0.25!(B)$) arc (120:175:3cm);
+                    \draw[gray] ($ (C)!0.25!(B)$) arc (120:65:3cm);
+                    \draw[gray] ($ (B)!0.25!(C)$) arc (-60:-115:3cm);
+                    \draw[gray] ($ (B)!0.25!(C)$) arc (-60:-5:3cm);
+                }
+                \uncover<7>{
+                    \draw[gray] ($(D)+(210:4cm) $) -- ($(D)+(30:3cm)$);
+                    \filldraw[fill=white, draw=black] (D) circle (0.3mm);
+                }
+                \uncover<7-8>{
+                    \node[above, xshift=1mm, yshift=0.5mm] at (D){$D$};
+                }
+                \uncover<8>{
+                    \node[above, gray] at (C){$C$};
+                    \draw[gray] (A)--(B)--(C)--cycle;
+                    \draw[thin] ($(D)+(-60:0.2)$)-- ++(210:0.2)-- ++(120:0.2);
+                    \draw[myGreen, very thick] (D)--(A)--(B)--cycle;
+                    \node at ($ (B)+(155:0.65cm) $){$60^\circ $};
+                    \node at ($ (A)+(13.75:1cm) $){$30^\circ $};
+                }
+
+            \end{scope}
+        } % end \tikz
+    \end{textblock*}
+
+    \begin{textblock*}{0.55\textwidth}(0.5cm, 5cm)
+        \footnotesize
+        \begin{enumerate}[<+-| alert@+>]
+            \item To do this, you will need a pair of compasses (sometimes known, incorrectly, as a compass: whatever you call it, you need the device that draws circles or arcs) and a sheet of paper to work on.
+            \item Draw a horizontal line close to the bottom of a sheet of paper and mark a point $A$ near the left end of the line.
+            \item Using the pair of compasses, draw an arc with centre $A$ and radius $r$ as shown. Mark the intersection of the arc with the line as point $B$.
+                  \suspend
+        \end{enumerate}
+
+    \end{textblock*}
+
+    \begin{textblock*}{0.55\textwidth}(6.5cm, 5cm)
+
+        \begin{enumerate}[<+-| alert@+>]
+            \footnotesize
+            \resume
+            \item Keeping the radius at $r$, draw an arc with centre $B$ as shown. Mark the intersection of the two arcs as $C$.
+            \item $\triangle ABC$ is equilateral with sides of length $r$.
+            \item Draw arcs centred at $B$ and $C$, with radius $r'\approx 0.75r$, as shown.(The exact value of $r'$ is not critical but it should be the same value for both arcs.)
+            \item Draw a line between the intersection of these two arcs. This line bisects $BC$ at $D$. It also passes through $A$, bisecting $\angle BAC$.
+                  \suspend
+        \end{enumerate}
+    \end{textblock*}
+    \begin{textblock*}{0.5\textwidth}(5cm, 8.6cm)
+        \centering
+        \begin{enumerate}
+            \footnotesize
+            \resume
+            \item<8 | alert@8> $\angle BAD = 30^\circ$, as required. \textcolor{myGreen}{\Large\checkmark}
+        \end{enumerate}
+    \end{textblock*}
+\end{frame}

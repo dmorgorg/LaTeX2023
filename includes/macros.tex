@@ -2,6 +2,13 @@
 \newcounter{resumeenumi}
 \newcommand{\suspend}{\setcounter{resumeenumi}{\theenumi}}
 \newcommand{\resume}{\setcounter{enumi}{\theresumeenumi}}
+
+\newcounter{saveenumi}
+\newcommand{\seti}{\setcounter{saveenumi}{\value{enumi}}}
+\newcommand{\conti}{\setcounter{enumi}{\value{saveenumi}}}
+\resetcounteronoverlays{saveenumi}
+
+
 % \newcounter{myexercisecounter}
 % \newcommand{\suspendExerciseCounter}{\setcounter{myexercisecounter}{\theenumi}}
 % \newcommand{\resumeExerciseCounter}{\setcounter{enumi}{\themyexercisecounter}}

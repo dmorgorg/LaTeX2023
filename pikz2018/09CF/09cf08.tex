@@ -1,0 +1,69 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+
+\begin{tikzpicture}[scale=\scale]
+
+	\small
+
+	\coordinate (A) at (0, 0);
+	\coordinate (C) at (6, 0);
+	\coordinate (B) at (10, 0);
+	\coordinate (D) at (6, 0);
+
+  \def\hi{.25}
+
+
+	\begin{scope}[yshift=.25cm]
+    \only<1-4>{
+    \DLOne{(4,2)}{(10,2))}{(10,0)}{Goldenrod4}{black}{10}{1}{0.25}
+    }
+    % \only<6->{
+    % \DLOne{(4,2)}{(10,2))}{(10,0)}{Goldenrod4!50!white}{Goldenrod4!75!white}{10}{1}{0.25}
+    % }
+
+	\end{scope}
+
+	\uncover<1-2>{
+		\pgfoonew \AB=new rrect(A,B,LightGoldenrod3,LightGoldenrod3,black,0.5,0,0.5,0.125)
+	}
+
+	\fill[mucus] ($ (A)+(0,2.5) $) rectangle ($ (A)+(-1.5,-1.5) $);
+	\fill[mucus] ($ (B)+(-1,-0.65) $) rectangle ++(2,-.85);
+	\draw ($ (A)+(0,-1.5) $) -- ($ (A)+(0,2.5) $);
+	\draw ($ (B)+(-1,-0.65) $) --+(2,0);
+
+
+
+  \uncover<3->{
+    \filldraw[fill=LightGoldenrod3] ($(A)+(0,\hi)$)--($(C)+(-\hi,\hi)$)arc(90:-90:\hi)--($(A)+(0,-\hi)$)--cycle;
+    \filldraw[fill=LightGoldenrod3] ($(C)+(\hi,\hi)$)--($(B)+(\hi,\hi)$)--+(0,-2*\hi)--($(C)+(\hi,-\hi)$)arc(270:90:\hi);
+    \shadedraw[thin, ball color=Burlywood4] (C) circle (3pt) node[below right,yshift=-0.1cm,xshift=-0.125cm] {$C$};
+  }
+
+  \Rocker{B}{mucus}{black}{0.65}{0.125}
+
+	% \node[xshift=3mm, yshift=3mm] (A)  {$A$};
+	\shadedraw[thin, ball color=Burlywood4] (B) circle (3pt) node[right,xshift=0.125cm] {$B$};
+	\fill (A) circle (1.5pt) node[left] {$A$};
+
+	\uncover<2,4->{
+		% \filldraw[fill=LightGoldenrod3]
+		\draw[saitMaroon, ultra thick, -latex] (A)--+(0,1.5)node[right]{$A_y$};
+		\draw[saitMaroon, ultra thick, -latex] (A)--+(1.5,0)node[yshift=0.35cm]{$A_x$};
+		\draw[saitMaroon, ultra thick, -latex] ($(A)+(45:0.75)$)arc(45:315:0.74)--+(40:0.2)node[below right,xshift=-0.225cm]{$M_a$};
+		\draw[saitMaroon, ultra thick, latex-] (B)--+(0,-1.5)node[below]{$B_x$};
+	}
+  \uncover<4->{
+  \draw[saitMaroon, ultra thick, -latex] ($(C)+(0.125,0)$)--+(0,1.5)node[right]{$C_y$};
+  \draw[saitMaroon, ultra thick, -latex] ($(C)+(0.125,0)$)--+(1.5,0)node[yshift=-0.35cm]{$C_x$};
+  \draw[saitMaroon, ultra thick, -latex] ($(C)+(-0.125,0)$)--+(0,-1.5)node[right]{$C_y$};
+  \draw[saitMaroon, ultra thick, -latex] ($(C)+(-0.125,0)$)--+(-1.5,0)node[yshift=-0.35cm]{$C_x$};
+
+  }
+
+
+
+
+
+
+\end{tikzpicture}

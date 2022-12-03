@@ -1,0 +1,56 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+\tikz[scale=\scale]{
+  \coordinate (O) at (0,0);
+  \coordinate (A) at (0,2);
+  \coordinate (B) at (4,6);
+  \coordinate (C) at (6,0);
+
+  \gettikzxy{(A)}{\ax}{\ay}
+  \gettikzxy{(B)}{\bx}{\by}
+  \gettikzxy{(C)}{\cx}{\cy}
+
+  \fill[top color=Seashell4, bottom color=Seashell1] ($ (A)+(-1.5,-0.75) $) rectangle ++(3, -0.5);
+  \fill[top color=Seashell4, bottom color=Seashell1] ($ (C)+(-1.5,-0.75) $) rectangle ++(3, -0.5);
+
+  \PinnedConnection{A}{Seashell3}{black}{0.75}{.125}
+  \PinnedConnection{C}{Seashell3}{black}{0.75}{.125}
+
+
+  \begin{scope}[xshift=2.1cm, yshift=4.56cm]%[xshift=2cm, yshift=4cm]
+    \def\scale{1}
+    \DLOne[-71.565]{(0,0)}{(6.3246,0)}{(0,-1.5)}{Gold3}{Gold4!75!black}{9}{1}{0.5}
+  \end{scope}
+
+  \begin{scope}[xshift=-1.05cm, yshift=5.15cm]%[xshift=2cm, yshift=4cm]
+    \def\scale{1}
+    \DLOne[45]{(0,0)}{(5.6568,0)}{(0,-1)}{Gold3}{Gold4!75!black}{8}{1}{0.5}
+  \end{scope}
+
+  \pgfoonew \AB =new rrect(A,B,DarkSeaGreen4,DarkSeaGreen2,black,0.5,0.5,0.5,0.2)
+  \pgfoonew \BC =new rrect(B,C,DarkSeaGreen4,DarkSeaGreen3,black,0.5,0.5,0.5,0.2)
+
+  \shadedraw[ball color=Honeydew3] (A) circle (3pt);
+  \shadedraw[ball color=Honeydew] (B) circle (3pt);
+  \shadedraw[ball color=Honeydew] (C) circle (3pt);
+
+  \draw (\ax-1cm, \ay) -- (\ax-3cm, \ay);
+  \draw (\bx-1cm, \by) -- (\ax-3cm, \by);
+  \draw (\cx-1cm, \cy) -- (\ax-3cm, \cy);
+
+  \draw (\ax, \ay-1cm) -- (\ax, \cy-2.5cm);
+  \draw (\bx, \by-1cm) -- (\bx, \cy-2.5cm);
+  \draw (\cx, \cy-1cm) -- (\cx, \cy-2.5cm);
+
+  \draw[latex-latex] (\ax,\cy-2cm) --node[fill=white] { $ 4.20\thinspace\text{m}$} (\bx,\cy-2cm);
+  \draw[latex-latex] (\bx,\cy-2cm) --node[fill=white] { $2.20\thinspace\text{m}$} (\cx,\cy-2cm);
+  \draw[latex-latex] (\ax-2cm,\ay) --node[fill=white] { $2.30\thinspace\text{m}$} (\ax-2cm,\cy);
+  \draw[latex-latex] (\ax-2cm,\ay) --node[fill=white] { $4.50\thinspace\text{m}$} (\ax-2cm,\by);
+
+  \node[rotate=45] at (0,4.25) { $ 2.75\,\text{kN/m}$};
+  \node[rotate=-71.565] at (6.5,5) { $ 4.25\,\text{kN/m}$};
+
+  \node[left=5pt] at (A) {\large $ A$};
+  \node[above=5pt] at (B) {\large $ B$};
+  \node[left=5pt] at (C) {\large $ C$};
+}

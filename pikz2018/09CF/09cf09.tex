@@ -1,0 +1,43 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+
+\begin{tikzpicture}[xscale=-1,scale=\scale]
+
+	\small
+
+	\coordinate (A) at (0, 0);
+	\coordinate (C) at (6, 0);
+	\coordinate (B) at (10, 0);
+	\coordinate (D) at (4, 0);
+
+	\def\hi{.25}
+
+	\begin{scope}[yshift=.25cm]
+		\DLOne{(4,2)}{(10,2))}{(10,0)}{PaleGreen3}{black}{10}{1}{0.5}
+	\end{scope}
+
+	\fill[right color = Cornsilk2, left color=Cornsilk4] ($ (A)+(0,3.5) $) rectangle ($ (A)+(-1.5,-3) $);
+	\fill[bottom color = Cornsilk2, top color=Cornsilk4] ($ (B)+(-1,-0.65) $) rectangle ++(2,-.85);
+	\draw ($ (A)+(0,-3) $) -- ($ (A)+(0,3.5) $);
+	\draw ($ (B)+(-1,-0.65) $) --+(2,0);
+
+	\filldraw[fill=PaleTurquoise4] ($(A)+(0,\hi)$)--($(C)+(-\hi,\hi)$)arc(90:-90:\hi)--($(A)+(0,-\hi)$)--cycle;
+	\filldraw[fill=PaleTurquoise4] ($(C)+(\hi,\hi)$)--($(B)+(\hi,\hi)$)--+(0,-2*\hi)--($(C)+(\hi,-\hi)$)arc(270:90:\hi);
+	\shadedraw[thin, ball color=PaleTurquoise4] (C) circle (3pt) node[below right,yshift=-0.1cm, xshift=-0.0625cm] {\normalsize $B$};
+
+	\Rocker{B}{Cornsilk3}{black}{0.65}{0.125}
+
+	\shadedraw[thin, ball color=PaleTurquoise4] (B) circle (3pt) node[left,xshift=-0.125cm] {\normalsize $A$};
+	\fill (A) circle (1.5pt) node[right] {\normalsize $C$};
+
+  \draw ($(D)+(0,-0.5)$)--+(0,-2);
+  \draw ($(C)+(0,-0.5)$)--+(0,-2);
+  \draw ($(B)+(0,-0.5)$)--+(0,-2);
+\small
+  \draw[latex-latex] ($(A)+(0,-2)$)--node[fill=white]{$2.00\,$m} ($(D)+(0,-2)$);
+  \draw[latex-latex] ($(D)+(0,-2)$)--node[fill=white,inner sep=0.5mm]{$1.00\,$m} ($(C)+(0,-2)$);
+  \draw[latex-latex] ($(C)+(0,-2)$)--node[fill=white]{$2.00\,$m} ($(B)+(0,-2)$);
+
+  \node[yshift=1.75cm] at (C) {$4.75\,\mathsf{kN/m}$};
+
+\end{tikzpicture}

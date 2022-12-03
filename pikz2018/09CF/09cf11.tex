@@ -1,0 +1,63 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+
+\begin{tikzpicture}[xscale=-1,scale=\scale]
+
+	\small
+
+	\coordinate (A) at (0,0);
+	\coordinate (D) at (0,5);
+	\coordinate (C) at (0,3);
+	\coordinate (B) at (2,1.5);
+	\coordinate (E) at (-2,4.5);
+	\coordinate (P) at (5,-2.25);
+
+	\gettikzxy{(E)}{\Ex}{\Ey}
+	\gettikzxy{(D)}{\Dx}{\Dy}
+	\gettikzxy{(B)}{\bx}{\by}
+	\gettikzxy{(C)}{\Cx}{\Cy}
+	\gettikzxy{(A)}{\Ax}{\Ay}
+	\gettikzxy{(P)}{\Px}{\Py}
+
+
+	\shade[top color=Burlywood4, bottom color=Burlywood2] (\Ax-2.75cm,\Ay-0.5cm)--(\bx+0.5cm,\Ay-0.5cm)--+(1.25,-1.25)--(\Ax-2.75cm,\Ay-1.75cm);
+	\shade[left color=Burlywood2, right color=Burlywood4] (\bx+0.5cm,\by+1.25cm)--(\bx+0.5cm,\Ay-0.5cm)--+(1.25,-1.25)--(\bx+1.75cm,\by+1.25cm)--cycle;
+
+
+	\draw ($(A)+(-2.75,-0.5)$) -- (\bx+0.5cm,\Ay-0.5cm)--(\bx+0.5cm,\by+1.25cm);
+
+	\pgfoonew \AD=new rrect(A,D,LightYellow4,LightYellow3,black,0.4,0.4,0.4,0.125)
+
+	\begin{scope}[even odd rule, transform canvas={rotate around={36.87:(C)}}]
+		\filldraw[top color=LightYellow4,bottom color=LightYellow4,middle color=LightYellow3, rounded corners=0.125cm]($(C)+(-2.7,0.2)$)rectangle($(C)+(2.7,-.2)$)
+		[rounded corners=0.0625cm]($(C)+(-1,0.1)$) rectangle ($(C)+(1,-0.1)$);
+	\end{scope}
+
+	\draw[ultra thick, saitMaroon, -latex] (E)--+(0,-1.5)node[below]{$2.56\,$kN};
+	\draw[ultra thick, saitMaroon, -latex] (D)--+(1.5,0)node[left]{$P$};
+
+	\PinnedConnection{A}{Burlywood3}{black}{0.5}{0.1}
+	\PinnedConnection[90]{B}{Burlywood3}{black}{0.5}{0.1}
+
+	\draw[ball color=black] (C) circle (0.075cm)node[below, xshift=0.375cm]{$C$};
+	\draw[ball color=LightYellow4] (D) circle (0.0875cm)node[xshift=0.375cm]{$D$};
+	\draw[ball color=LightYellow4] (E) circle (0.0875cm)node[xshift=0.375cm]{$E$};
+	\draw[ball color=LightYellow4] (A) circle (0.0875cm)node[xshift=0.375cm]{$A$};
+	\draw[ball color=LightYellow4] (B) circle (0.0875cm)node[xshift=0.25cm,yshift=-.25cm]{$B$};
+
+\draw ($(B)+(0.875,0)$) -- (\Px+0.5cm, \by);
+\draw ($(C)+(0.75,0)$) -- (\Px+0.5cm, \Cy);
+\draw ($(D)+(2.25,0)$) -- (\Px+0.5cm, \Dy);
+\draw ($(A)+(0.5,0)$) -- (\Px+0.5cm, \Ay);
+\draw ($(A)+(0,-0.75)$) -- (\Ax, \Py-0.5cm);
+\draw ($(E)+(0,-2.25)$) -- (\Ex, \Py-0.5cm);
+\draw ($(B)+(0,-0.5)$) -- (\bx, \Py-0.5cm);
+
+	%
+	% \scriptsize
+		\draw[latex-latex] (\Ex,\Py)--node[fill=white,inner sep=0.5mm]{$2.20\,$m}(\Ax,\Py);
+		\draw[latex-latex] (\Ax,\Py)--node[fill=white,inner sep=0.5mm]{$2.20\,$m}(\bx,\Py);
+		\draw[latex-latex] (\Px,\Dy)--node[fill=white,inner sep=0.5mm]{$2.35\,$m}(\Px,\Cy);
+		\draw[latex-latex] (\Px,\Cy)--node[fill=white,inner sep=0.5mm]{$1.750\,$m}(\Px,\by);
+		\draw[latex-latex] (\Px,\by)--node[fill=white,inner sep=0.5mm]{$1.750\,$m}(\Px,\Ay);
+\end{tikzpicture}

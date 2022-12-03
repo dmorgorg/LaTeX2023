@@ -1,0 +1,75 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+
+\begin{tikzpicture}[scale=\scale]
+
+ \small
+
+
+ \coordinate (E) at (0, 0);
+ \coordinate (A) at (-1.8, -2.7);
+ \coordinate (B) at (2.85, -2.7);
+ \coordinate (P) at (-3.875, -5);
+ \coordinate (PP) at (-3.25, -4.625);
+ \coordinate (I) at ($(A)!1.75!(E)$);
+ \coordinate (H) at ($(B)!2!(E)$);
+ \coordinate (C) at ($(A)!0.3!(E)$);
+ \coordinate (D) at ($(B)!0.3!(E)$);
+ \coordinate (O) at ($(E)+(96.285:2)$);
+ \coordinate (F) at ($(O)+(226.47:.8)$);
+ \coordinate (G) at ($(O)+(-30.061:.8)$);
+
+
+
+  \gettikzxy{(A)}{\Ax}{\Ay}
+  \gettikzxy{(B)}{\Bx}{\By}
+  \gettikzxy{(C)}{\Cx}{\Cy}
+  \gettikzxy{(D)}{\Dx}{\Dy}
+  \gettikzxy{(E)}{\Ex}{\Ey}
+ \gettikzxy{(P)}{\Px}{\Py}
+ \gettikzxy{(PP)}{\PPx}{\PPy}
+
+\small
+
+\pgfoonew \BH=new rrect(B,H,Tan4,Tan3,black,0.35,0.35,0.35,0.125)
+\pgfoonew \AI=new rrect(A,I,Tan4,Tan3,black,0.35,0.35,0.35,0.125)
+\shade[top color=Cornsilk4, bottom color=Cornsilk2] ($(A)+(-2.5,-0.5)$) rectangle ($(B)+(1.5,-1.5)$);
+\PinnedConnection{A}{Cornsilk3}{black}{0.5}{.125}
+\Rone{B}{Cornsilk3}{black}{0.5}{.125}
+\draw[very thick, black] (C)--(D);
+
+\shadedraw[ball color=Cornsilk4, draw=black] (E) circle (3pt)node[xshift=3.5mm,yshift=0.75mm]{$E$};
+\shadedraw[ball color=Cornsilk4, draw=black, very thin] (B) circle (2pt)node[xshift=2.75mm]{$B$};
+\shadedraw[ball color=Cornsilk4, draw=black, very thin] (A) circle (2pt)node[xshift=-2.75mm,yshift=1.75mm]{$A$};
+\shadedraw[ball color=NavajoWhite4, draw=black, very thin] (C) circle (2pt)node[xshift=-2.5mm,yshift=1.75mm]{$C$};
+\shadedraw[ball color=NavajoWhite4, draw=black, very thin] (D) circle (2pt)node[xshift=2.5mm,yshift=1.75mm]{$D$};
+
+
+\draw[thin] (\Ex,\Ey-0.5cm)--(\Ex,\Py);
+\draw[thin] (\Ax,\Ay-0.2cm)--(\Ax,\Py);
+\draw[thin] (\Bx,\By-0.2cm)--(\Bx,\Py);
+\draw[thin] (\Ex-0.5cm,\Ey)--(\Px,\Ey);
+\draw[thin] (\Ax-.35cm,\Ay)--(\Px,\Ay);
+\draw[thin] (\Cx-.35cm,\Cy)--(\Px,\Cy);
+
+\draw[latex-latex] (\Ax,\PPy)--node[fill=white,inner sep=0.3mm]{$360\,\textsf{mm}$}(\Ex,\PPy);
+\draw[latex-latex] (\Ex,\PPy)--node[fill=white,inner sep=0.3mm]{$570\,\textsf{mm}$}(\Bx,\PPy);
+\draw[latex-latex] (\PPx,\Ay)--node[fill=white,inner sep=0.3mm]{$135\,\textsf{mm}$}(\PPx,\Cy);
+\draw[latex-latex] (\PPx,\Cy)--node[fill=white,inner sep=0.3mm]{$405\,\textsf{mm}$}(\PPx,\Ey);
+
+% \draw (E)--+(O);
+\filldraw[fill=LightSteelBlue3, draw=black] (O) circle (1.105cm);
+\filldraw[fill=white, draw=black] (O) circle (1.015cm);
+
+\node at (F) {$F$};
+\node at (G) {$G$};
+\fill (O)circle (1pt)node[above] {$O$};
+
+
+
+
+
+
+
+
+\end{tikzpicture}

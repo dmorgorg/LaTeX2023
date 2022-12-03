@@ -1,0 +1,83 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+\tikz[scale=\scale, line cap=round]{
+	\def\hi{0.2}
+	\coordinate (G) at (1.55,1.625);
+	\coordinate (R) at (-1.75,0);
+	\coordinate (F) at (3.825,0);
+	\coordinate (AB) at (-3.5,0);
+	\coordinate (BC) at (6,0);
+	\coordinate (A) at ($(AB)+(0,-2.5)$);
+	\coordinate (B) at (0,0);
+	\coordinate (C) at ($(BC)+(0,-1)$);
+	\coordinate (Z) at ($(C)+(2,-0.675)$);
+
+	\gettikzxy{(G)}{\Gx}{\Gy}
+	\gettikzxy{(F)}{\Fx}{\Fy}
+	\gettikzxy{(R)}{\Rx}{\Ry}
+	\gettikzxy{(AB)}{\ABx}{\ABy}
+	\gettikzxy{(BC)}{\BCx}{\BCy}
+	\gettikzxy{(A)}{\Ax}{\Ay}
+	\gettikzxy{(B)}{\Bx}{\By}
+	\gettikzxy{(C)}{\Cx}{\Cy}
+	\gettikzxy{(Z)}{\Zx}{\Zy}
+
+
+
+	% the truck
+	\begin{scope}[yshift=1.275cm,xscale=-1,xshift=-2.125cm]
+
+		\filldraw[draw=LightBlue4!50!black,fill=LightBlue3] (0,0)-- +(0,2)arc(180:90:0.25)-- ++(5,0)-- +(0,-2.25)--cycle;
+		\filldraw[draw=LightBlue4!50!black,fill=LightBlue3] (-0.0625,-0.0625)-- ++(5,0)-- ++(0,-0.55)-- ++(-0.5,0)arc(0:180:0.55)-- +(-4.5,0)arc(0:180:0.55)-- ++(-0.0625,0)-- ++(0,0.55)-- ++(0.0625,0.0625)-- ++(0.0625,0.325)arc(160:99:0.125)-- ++(8:0.9)-- ++(65:0.6)arc(155:90:0.125)-- ++(0.65,0)arc(90:0:0.125)-- cycle;
+		\filldraw[fill=LightBlue3,draw=LightBlue4!50!black] (3.89,-0.6) circle (0.475cm);
+		\filldraw[fill=white,draw=LightBlue4!50!black] (3.89,-0.6) circle (0.3cm);
+		\filldraw[fill=LightBlue3,draw=LightBlue4!50!black] (3.89,-0.6) circle (0.225cm);
+		\filldraw[fill=LightBlue3,draw=LightBlue4!50!black] (-1.7125,-0.6)  circle (0.475cm);
+		\filldraw[fill=white,draw=LightBlue4!50!black] (-1.7125,-0.6) circle (0.3cm);
+		\filldraw[fill=LightBlue3,draw=LightBlue4!50!black] (-1.7125,-0.6) circle (0.225cm);
+		\draw[LightBlue4!50!black](-.2,1)-- ++(0,-1.175)arc(0:-90:0.0625)-- ++(-0.6,0)arc(270:225:0.0625)-- ++(135:0.25)arc(225:180:0.0625)-- ++(0,0.5)arc(180:165:0.125)-- ++(69:0.5)arc(161:90:0.0625)-- +(0.595,0)arc(90:0:0.0625);
+		\filldraw[fill=white, draw=LightBlue4!50!black](-.26,0.95)-- ++(0,-0.5)-- ++(-0.725,0)arc(270:161:0.0625)-- ++(69:0.45)arc(161:90:0.0625)-- ++(0.5125,0)arc(90:5:0.05);
+		\fill (G) circle (2pt)node[left]{\normalsize $G$};
+	\end{scope}
+
+\shade[right color=gray!75, left color=white] ($(A)+(-0.5,0.75)$) rectangle +(-0.5,-1.5);
+\shade[left color=gray!75, right color=white] ($(C)+(0.5,0.75)$) rectangle +(0.5,-1.5);
+
+	\PinnedConnection[-90]{A}{Honeydew4}{black}{0.5}{0.125};
+	\PinnedConnection[90]{C}{Honeydew4}{black}{0.5}{0.125};
+
+
+
+	\filldraw[fill=Honeydew3, draw=black] (\Ax-\hi cm,\Ay-\hi cm)--(\Ax+\hi cm,\Ay-\hi cm)--(\ABx+\hi cm,\ABy-0.5cm -\hi cm)--(\ABx+0.5cm+\hi cm,\ABy-\hi cm)--(\Bx-\hi cm,\By-\hi cm)arc(-90:90:\hi)--(\ABx-\hi cm,\ABy+\hi cm)--cycle;
+
+	\filldraw[fill=Honeydew3, draw=black] (\Cx+\hi cm,\Cy-\hi cm)--(\BCx+\hi cm, \BCy+\hi cm)--(\Bx+\hi cm, \By+\hi cm)arc(90:270:\hi)--(\BCx-1cm-\hi cm, \BCy-\hi cm)--+(1,-0.5)--(\Cx-\hi cm,\Cy-\hi cm)--cycle;
+
+	\shadedraw[ball color=Honeydew3] (A) circle (3pt)node[xshift=0.35cm]{\normalsize $A$};
+	\shadedraw[ball color=Honeydew3] (C) circle (3pt)node[xshift=-0.35cm]{\normalsize $C$};
+	\shadedraw[ball color=Honeydew3] (B) circle (4pt)node[xshift=0.125cm,yshift=-0.35cm]{\normalsize $B$};;
+
+	\draw ($(F)+(0,-0.375)$) -- +(0,-1.62);
+	\draw ($(R)+(0,-0.375)$) -- +(0,-1.62);
+	\draw (\ABx,\ABy-1.25cm) -- +(0,-0.75);
+	\draw (\Cx,\Cy-.375cm) -- +(0,-0.625);
+	\draw (\Bx,\By-.4cm) -- +(0,-1.6);
+	\draw (\Gx,\Gy-.25cm) -- +(0,-3.375);
+
+	\draw (\Ax+0.75cm,\Ay)--(\Zx+1cm,\Ay);
+	\draw (\Cx+0.75cm,\Cy)--(\Zx+1cm,\Cy);
+	\draw (\Gx+0.25cm,\Gy)--(\Zx+1cm,\Gy);
+	\draw (\Bx+0.375cm,\By)--(\Zx+1cm,\By);
+
+	% \draw (\Ax, \Ay+0.5cm)--(\BCx, \Ay+0.5cm);
+
+	\draw[latex-latex] (\Ax,\Zy)--node[fill=white,inner sep=0.25mm]{\small$1.35\,$m}(\Rx,\Zy);
+	\draw[latex-latex] (\Rx,\Zy)--node[fill=white,inner sep=0.25mm]{\small$1.35\,$m}(\Bx,\Zy);
+	\draw[latex-latex] (\Bx,\Zy)--node[fill=white,inner sep=0.25mm]{\small$1.20\,$m}(\Gx,\Zy);
+	\draw[latex-latex] (\Gx,\Zy)--node[fill=white,inner sep=0.25mm]{\small$1.75\,$m}(\Fx,\Zy);
+	\draw[latex-latex] (\Fx,\Zy)--node[fill=white,inner sep=0.25mm]{\small$1.70\,$m}(\BCx,\Zy);
+
+	\draw[latex-latex] (\Zx,\Ay)--node[fill=white,inner sep=0.5mm]{\small$1.15\,$m}(\Zx,\Cy);
+	\draw[latex-latex] (\Zx,\Cy)--node[fill=white,inner sep=0.5mm]{\small$0.750\,$m}(\Zx,\By);
+	\draw[latex-latex] (\Zx,\By)--node[fill=white,inner sep=0.5mm]{\small$1.25\,$m}(\Zx,\Gy);
+
+}

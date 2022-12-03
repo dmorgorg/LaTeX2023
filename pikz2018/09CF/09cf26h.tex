@@ -1,0 +1,77 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+
+\begin{tikzpicture}[scale=\scale]
+
+ \small
+
+
+ \coordinate (E) at (0, 0);
+ \coordinate (A) at (-1.8, -2.7);
+ \coordinate (B) at (2.85, -2.7);
+ \coordinate (P) at (-3.875, -4);
+ \coordinate (PP) at (-3.25, -3.625);
+ \coordinate (I) at ($(A)!1.75!(E)$);
+ \coordinate (H) at ($(B)!2!(E)$);
+ \coordinate (C) at ($(A)!0.3!(E)$);
+ \coordinate (D) at ($(B)!0.3!(E)$);
+ \coordinate (O) at ($(E)+(96.285:2)$);
+ \coordinate (F) at ($(E)+(136.55:1.3565)$);
+
+
+
+  \gettikzxy{(A)}{\Ax}{\Ay}
+  \gettikzxy{(B)}{\Bx}{\By}
+  \gettikzxy{(C)}{\Cx}{\Cy}
+  \gettikzxy{(D)}{\Dx}{\Dy}
+  \gettikzxy{(E)}{\Ex}{\Ey}
+ \gettikzxy{(P)}{\Px}{\Py}
+ \gettikzxy{(PP)}{\PPx}{\PPy}
+
+\footnotesize
+
+\pgfoonew \BH=new rrect(B,H,gray!50,gray!50,black,0.35,0.35,0.35,0.125)
+\draw[very thick, saitMaroon, -latex] (D)--+(-1.25,0)node[below, black]{$T_{CD}$};
+\node[below left] at (F){$F$};
+\node[below left] at (E){$E$};
+\node[below left] at (D){$D$};
+\node[below left] at (B){$B$};
+
+
+
+\draw[thin] (\Ex-1.5cm,\Ey)--(\Px,\Ey);
+% \draw[thin] (\Ax-.35cm,\Ay)--(\Px,\Ay);
+\draw[thin] (\Dx-1.5cm,\Cy)--(\Px,\Cy);
+
+
+\draw[latex-latex] (\PPx,\Cy)--node[fill=white,inner sep=0.3mm]{$405\,\textsf{mm}$}(\PPx,\Ey);
+\draw ($(E)+(46.548:0.35)$)--+(46.548:1.65);
+\draw[latex-latex]($(E)+(46.548:1.75)$) -- node[fill=white, inner sep=0.4mm, xshift=2.5mm]{$271.29\,\textsf{mm} $}($(F)+(46.458:1.75)$);
+\draw[latex-latex] ($(E)+(1.75,0)$)arc(0:46.548:1.75)node[midway, fill=white, inner sep=0.4mm]{$46.548\degree$};
+\draw ($(E)+(0.5,0)$) -- (2,0);
+
+
+
+
+\draw[very thick, saitBlue, latex-] (F)--+(46.548:2)node[black, above]{$3.0324\,\textsf{kN}$};
+
+
+
+
+\draw[very thick, saitBlue, -latex] (B)--+(0,1.25)node[yshift=1mm, black]{$1.2369\,\textsf{kN}$};
+\draw[latex-latex] (\Bx,\PPy)--node[fill=white,inner sep=0.3mm]{$570\,\textsf{mm}$}(\Ex,\PPy);
+\draw[thin] (\Ex,\Ey-1.375cm)--(\Ex,\Py);
+\draw[thin] (\Bx,\By-0.35cm)--(\Bx,\Py);
+
+\draw[very thick, saitMaroon, -latex] (E)--+(0,-1.25)node[left, black]{$E_y$};
+\draw[very thick, saitMaroon, -latex] (E)--+(-1.25,0)node[below, black]{$E_x$};
+\fill[black] (E) circle (2pt);
+\fill[black] (B) circle (2pt);
+\fill[black] (D) circle (2pt);
+\fill (F) circle (2pt);
+
+
+
+
+
+\end{tikzpicture}

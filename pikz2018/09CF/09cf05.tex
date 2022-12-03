@@ -1,0 +1,71 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+\tikz[scale=\scale]{
+
+	\footnotesize
+
+	\def\hi{0.1875};
+	\def\radii{\hi}
+	\def\extend{\hi}
+
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (6,2.5);
+	\coordinate (C) at (9,2.5);
+	\coordinate (D) at (9,1);
+
+	\gettikzxy{(A)}{\ax}{\ay}
+	\gettikzxy{(B)}{\bx}{\by}
+	\gettikzxy{(C)}{\cx}{\cy}
+	\gettikzxy{(D)}{\ddx}{\ddy}
+
+
+		\PinnedConnection[90]{D}{Burlywood4}{black}{0.75}{0.125}
+		\PinnedConnection{A}{Burlywood4}{black}{0.75}{0.125}
+
+	% \fill[white] (-2.5,-3) rectangle (12.5,6.5);
+	\shade[top color=lHeaderGrey,bottom color=white] (\ax-2 cm, \ay-0.5 cm) -- (\cx+\hi+0.5 cm,\ay-0.5cm) -- +(1.5,-1.5) -- (\ax-2 cm, \ay-2cm) -- cycle;
+	\shade[left color=lHeaderGrey, right color=white] (\cx+\hi+0.5 cm,\ay-0.5cm) -- ++(0,6) --  ++(1.5, 0) -- ++(0,-7.5) -- cycle;
+	\draw (\ax-2 cm, \ay-0.5 cm) -- (\cx+\hi+0.5 cm,\ay-0.5cm) -- ++(0,6);
+		%
+
+	\begin{scope}[xshift=-0.325cm, yshift=1.43cm]
+		\def\scale{1}
+		\DLOne[22.62]{(0,1.5)}{6.5,1.5}{(0,0)}{Honeydew2}{black}{12}{1}{0.5}
+	\end{scope}
+
+	\begin{scope}
+		\def\scale{1}
+		\DLOne{(\bx,\by+1.5cm +\hi cm)}{(\cx,\cy+2.25cm+\hi)}{(\cx,2.5+\hi)}{Honeydew2}{black}{6}{1}{0.5}
+	\end{scope}
+
+	\pgfoonew \AB =new rr(A,B,Burlywood3,black,0.125)
+	\filldraw[fill=Burlywood3, draw=black, line width=0.125mm] (\bx,\by+\hi cm) -- (\cx+\hi cm, \cy+\hi cm) -- (\ddx+\hi cm, \ddy)arc(0:-180:\hi) -- (\cx-\hi cm,\cy-\hi cm) -- (\bx, \by-\hi cm) arc(-90:-270:\hi);
+
+	\shadedraw[ball color=gray] (A) circle (3pt);
+	\shadedraw[ball color=gray] (B) circle (3pt);
+	\shadedraw[ball color=gray] (D) circle (3pt);
+
+	\draw (\ax,\ay-1.125cm) -- (\ax,\ay-2.5cm);
+	\draw (\bx,\by-0.75cm) -- (\bx,\ay-2.5cm);
+	\draw (\ddx,\ddy-0.75cm) -- (\ddx,\ay-2.5cm);
+
+	\draw (\ddx-0.5cm,\ddy) -- (\bx+0.5cm, \ddy);
+	\draw (\ax+0.75cm,\ay) -- (\ddx-0.5cm,\ay);
+	\draw (\ddx-1cm,\by) -- (\bx+1cm, \by);
+
+
+	\draw[latex-latex] (\ax,\ay-2.25cm) -- node[fill=white]{$6.00\>\text{m}$}(\bx,\ay-2.25cm);
+	\draw[latex-latex] (\bx,\ay-2.25cm) -- node[fill=white]{$3.00\>\text{m}$}(\ddx,\ddy-3.25cm);
+
+	\draw[latex-latex] (\bx*0.5+\cx*0.5,\by) -- node[fill=white,inner sep=0.5mm]{$1.50\>$m}(\bx*0.5+\cx*0.5,\ddy);
+	\draw[latex-latex] (\bx*0.5+\cx*0.5,\ddy) -- node[fill=white,inner sep=0.5mm]{$1.00\>$m}(\bx*0.5+\cx*0.5,\ay);
+	%
+\normalsize
+	\node[yshift=-0.5cm] at (A) { $A$};
+	\node[yshift=-0.325cm] at (B) {$B$};
+	\node[yshift=-0.325cm] at (D) { $C$};
+  %
+	\node[xshift=0.25cm, yshift=1.65cm, rotate=22.62] at (A) {$3.00\>\text{kN/m}$};
+	\node[yshift=1.35cm, xshift=-0.5cm] at (B) {$3.00\>\text{kN/m}$};
+	\node[yshift=1.75cm, xshift=-0.5cm] at (C) {$4.50\>\text{kN/m}$};
+}

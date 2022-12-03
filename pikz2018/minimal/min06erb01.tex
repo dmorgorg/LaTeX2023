@@ -1,0 +1,79 @@
+%!TEX option = --enable-write18
+
+\documentclass[ x11names, border=10pt]{standalone}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{graphicx}
+\usepackage{booktabs}  % for top and bottom spacing in table cells
+\usepackage{mathpazo}
+\usepackage{textcomp}
+\usepackage{multirow}
+\usepackage{cancel}
+
+\usepackage{verbatim}
+\usepackage{bm}
+\usepackage{graphicx}
+\usepackage{tikz}
+% \usepackage{tkz-linknodes}
+\usepackage{gensymb} % for \degree
+\usepackage[many]{tcolorbox}
+\usepackage{pgf}
+\usepackage{pgfmath}
+
+\usepgfmodule{oo}
+\usetikzlibrary{shapes,decorations,shadows,calc}
+\usetikzlibrary{decorations.shapes}
+\usetikzlibrary{shapes.callouts}
+
+\usetikzlibrary{positioning}
+\usetikzlibrary{decorations.text}
+\usetikzlibrary{decorations.pathmorphing}
+\usetikzlibrary{positioning,arrows.meta}
+\usetikzlibrary{decorations.markings}
+% bloody coils
+
+\usetikzlibrary{shapes.multipart}
+\tikzset{every picture/.append style={line cap=round}}
+
+\input{../../includes/macros.tex}
+\input{../../includes/definedColors.tex}
+\input{../../includes/tikzObjects.tex}
+\input{../../includes/Roller.tex}
+\input{../../includes/Ronly.tex}
+\input{../../includes/Rone.tex}
+\input{../../includes/Rocker.tex}
+\input{../../includes/PinnedConnection.tex}
+\input{../../includes/EyeConnection.tex}
+\input{../../includes/EyeBolt.tex}
+\input{../../includes/WBeam.tex}
+\input{../../includes/WWBeam.tex}
+\input{../../includes/Channel.tex}
+\input{../../includes/DLOne.tex}
+\input{../../includes/Pulley.tex}
+
+
+
+\everymath{\displaystyle}
+
+\usepackage[export]{adjustbox}
+
+
+
+
+
+\def\scale{1} % initialisation for pikz
+
+
+%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%
+\begin{document}
+	\def\scale{0.7}
+	\centering
+	\input{../../pikz2018/06ERB/06erb01}
+
+
+
+
+
+
+
+\end{document}

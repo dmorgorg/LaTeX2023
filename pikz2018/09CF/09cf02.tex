@@ -1,0 +1,53 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+\tikz[scale=\scale]{
+
+ \coordinate (A) at (0,0);
+ \coordinate (B) at (4.5,0);
+ \coordinate (C) at (7.5,0);
+ \coordinate (D) at (3,-2.225);
+ \coordinate (E) at (0,-3);
+
+ \gettikzxy{(A)}{\Ax}{\Ay}
+ \gettikzxy{(B)}{\Bx}{\By}
+ \gettikzxy{(C)}{\Cx}{\Cy}
+ \gettikzxy{(D)}{\Dx}{\Dy}
+ \gettikzxy{(E)}{\Ex}{\Ey}
+
+ \footnotesize
+
+ \fill[left color =LightYellow2, right color=LightYellow4] ($(A)+(-0.5,2)$) rectangle ($(E)+(-1.5,-2)$);
+ \PinnedConnection[-90]{A}{LightYellow4}{black}{0.5}{0.125}
+ \PinnedConnection[-90]{E}{LightYellow4}{black}{0.5}{0.125}
+
+ 	\pgfoonew \BC=new rrect(A,C,DarkGoldenrod3,DarkGoldenrod3,black,0.4,0.4,0.4,0.125);
+  \filldraw [fill=DarkGoldenrod3, draw=black, line width=0.125mm] ($(E)+(0,0.2)$) arc [start angle=-90, end angle=0, x radius=4.3cm, y radius=2.8cm]arc(180:0:0.2) arc[start angle=0, end angle=-90, x radius=4.7cm, y radius=3.2cm]arc(270:90:0.2);
+
+\draw[thin, black] ($(A)+(0,0.5)$)--+(0,1);
+  \draw[thin, black] ($(B)+(0,0.5)$)--+(0,1);
+  \draw[thin, black] ($(C)+(0,0.5)$)--+(0,1);
+  \draw[thin, black] ($(D)+(0,0.5)$)--+(0,3.225);
+  \draw[thin, black] ($(E)+(-0.25,0)$)--+(-3,0);
+  \draw[thin, black] ($(A)+(-0.25,0)$)--+(-3,0);
+  \draw[thin, black] ($(D)+(-0.75,0)$)--+(-5.5,0);
+
+  \draw[latex-latex] ($(A)+(0,1)$)--node[fill=white]{$1.5\,$m}($(D)+(0,3.225)$);
+  \draw[latex-latex] ($(B)+(0,1)$)--node[fill=white,inner sep=0.1mm]{$0.75\,$m}($(D)+(0,3.225)$);
+  \draw[latex-latex] ($(B)+(0,1)$)--node[fill=white,inner sep=0.1mm]{$1.5\,$m}($(C)+(0,1)$);
+  \draw[latex-latex] ($(A)+(-2.5,0)$)--node[fill=white,inner sep=0.3mm]{$1.15\,$m}($(D)+(-5.5,0)$);
+  \draw[latex-latex] ($(E)+(-2.5,0)$)--node[fill=white,inner sep=0.3mm]{$0.35\,$m}($(D)+(-5.5,0)$);
+
+\normalsize
+\draw[ultra thick, saitDeepBlue, -Latex] (C)--+(0,-2)node[below,black]{ $4.20\,$kN};
+\draw[ultra thick, saitDeepBlue, -Latex] (D)--+(0,-2)node[below,black]{$2.40\,$kN};
+
+ \filldraw[ball color=Ivory4, draw=black, thin] (A) circle (1mm)node[xshift=0.05cm, yshift=-0.3cm]{$A$};
+ \filldraw[ball color=Ivory4, draw=black, thin] (B) circle (1mm)node[xshift=0.25cm, yshift=-0.3cm]{$B$};
+ \filldraw[ball color=Ivory4, draw=black, thin] (C) circle (1mm)node[xshift=0.2cm, yshift=-0.25cm]{$C$};
+ \filldraw[ball color=Ivory4, draw=black, thin] (D) circle (1mm)node[xshift=0.2cm, yshift=-0.25cm]{$D$};
+ \filldraw[ball color=Ivory4, draw=black, thin] (E) circle (1mm)node[xshift=0.05cm, yshift=-0.3cm]{$E$};
+
+
+
+
+}

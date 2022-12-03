@@ -1,0 +1,74 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+\tikz[scale=\scale, line cap=round]{
+
+
+	\coordinate (P) at (7.75,5.5);
+	\coordinate (PP) at (-1.75,6);
+	\coordinate (Q) at (7.25,9.5);
+	\coordinate (QQ) at (-1.25,7.5);
+	\coordinate (A) at (0,0);
+	\coordinate (B) at (1.75,2);
+	\coordinate (C) at (3.5,4);
+	\coordinate (D) at (5,1);
+	\coordinate (E) at (6,-1);
+	\coordinate (G) at ($(B)!0.5385!(D)$);
+
+	\gettikzxy{(P)}{\Px}{\Py}
+	\gettikzxy{(PP)}{\PPx}{\PPy}
+	\gettikzxy{(Q)}{\Qx}{\Qy}
+	\gettikzxy{(QQ)}{\QQx}{\QQy}
+	\gettikzxy{(A)}{\Ax}{\Ay}
+	\gettikzxy{(B)}{\Bx}{\By}
+	\gettikzxy{(C)}{\Cx}{\Cy}
+	\gettikzxy{(D)}{\Dx}{\Dy}
+	\gettikzxy{(E)}{\Ex}{\Ey}
+	\gettikzxy{(G)}{\Gx}{\Gy}
+
+	\fill[top color=DarkSeaGreen4, bottom color=DarkSeaGreen3] ($(A)+(-1.75,-0.325)$) rectangle +(3,-0.75);
+	\fill[top color=DarkSeaGreen4, bottom color=DarkSeaGreen3] ($(E)+(-1.5,-0.5)$) rectangle +(3.25,-0.75);
+
+	\PinnedConnection{E}{DarkSeaGreen3!75!black}{black}{0.5}{0.125}
+	\Ronly{A}{DarkSeaGreen3}{black}{0.325}{0.125}
+
+	\pgfoonew \AC=new rrect(A,C,LightGoldenrod4,LightGoldenrod3,black,0.4,0.4,0.4,0.125)
+	\pgfoonew \CE=new rrect(C,E,LightGoldenrod4,LightGoldenrod3,black,0.4,0.4,0.4,0.125)
+	\pgfoonew \DB=new rrect(D,B,LightGoldenrod4,LightGoldenrod3,black,0.4,0.4,0.4,0.125)
+
+	\draw[-latex, ultra thick, blue] (G)--+(0,-1.5)node[below]{$1.75\,$kN};
+
+\normalsize
+	\shadedraw[ball color=DarkSeaGreen3] (A) circle (3pt)node[xshift=-0.375cm,yshift=0.325cm]{$A$};
+	\shadedraw[ball color=DarkSeaGreen3] (B) circle (3pt)node[above left]{$B$};
+	\shadedraw[ball color=DarkSeaGreen3] (C) circle (3pt)node[above right]{$C$};
+	\shadedraw[ball color=DarkSeaGreen3] (D) circle (3pt)node[above right]{$D$};
+	\shadedraw[ball color=DarkSeaGreen3] (E) circle (3pt)node[above right]{$E$};
+	\fill[blue] (G) circle (2pt)node[black, xshift=-1.75mm,yshift=-2.75mm]{$G$};
+
+	\draw (\Ex+0.5cm,\Ey)--(\Px,\Ey);
+	\draw (\Dx+0.5cm,\Dy)--(\Px,\Dy);
+	\draw (\Cx+0.5cm,\Cy)--(\Px,\Cy);
+	\draw (\Cx-0.5cm,\Cy)--(\PPx,\Cy);
+	\draw (\Bx-0.5cm,\By)--(\PPx,\By);
+	\draw (\Ax-0.5cm,\Ay)--(\PPx,\Ay);
+	\draw (\Ax,\Ay+0.5cm)--(\Ax,\PPy);
+	\draw (\Bx,\By+0.5cm)--(\Bx,\PPy);
+	\draw (\Cx,\Cy+0.375cm)--(\Cx,\PPy);
+	\draw (\Dx,\Dy+0.75cm)--(\Dx,\PPy);
+	\draw (\Ex,\Ey+0.75cm)--(\Ex,\PPy);
+	\draw (\Cx,\Cy-0.75cm)--(\Gx,\Gy+0.375cm);
+
+	\small
+
+	\draw[latex-latex] (\QQx,\Ay)--node[fill=white]{$2.00\,$m}(\QQx,\By);
+	\draw[latex-latex] (\QQx,\By)--node[fill=white]{$2.00\,$m}(\QQx,\Cy);
+	\draw[latex-latex] (\Qx,\Ey)--node[fill=white]{$2.00\,$m}(\Qx,\Dy);
+	\draw[latex-latex] (\Qx,\Dy)--node[fill=white]{$3.00\,$m}(\Qx,\Cy);
+	\draw[latex-latex] (\Ax,\Py)--node[fill=white, inner sep=0.25mm]{$1.75\,$m}(\Bx,\Py);
+	\draw[latex-latex] (\Bx,\Py)--node[fill=white, inner sep=0.25mm]{$1.75\,$m}(\Cx,\Py);
+	\draw[latex-latex] (\Cx,\Py)--node[fill=white, inner sep=0.25mm]{$1.50\,$m}(\Dx,\Py);
+	\draw[latex-latex] (\Dx,\Py)--node[fill=white, inner sep=0.25mm, rotate=45]{$1.00\,$m}(\Ex,\Py);
+
+
+
+}

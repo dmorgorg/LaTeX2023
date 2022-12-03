@@ -1,0 +1,26 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+
+\begin{tikzpicture}[scale=\scale]
+
+ \small
+
+
+ \coordinate (C) at (0, 0);
+ \coordinate (P) at (3.7334, 10);
+
+  \gettikzxy{(C)}{\Cx}{\Cy}
+ \gettikzxy{(P)}{\Px}{\Py}
+
+\large
+
+\draw[gray, thin] (\Px, \Cy-0.5cm)--(\Px, \Py+0.5cm);
+\draw[gray, thin] (\Cx-0.5cm, \Py)--(\Px+0.5cm, \Py);
+ \draw[gray, very thick, -latex] (C)--node[below,black]{$7.4667$ kN}+(\Px,\Cy);
+ \draw[gray, very thick, -latex] (C)--node[black, above, sloped]{$58.800$ kN}+(\Cx,\Py);
+ \draw[saitMaroon, very thick, -latex] (C)--node[black, sloped, above, pos=0.75]{$59.272$ kN}+(\Px,\Py);
+ \draw[latex-latex] ($(C)+(2,0)$)arc(0:69.53:2)node[midway, fill=white,inner sep=0.3mm]{$82.763\degree$};
+ \node[below left] at (C){$C$};
+
+
+\end{tikzpicture}

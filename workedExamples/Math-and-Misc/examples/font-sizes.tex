@@ -1,0 +1,169 @@
+\begin{frame}{Web :: Dynamic font sizes with CSS}
+    % \setbeamercolor{normal text}{fg=black,bg=}
+    \small
+
+
+    \only<1-4>{
+        \begin{enumerate}[<+-| alert@+>]
+            \item Responsive websites usually require font sizes that change with device (or browser window) width. A font size of 20px that works well on a large monitor is unlikely to be suitable for a smaller tablet or a phone.\parb
+            \item With media queries, you can set a different font size for each range of device sizes; this is perfectly adequate in many cases. It does have the disadvantage that when resizing a browser, the user will see the font size jumping from, for example, 18px to 16px to 14px. (But it's usually only designers who spend too much time resizing windows.) \parb
+            \item For a more fluid result, viewport units are useful (where {\ttfamily 1vw = 1/100} of the window width). So, for example, if you set your css to \textcolor{black}{\ttfamily font-size:2vw;} and your phone is 400px wide, the font will be 8px. If your window width is 1200px, font size will be 24px.\parb
+            \item Using viewport units alone may tend to make the fonts too small on small screens and too large on large screens; one can introduce some fixed sizes as well:\newline \textcolor{\thisColor}{\ttfamily\textbf font-size:calc(9px + 1vw);} sets font size at 13px for phone width of 400px and font size of 21px for window size of 1200px. \pars Still not exactly what you want? Maybe \textcolor{black}{\ttfamily font-size:calc(4px + 1.5vw);} \parb
+                  %   \seti
+        \end{enumerate}
+    }
+    \only<5>{
+        \begin{enumerate}[<+-| alert@+>]
+            % \only<...> seems to break the automated counter...
+            % \conti
+            \setcounter{enumi}{4}
+            \item<5 | alert@5> For more precise control, without trial and error that rapidly becomes frustrating, I turned to this excellent \href{https://css-tricks.com/snippets/css/fluid-typography/}{CSS-tricks} page showing examples such as
+                \begin{center}
+                    \textcolor{black}{\ttfamily font-size: calc(16px + 6 * ((100vw - 320px) / 680));}
+                \end{center}
+                What are these magic numbers? At the moment, I can tell that, at a screen width of 320px, the font size is 16px. Font size increases smoothly until, at a screen width of 1000px, the font size of 22px. But I probably won't remember how to figure that out next week! The \href{https://css-tricks.com/snippets/css/fluid-typography/}{CSS-tricks} page doesn't show how these numbers are derived\ldots \pars \ldots but it's just some (relatively) simple high-school math. All you need to recall from high-school is the equation of a line in the form:
+                \textcolor{black}{$$\frac{y-y_1}{x-x_1}=\frac{y_2-y_1}{x_2-x_1}$$}
+                % \seti
+        \end{enumerate}
+    }
+    \only<6->{
+        \begin{textblock*}{1\textwidth}(1.5cm, 1cm)
+            \cmini{
+                \tikz[scale=0.85]{
+                    \coordinate (0) at (0,0);
+                    \coordinate (X) at (6,0);
+                    \coordinate (Y) at (0,3.5);
+                    \coordinate (min) at (1,1.25);
+                    \coordinate (max) at (5,2.5);
+
+                    \draw[-to](0)--node[below, pos=0.9, yshift=-0.4cm]{\bf view width}(X);
+                    \draw[-to](0)--node[left,pos=0.9, xshift=-0.15cm]{\bf font size}(Y);
+                    \node[below left] at (0){0};
+
+                    \gettikzxy{(min)}{\minx}{\miny}
+                    \gettikzxy{(max)}{\maxx}{\maxy}
+                    \gettikzxy{(X)}{\xx}{\xy}
+
+                    \only<6-8,16,17>{
+                        \draw[very thick, \thisColor](0,\miny)--(\minx,\miny)--(max)--(\xx,\maxy);
+                    }
+
+                    \only<6-7,16,17>{
+                        \node[left] at (0,\miny){10px};
+                        \draw[dotted](max)--(0,\maxy)node[left]{20px};
+                        \draw[dotted](min)--(\minx,0)node[below]{300px};
+                        \draw[dotted](max)--(\maxx,0)node[below]{1200px};
+                    }
+                    \only<8>{
+                        \draw[dotted](min)--(\minx,0)node[below]{$x_1$};
+                        \node[yshift=-0.2cm,fill=white, inner sep=0.4mm] at (min) {$(x_1,y_1)$};
+                    }
+                    \only<8-14>{
+                        \node[left] at (0,\miny){$y_1$};
+                        \draw[dotted](max)--(0,\maxy)node[left]{$y_2$};
+                        \draw[dotted](max)--(\maxx,0)node[below]{$x_2$};
+                        \node[yshift=0.2cm,fill=white, inner sep=0.4mm] at (max) {$(x_2,y_2)$};
+                    }
+                    \only<9-14>{
+                        \draw[dotted](\minx,\maxy)--(\minx,0)node[below]{$x_1$};
+                        \draw[dotted](\maxx,\miny)--(0,\miny);
+                        \node[yshift=-0.2cm,fill=white, inner sep=0.4mm] at (min) {$(x_1,y_1)$};
+                        \draw[very thick, \thisColor](min)--(max);
+                    }
+                    \only<9-14>{
+                        \coordinate (P) at ($(min)!0.6!(max)$);
+                        \gettikzxy{(P)}{\px}{\py}
+                        \draw[thick, red] (P)--(\px,0)node[below, black]{\large $ x$};
+                        \draw[thick, red] (P)--(0,\py)node[left, black]{\large $ y$};
+                    }
+                    \only<15>{
+                        \node[yshift=-0.2cm,fill=white, inner sep=0.4mm] at (min) {$(300,10)$};
+                        \node[yshift=0.2cm,fill=white, inner sep=0.4mm] at (max) {$(1200,20)$};
+                        \draw[very thick, \thisColor](min)--(max);
+                    }
+                }
+            }
+        \end{textblock*}
+    }
+    \begin{textblock*}{1\textwidth}(1cm, 5.25cm)
+        \only<6-8>{
+            \setcounter{enumi}{5}
+            \begin{enumerate}
+                \setcounter{enumi}{5}
+                \item<6- | alert@6> We can graph our desired font size against view width as shown. In this case: view widths less than 300px have a font size of 10px; font sizes grow uniformly from 10px at 300px view width to a font-size 20px at 1200px window width; and, for window sizes over 1200px, the font size remains 20px. How do we achieve this with CSS?
+                \item<7-  | alert@7> The constant font sizes below 300px and above 1200px can be easily handled with the clamp function; we'll come back to that later. What is more interesting is the uniformly increasing font size calculation between view widths of 300px and 1200px.
+                \item<8| alert@8> Instead of using the fixed numbers, we'll generalise and use variables so we can easily adjust our formula for different required values.
+            \end{enumerate}
+        }
+        \only<9-12>{
+            \begin{enumerate}
+                \setcounter{enumi}{8}
+                \item<9-|alert@9> For now, just focus on the sloped line as a function from view width $x$ to font size $y$.
+                \item<10-|alert@10,11,12> The equation of that line is given by:
+                    \textcolor{black}{
+                        \begin{align*}
+                            \uncover<10->{\frac{y-y_1}{x-x_1} & = \frac{y_2-y_1}{x_2-x_1} \\}
+                            \uncover<11->{\Rightarrow y-y_1   & = (x-x_1)\cdot\frac{y_2-y_1}{x_2-x_1}\\}
+                            \uncover<12>{\Rightarrow y        & = y_1+(x-x_1)\cdot\frac{y_2-y_1}{x_2-x_1}}
+                        \end{align*}
+                    }
+
+            \end{enumerate}
+        }
+        \only<13-15>{
+            \begin{enumerate}
+                \setcounter{enumi}{12}		% first item will be 6				
+                \item<13-|alert@13> We have font size $ = y_1+(x-x_1)\cdot\frac{y_2-y_1}{x_2-x_1}$ where $x_1$, $y_1$, $x_2$ and $y_2$ are numbers chosen for our particular design and $x$ is view width. Of course, CSS does not understand $x$ but view width can be represented by 100vw.
+                \item<14-|alert@14> Thus,  \textcolor{black}{\ttfamily font-size:calc($y_1$ + (100vw - $x_1$)*($y_2-y_1$)/($x_2-x_1$));}
+                \item<15-|alert@15> From our previous example:
+                    \begin{center}
+                        \textcolor{black}{\ttfamily font-size:calc(10px + (100vw - 300px)*(20px-10px)/(1200px-300px));}
+                    \end{center}
+                    or, more concisely:
+                    \begin{center}
+                        \textcolor{black}{\ttfamily font-size: calc(10px + 10 * (100vw - 300px)/900);}
+                    \end{center}
+
+            \end{enumerate}
+        }
+        \only<16>{
+            \begin{enumerate}
+                \setcounter{enumi}{15}		% first item will be 9				
+                \item<16|alert@16> CSS for the complete range of view widths: \cmini{
+
+                        \textcolor{black}{\ttfamily @media screen and (min-width:1200px) \{ \newline
+                            html \{ font-size:20px; \} \newline\} } \pars
+
+                        \textcolor{black}{\ttfamily @media screen and (max-width:1200px) \{ \newline
+                            html \{ font-size: calc(10px + (100vw - 300px)/900); \} \newline \} } \pars
+
+                        \textcolor{black}{\ttfamily @media screen and (max-width:300px) \{ \newline
+                            html \{ font-size:10px; \} \newline\} }
+                    }
+                    % \item<17|alert@17>Or, better still, as:
+                    % \textcolor{black}{\ttfamily \{ code \} }
+
+            \end{enumerate}
+        }
+        % \only<17>{
+        %     \begin{enumerate}
+        %         \setcounter{enumi}{16}
+        %         \item<17|alert@17> Or, better still, as: \newline
+        %             \textcolor{black}{\ttfamily \newline
+        %                 html \{ \newline
+        %                 font-size: clamp(10px, calc(10px + (100vw - 300px)/900), 20px);  \newline \} }
+        %     \end{enumerate}
+        % }       
+
+    \end{textblock*}
+
+
+
+
+
+
+
+
+
+
+\end{frame}

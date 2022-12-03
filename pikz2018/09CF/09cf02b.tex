@@ -1,0 +1,74 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+\tikz[scale=\scale]{
+
+ \coordinate (A) at (0,0);
+ \coordinate (AA) at (0,-1);
+ \coordinate (B) at (4.5,0);
+ \coordinate (BB) at (4.5,-1);
+ \coordinate (C) at (7.5,0);
+ \coordinate (D) at (3,-2.225);
+ \coordinate (DD) at (3,-3.225);
+ \coordinate (E) at (0,-3);
+ \coordinate (EE) at (0,-4);
+
+ \gettikzxy{(A)}{\Ax}{\Ay}
+ \gettikzxy{(B)}{\Bx}{\By}
+ \gettikzxy{(BB)}{\BBx}{\BBy}
+ \gettikzxy{(C)}{\Cx}{\Cy}
+ \gettikzxy{(D)}{\Dx}{\Dy}
+ \gettikzxy{(E)}{\Ex}{\Ey}
+
+ \footnotesize
+
+
+
+ 	\pgfoonew \BC=new rrect(A,C,DarkGoldenrod2,DarkGoldenrod2,black,0.4,0.4,0.4,0.125);
+  \filldraw [fill=DarkGoldenrod2, draw=black, line width=0.125mm] ($(EE)+(0,0.2)$) arc [start angle=-90, end angle=0, x radius=4.3cm, y radius=2.8cm]arc(180:0:0.2) arc[start angle=0, end angle=-90, x radius=4.7cm, y radius=3.2cm]arc(270:90:0.2);
+
+\draw[thin, black] ($(A)+(0,0.5)$)--+(0,1);
+\draw[thin, black] ($(A)+(0,-0.5)$)--+(0,-3);
+  \draw[thin, black] ($(B)+(0,0.5)$)--+(0,1);
+  \draw[thin, black] ($(C)+(0,0.5)$)--+(0,1);
+  \draw[thin, black] ($(DD)+(0,0.5)$)--+(0,4.225);
+  \draw[thin, black] ($(EE)+(-0.5,0)$)--+(-2.75,0);
+  \draw[thin, black] ($(BB)+(-1.75,0)$)--+(-6,0);
+  \draw[thin, black] ($(DD)+(-0.75,0)$)--+(-5.5,0);
+
+  \draw[latex-latex] ($(A)+(0,1)$)--node[fill=white]{$1.5\,$m}($(D)+(0,3.225)$);
+  \draw[latex-latex] ($(B)+(0,1)$)--node[fill=white,inner sep=0.1mm]{$0.75\,$m}($(D)+(0,3.225)$);
+  \draw[latex-latex] ($(B)+(0,1)$)--node[fill=white,inner sep=0.1mm]{$1.5\,$m}($(C)+(0,1)$);
+  \draw[latex-latex] ($(AA)+(-2.5,0)$)--node[fill=white,inner sep=0.3mm]{$1.15\,$m}($(DD)+(-5.5,0)$);
+  \draw[latex-latex] ($(EE)+(-2.5,0)$)--node[fill=white,inner sep=0.3mm]{$0.35\,$m}($(DD)+(-5.5,0)$);
+
+\normalsize
+\draw[ultra thick, saitDeepBlue, -Latex] (C)--+(0,-2)node[below,black]{$4.20\,$kN};
+\draw[ultra thick, saitDeepBlue, -Latex] (DD)--+(0,-2)node[below,black]{$2.40\,$kN};
+
+\draw[very thick, saitMaroon, -Latex] (A)--+(0,1.65)node[above]{$A_y$};
+\draw[very thick, saitMaroon, -Latex] (A)--+(1.25,0)node[below,yshift=-0.4mm]{$A_x$};
+\draw[very thick, saitMaroon, -Latex] (EE)--+(0,1.65)node[right]{$E_y$};
+\draw[very thick, saitMaroon, -Latex] (EE)--+(1.25,0)node[below,yshift=-0.4mm]{$E_x$};
+\draw[very thick, saitMaroon, -Latex] (B)--+(0,1.65)node[above]{$B_y$};
+\draw[very thick, saitMaroon, -Latex] (B)--+(1.25,0)node[below,yshift=-0.4mm]{$B_x$};
+\draw[very thick, saitMaroon, -Latex] (BB)--+(0,-1.5)node[right]{$B_y$};
+\draw[very thick, saitMaroon, -Latex] (BB)--+(-1.25,0)node[below right]{$B_x$};
+
+
+
+ \filldraw[ball color=Ivory4, draw=black, thin] (A) circle (1mm);
+ \filldraw[ball color=Ivory4, draw=black, thin] (B) circle (1mm);
+ \filldraw[ball color=Ivory4, draw=black, thin] (BB) circle (1mm);
+ \filldraw[ball color=Ivory4, draw=black, thin] (C) circle (1mm);
+ \filldraw[ball color=Ivory4, draw=black, thin] (DD) circle (1mm);
+ \filldraw[ball color=Ivory4, draw=black, thin] (EE) circle (1mm);
+
+\node[xshift=-0.15cm,yshift=-.325cm] at (A){$A$};
+\node[xshift=0.175cm,yshift=-.325cm] at (C){$C$};
+\node[yshift=-0.325cm] at (B){$B$};
+\node[xshift=-0.25cm,yshift=0.275cm] at (DD){$D$};
+\node[yshift=-0.275cm] at (EE){$E$};
+
+
+
+}

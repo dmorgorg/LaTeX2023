@@ -1,0 +1,56 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+
+\begin{tikzpicture}[scale=\scale]
+
+
+
+
+ \coordinate (E) at (0, 0);
+ \coordinate (G) at ($(E)+(59.036:1.5921)$);
+ \coordinate (F) at ($(E)+(133.53:1.5921)$);
+ \coordinate (O) at ($(E)+(96.284:2)$);
+ \coordinate (OO) at ($(O)+(7,-0.5)$);
+ \coordinate (FF) at ($(F)+(226.47:2)$);
+ \coordinate (GG) at ($(G)+(149.037:-2.5)$);
+
+
+\draw (O) circle (1.2105cm);
+
+
+\fill (O) circle (1pt) node[yshift=2mm]{\small $O$};
+
+\draw[dashed] (O)--(F);
+\draw[dashed] (O)--(G);
+\small
+\draw[very thick, saitMaroon, latex-] (G)--(GG)node[right]{$R_G$};
+\draw[very thick, saitMaroon, latex-] (F)--(FF)node[left]{$R_F$};
+
+ \scriptsize
+
+\draw[very thick, saitDeepBlue,-latex] (O)--+(0,-3)node[below]{$3.5917\,\textsf{kN}$};
+\draw[thin] ($(FF)+(1,0)$)--+(.5,0);
+\draw[thin] ($(GG)+(-1.5,0)$)--+(-.5,0);
+\draw[latex-latex] ($(FF)+(1.25,0)$)arc(0:46.469:1.25)node[midway, fill=white, inner sep=.2mm, xshift=1.25mm]{$46.548\degree$};
+\draw[latex-latex] ($(GG)+(-1.75,0)$)arc(180:149.04:1.75)node[midway, fill=white, inner sep=.2mm, xshift=-1.5mm]{$33.690\degree$};
+
+\small
+\draw[very thick, saitMaroon, -latex] (OO)--+(149.04:2.5)node[left]{$R_G$};
+\draw[very thick, saitMaroon, -latex] (OO)--+(46.469:2)node[right]{$R_F$};
+\scriptsize
+\draw[very thick, saitDeepBlue,-latex] (OO)--+(0,-2)node[below]{$3.5917\,\textsf{kN}$};
+
+\draw[latex-latex] ($(OO)+(1.25,0)$)arc(0:46.469:1.25)node[midway, fill=white, inner sep=.2mm, xshift=1.25mm]{$46.548\degree$};
+\draw[latex-latex] ($(OO)+(-1.75,0)$)arc(180:149.04:1.75)node[midway, fill=white, inner sep=.2mm, xshift=-1.5mm]{$33.690\degree$};
+\fill (OO) circle (1pt) node[yshift=2mm]{\small $O$};
+\draw[thin] ($(OO)+(0.25,0)$)--+(1.5,0);
+\draw[thin] ($(OO)+(-.25,0)$)--+(-2,0);
+\fill (OO) circle (1pt);
+
+
+
+
+
+
+
+\end{tikzpicture}

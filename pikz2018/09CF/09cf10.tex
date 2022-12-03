@@ -1,0 +1,72 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+
+\begin{tikzpicture}[scale=\scale]
+
+	% \small
+
+	\coordinate (C) at (0, 0);
+	\coordinate (B) at (3,-2);
+	\coordinate (D) at (-4.5, 3);
+	\coordinate (A) at (0,-4);
+	\coordinate (E) at (6,0);
+	\coordinate (EE) at ($(E)+(0.5cm,0.5cm)$);
+	\coordinate (F) at (0,5);
+
+	\PinnedConnection[180]{F}{Cornsilk3}{black}{0.75}{0.125}
+	\Rone[208.1]{E}{Cornsilk3}{black}{0.75}{0.125}
+
+	\pgfoonew \AF=new rrect(A,F,DarkSeaGreen4,DarkSeaGreen3,black,0.4,0.4,0.4,0.125)
+	\pgfoonew \AE=new rrect(A,E,saitMaroon!50!black,saitMaroon!75,black,0.4,0.4,0.4,0.125);
+	\pgfoonew \DB=new rrect(D,B,Gold4,Gold3,black,0.4,0.4,0.4,0.125);
+
+
+	\fill[bottom color=Cornsilk4,top color=Cornsilk3] ($(F)+(-1.5,0.75)$) rectangle ($(F)+(1.5,1.5)$);
+	\draw ($(F)+(-1.5,0.75)$)--($(F)+(1.5,0.75)$);
+
+
+	\begin{scope}[transform canvas={rotate around={28.07:(E)}}]
+		\fill[bottom color=Cornsilk4,top color=Cornsilk3] ($(E)+(-0.75,0.75)$) rectangle ($(E)+(2.75,1.5)$);
+		\draw ($(E)+(-0.75,0.75)$)--+(3.5,0);
+	\end{scope}
+
+	\draw (EE)--node[yshift=-0.125cm,pos=0.6]{\scriptsize $15$}++(1.75,0)--node[xshift=0.125cm]{\scriptsize $8$}++(0,0.9333)--node[yshift=0.125cm, sloped,pos=0.45]{\scriptsize $17$}(EE);
+
+
+	\draw ($(E)+(-0.75,0)$)--($(C)+(0.75,0)$);
+	\draw ($(C)+(-0.75,0)$)--($(C)+(-7,0)$);
+	\draw ($(A)+(-0.75,0)$)--($(A)+(-7,0)$);
+	\draw ($(D)+(-0.375,0)$)--($(D)+(-2.5,0)$);
+	\draw ($(F)+(-0.375,0)$)--($(F)+(-7,0)$);
+	\draw ($(B)+(-0.625,0)$)--(0.375,-2);
+	\draw (-7,-2)--(-0.375,-2);
+	\draw ($(D)+(0,-2.75)$)--($(D)+(0,-8.5)$);
+	\draw ($(A)+(0,-0.5)$)--($(A)+(0,-1.5)$);
+	\draw ($(B)+(0,-0.5)$)--($(B)+(0,-3.5)$);
+	\draw ($(E)+(0,-0.5)$)--($(E)+(0,-5.5)$);
+
+
+\draw[ultra thick, saitDeepBlue, -latex] (D)--+(0,-1.75)node[below]{$\bm{9.65}\,$kN};
+
+
+	% \node[xshift=3mm, yshift=3mm] (A)  {$A$};
+	\shadedraw[ball color=gray!50] (A) circle (3pt) node[xshift=0.25cm,yshift=-0.125cm] {$A$};
+	\shadedraw[ball color=gray!50] (B) circle (3pt) node[xshift=0.25cm, yshift=-0.25cm] {$B$};
+	\shadedraw[ball color=gray!50] (C) circle (3pt) node[xshift=0.275cm, yshift=0.175cm] {$C$};
+	\shadedraw[ball color=gray!50] (F) circle (3pt) node[xshift=0.275cm] {$F$};
+	\shadedraw[ball color=gray!50] (E) circle (3pt) node[xshift=0.25cm,yshift=-0.125cm] {$E$};
+	\shadedraw[ball color=gray!50] (D) circle (3pt) node[xshift=0.125cm,yshift=0.275cm] {$D$};
+
+% \scriptsize
+	\draw[latex-latex] ($(F)+(-6.25,0)$)--node[fill=white]{$1.00\,$m}($(D)+(-1.75,0)$);
+	\draw[latex-latex] ($(C)+(-6.25,0)$)--node[fill=white]{$1.50\,$m}($(D)+(-1.75,0)$);
+	\draw[latex-latex] ($(C)+(-6.25,0)$)--node[fill=white]{$1.0\,$m}($(B)+(-9.25,0)$);
+	\draw[latex-latex] ($(A)+(-6.25,0)$)--node[fill=white]{$1.0\,$m}($(B)+(-9.25,0)$);
+	\draw[latex-latex] ($(D)+(0,-8)$)--node[fill=white]{$2.25\,$m}($(A)+(0,-1)$);
+	\draw[latex-latex] ($(B)+(0,-3)$)--node[fill=white]{$1.50\,$m}($(A)+(0,-1)$);
+	\draw[latex-latex] ($(B)+(0,-3)$)--node[fill=white]{$1.50\,$m}($(E)+(0,-5)$);
+
+
+
+
+\end{tikzpicture}

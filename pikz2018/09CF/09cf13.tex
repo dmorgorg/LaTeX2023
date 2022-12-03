@@ -1,0 +1,62 @@
+% !TEX root = ../../Beamer/statikz2018/statikz2018.tex
+
+
+\begin{tikzpicture}[scale=\scale]
+
+	\small
+
+	\coordinate (A) at (0,0);
+	\coordinate (AA) at (-0.5,0);
+	\coordinate (B) at (4,0);
+	\coordinate (C) at (6,-1);
+	\coordinate (D) at (10,-1);
+	\coordinate (E) at (2,0);
+	\coordinate (F) at (8.5,-1);
+	\coordinate (P) at (-2.75,-3.5);
+
+	\gettikzxy{(E)}{\Ex}{\Ey}
+	\gettikzxy{(D)}{\Dx}{\Dy}
+	\gettikzxy{(B)}{\Bx}{\By}
+	\gettikzxy{(C)}{\Cx}{\Cy}
+	\gettikzxy{(A)}{\Ax}{\Ay}
+	\gettikzxy{(F)}{\Fx}{\Fy}
+	\gettikzxy{(E)}{\Ex}{\Ey}
+	\gettikzxy{(P)}{\Px}{\Py}
+
+
+
+
+	\shade[right color=LightYellow4, left color=LightYellow2] ($(A)+(0,1.5)$)rectangle($(A)+(-1.5,-4)$);
+	\shade[left color=LightYellow4, right color=LightYellow2] ($(D)+(0.5,2.5)$)rectangle($(D)+(1.5,-3)$);
+
+	\pgfoonew \AB=new beam(AA,B,DarkSeaGreen3,DarkSeaGreen4,0.2,0.25,0.3)
+	\pgfoonew \CD=new beam(C,D,DarkSeaGreen3,DarkSeaGreen4,0.2,0.25,0.3)
+
+	\filldraw[fill=LightYellow3, draw=LightYellow4!75!black, line width=0.25mm] ($(B)+(0,0.125)$)arc(90:270:0.125)--++(.875,0)--++(0,-1)--++(1.125,0)arc(-90:90:0.125)--++(-0.875,0)--++(0,1)--cycle;
+	%
+	%
+	\PinnedConnection[90]{D}{LightYellow3}{black}{0.5}{0.1}
+
+	\draw[ultra thick, saitMaroon, -latex] (E)--+(0,-1.5)node[below]{$2.07\,$kN};
+
+	\draw [very thick, saitMaroon, -latex] ($(F)+(330:0.575)$)arc(330:35:0.575)--+(-45:0.1);
+
+	\filldraw[ball color=LightYellow3,draw=LightYellow4!50!black, thin] (A) circle (0.075cm)node[xshift=0.125cm, yshift=0.375cm]{$A$};
+	\filldraw[ball color=LightYellow3,draw=LightYellow4!50!black, thin] (B) circle (0.075cm)node[yshift=0.375cm]{$B$};
+	\filldraw[ball color=LightYellow3,draw=LightYellow4!50!black, thin] (C) circle (0.075cm)node[yshift=0.375cm]{$C$};
+	\filldraw[ball color=LightYellow3,draw=LightYellow4!50!black, thin] (D) circle (0.075cm)node[yshift=0.375cm]{$D$};
+	\filldraw[ball color=LightYellow3,draw=LightYellow4!50!black, thin] (E) circle (0.075cm);
+	\filldraw[ball color=LightYellow3,draw=LightYellow4!50!black, thin] (F) circle (0.075cm)node[saitMaroon, yshift=-0.6cm]{$2.76\,\mathrm{kN\!\cdot\!m}$};
+
+	\draw (\Fx,\Fy-1.25cm)--(\Fx,\Py-0.5cm);
+	\draw (\Cx,\Cy-0.5cm)--(\Cx,\Py-0.5cm);
+	\draw (\Bx,\By-0.5cm)--(\Bx,\Py-0.5cm);
+	\draw (\Ex,\By-2.25cm)--(\Ex,\Py-0.5cm);
+	\draw (\Dx,\Dy-0.5cm)--(\Dx,\Py-0.5cm);
+\footnotesize
+	\draw[latex-latex] (\Ax,\Py)--node[fill=white,inner sep=0.5mm]{$2.00\,$m}(\Ex,\Py);
+	\draw[latex-latex] (\Ex,\Py)--node[fill=white,inner sep=0.5mm]{$2.00\,$m}(\Bx,\Py);
+	\draw[latex-latex] (\Bx,\Py)--node[fill=white,inner sep=0.5mm]{$2.00\,$m}(\Cx,\Py);
+	\draw[latex-latex] (\Cx,\Py)--node[fill=white,inner sep=0.5mm]{$2.50\,$m}(\Fx,\Py);
+	\draw[latex-latex] (\Fx,\Py)--node[fill=white,inner sep=0.125mm]{$1.50\,$m}(\Dx,\Py);
+\end{tikzpicture}
